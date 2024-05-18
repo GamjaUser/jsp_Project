@@ -1,139 +1,3 @@
-@charset "UTF-8";
-#menu--toggle[type=checkbox]:not(:checked),
-#menu--toggle[type=checkbox]:checked {
-  display: none;
-}
-
-.menu--toggle__trigger,
-.menu--toggle__burger,
-.menu--toggle__burger:before,
-.menu--toggle__burger:after {
-  position: absolute;
-  top: 1.6em;
-  left: 1.6em;
-  width: 2em;
-  height: 2px;
-  background-color: #ffffff;
-  border-radius: 2px;
-  cursor: pointer;
-  z-index: 100;
-  transition: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-.menu--toggle__trigger {
-  height: 1em;
-  background: none;
-}
-
-.menu--toggle__burger:before {
-  content: "";
-  top: 10px;
-  left: 0;
-}
-.menu--toggle__burger:after {
-  content: "";
-  top: 20px;
-  left: 0;
-}
-
-.menu__body {
-  position: absolute;
-  width: 0; /* 초기 너비는 0으로 시작 */
-  height: 100vh; /* 높이는 100vh로 고정 */
-  margin: 0;
-  padding-top: 5px;
-  background-color: #30c8ca;
-  opacity: 0.8;
-  border-radius: 0; /* 모서리를 네모 형태로 유지 */
-  box-shadow: 3px 3px 7px rgba(40, 40, 40, 0.2);
-  z-index: 10;
-  animation: checkboxUncheckedAnimation 0.35s both;
-  ;
-}
-
-.menu__body-element,
-.menu__body-link {
-  display: none;
-  margin: 3.8em 0 -3.3em -0.1em;
-  font-weight: normal;
-  color: #282828;
-  text-decoration: none;
-  text-transform: none;
-  list-style: none;
-  outline: 0;
-  font-size: 1.1em
-}
-
-
-
-
-.menu__body-element {
-  text-indent: 2em;
-}
-
-.menu__body-link:hover {
-  display: block;
-  height: 100%;
-  width: 100%;
-  color: #282828;
-  background-color: #e2e2e2;
-  animation: changeWidthOfElementAnimation 0.35s both;
-}
-/* 게시판 목록 스타일 */
-.menu__body ol {
-  margin-top: 0.002em; /* 게시판 목록과 게시판 부옵션 간의 간격 조정 */
-}
-
-.menu__body ol li {
-  margin-top: 0.2px; /* 각 게시판 항목과 다음 항목 간의 간격 조정 */
-}
-
-/* 게시판 부옵션 스타일 */
-.menu__body ol li a {
-  display: block; /* 링크를 블록 요소로 표시하여 영역을 차지하도록 함 */
-  padding: 5px; /* 내부 여백 추가 */
-  text-decoration: none; /* 링크 밑줄 제거 */
-  color: #333; /* 텍스트 색상 지정 */
-}
-
-#menu--toggle:checked + .menu--toggle__trigger + .menu--toggle__burger {
-  top: 35px;
-  transform: rotate(405deg);
-  transition: transform 0.35s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-#menu--toggle:checked + .menu--toggle__trigger + .menu--toggle__burger:before {
-  top: 0;
-  transform: rotate(-90deg);
-  transition: transform 0.35s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-#menu--toggle:checked + .menu--toggle__trigger + .menu--toggle__burger:after {
-  top: 0;
-  transform: rotate(90deg);
-  transition: transform 0.35s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-#menu--toggle:checked + .menu--toggle__trigger + .menu--toggle__burger + .menu__body {
-  animation: checkboxCheckedAnimation 1s cubic-bezier(0.25, 0.1, 0.25, 1) both;
-}
-#menu--toggle:checked + .menu--toggle__trigger ~ .menu__body .menu__body-element, #menu--toggle:checked + .menu--toggle__trigger ~ .menu__body .menu__body-link {
-  display: block;
-}
-
-/**
- *	Animations
- *
- *  @note checkboxCheckedAnimation - added fix for Microsoft Edge
- */
-@keyframes checkboxCheckedAnimation {
-  100% {
-    width: 30vw;
-    height: 100vh;
-    border-radius: 0;
-  }
-}
-@keyframes checkboxUncheckedAnimation {
-  
-}
-
 /*프로필 css*/
 *,
 *:before,
@@ -142,313 +6,178 @@
   margin: 0;
   padding: 0;
 }
-body { 
-	
-	background: #7e8b91;
-	width: auto; 
- 	height: auto; 
- 	margin: auto;
-  
-	box-sizing: border-box;
+
+#modal_menubar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background-color: transparent;
 }
 
 .container {
-	display: flex;
-	flex-direction: row;
-	width: 100%; /* 전체 화면 너비에 맞게 조정 */
-	min-width: 600px; /* 최소 너비를 800px로 줄여 유연하게 */
-	margin: auto;
-	justify-content: center;
-}
-.menu-column {
-	position: relative;
-	width: 11%;
-	max-width: 30px;
-	background: linear-gradient(#2e96ea, #30c8ca);
-	min-width: 89px;
-	.profile {
-		position: absolute;
-		bottom: 0;
-		width: 100%;
-		height: 25px;
-		img {
-			position: relative;
-			width: 100%;
-			height: 100%;
-		}
-		&:after {
-			content: '';
-			display: block;
-			height: 20px;
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 100%;
-			background-color: rgba(245, 244, 120, 0.7);
-		}
-	}
-	.nav {
-		list-style-type: none;
-		margin: 0 0 100px;
-		padding: 0;
-		li {
-			width: 100%;
-			height: 8em;
-      
-			
-			&:hover {
-				background-color: #57a8ed;
-				cursor: pointer;
-			}
-		}
-	}
-
-	
-
-	.profile-img {
-    margin-top: 80px;
-		background-image: url("https://svgshare.com/i/eUF.svg");
-		background-position: center;
-		background-size: 40px;
-		background-repeat: no-repeat;
-	}
-
-	.board {
-    
-		background-image: url("https://svgshare.com/i/4uF.svg");
-		background-position: center;
-		background-size: 40px;
-		background-repeat: no-repeat;
-	}
-
-	.calendar {
-		background-image: url("https://svgshare.com/i/4vc.svg");
-		background-position: center;
-		background-size: 40px;
-		background-repeat: no-repeat;
-	}
-
-	.shop {
-		background-image: url("https://svgshare.com/i/162i.svg");
-		background-position: center;
-		background-size: 40px;
-		background-repeat: no-repeat;
-	}
-
-	.settings {
-		background-image: url("https://svgshare.com/i/4vd.svg");
-		background-position: center;
-		background-size: 40px;
-		background-repeat: no-repeat;
-	}
-}
-
-.float-none {
-	clear: both;
+  display: inline-flex;
+  
+  width: 100%;
+  min-width: 600px;
+  justify-content: center;
+  position: relative;
 }
 
 .summary-column {
-	position: relative;
-	z-index: 2;
-	width: 17%;
-	min-width: 325px;
-	max-width: 300px;
-	background: linear-gradient(#3d6281,#42656f);
-	.profile-img {
-		position: relative;
-		height: 331px;
-		img {
-			width: 100%;
-			height: 100%;
-		}
-		.name {
-			position: absolute;
-			bottom: 25px;
-			left: 1em;
-			color: white;
-			font-size: 1.5em;
-			font-weight: 300;
-		}
-	}
-	.statistics {
-		margin: 20px 6% 0 6%;		
-		h2 {
-			color: #a1afbc;
-			text-transform: uppercase;
-			font-size: 0.75em;
-			letter-spacing: 1px;
-		}
-		.age {
-			display: block;
-			width: 50%;
-			height: 100px;
-			box-sizing: border-box;
-			float: left;
-			border-right: 1px solid rgba(255, 255, 255, 0.2);
-			text-align: center;
-			border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-		}
-    .weight {
-			display: block;
-			width: 50%;
-			height: 100px;
-			box-sizing: border-box;
-			float: left;
-			border-right: 1px solid rgba(255, 255, 255, 0.2);
-			text-align: center;
-			border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-		}
-    
-		.title {
-			color: white;
-			letter-spacing: 2px;
-			font-size: 1.5em;
-			position: relative;
-			margin-top: -13px;
-			display: block;
-			line-height: 100px;
-			
-			&:after {
-				color: #90a0aa;
-				font-size: 1em;
-				letter-spacing: 0px;
-				position: absolute;
-				bottom: -26px;
-				left: 50%;
-				transform: translateX(-50%)
-			}
-		}
-		.weight {
-			border-right: none;
-			
-		}
-		.title-weight {
-			&:after {
-				content: 'Weight';
-			}
-		}
-		.title-age {
-			&:after {
-				content: 'Age';
-			}
-		}
-		.title-bmi {
-			&:after {
-				content: 'BMI';
-			}
-		}
-		.title-fat {
-			&:after {
-				content: 'Fat';
-			}
-		}
-		.height {
-			height: 150px;
-			border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-			.icon {
-				display: block;
-				width: 50%;
-				height: 100%;
-				float: left;
-				background:
-					url("https://svgshare.com/i/4xQ.svg");
-					background-size: 120px;
-					background-repeat: no-repeat;
-					background-position: center;
-			}
-			.data {
-				display: block;
-				width: 50%;
-				float: left;
-				span {
-					display: block;
-					position: relative;
-					line-height: 130px;
-					
-					font-size: 1.75em;
-					color: white;
-					&:after {
-						content: 'Height';
-						color: #90a0aa;
-						font-size: 1em;
-						line-height: 20px;
-						letter-spacing: 0px;
-						position: absolute;
-						left: 0;
-						bottom: 25px;
-					}
-				}
-			}
-		}
-		.bmi {
-			display: block;
-			width: 50%;
-			height: 100px;
-			box-sizing: border-box;
-			float: left;
-			border-right: 1px solid rgba(255, 255, 255, 0.2);
-			text-align: center;
-			border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-		}
-		.fat {
-      display: block;
-			width: 50%;
-			height: 100px;
-			box-sizing: border-box;
-			float: right;
-			border-right: 1px solid rgba(255, 255, 255, 0.2);
-			text-align: center;
-			border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-		}
-		.percentage {
-			font-size: 0.7em;
-			line-height: 0.7em;
-		}
-	}
-	.allergies {
-		padding-top: 20px;
-	}
-	.row {
-		position: relative;
-		height: 50px;
-		line-height: 50px;
-		text-transform: capitalize;
-		border-top: 1px solid #537482;
-		color: #f1f3f4;
-		font-size: 0.8em;
-		&:last-child {
-			border-bottom: 1px solid #537482;
-			margin-bottom: 50px;
-		}
-		.severity {
-			position: absolute;
-			top: 50%;
-			left: 75%;
-			transform: translate(-50%, -75%);
-			width: 100px;
-			height: 5px;
-			background: #567681;
-		}
-		.fill {
-			background: #c3f8ab;
-		}
-	}
+  position: absolute;
+  left: 4.7%;
+  width: 17%;
+  height: 132%;
+  min-width: 325px;
+  max-width: 300px;
+  background: linear-gradient(#3d6281, #42656f);
 }
 
+.profile-img {
+  position: relative;
+  height: 331px;
+}
+
+.profile-img img {
+  width: 100%;
+  height: 100%;
+}
+
+.profile-img .name {
+  position: absolute;
+  bottom: 25px;
+  left: 1em;
+  color: white;
+  font-size: 1.5em;
+  font-weight: 300;
+}
+
+.statistics {
+  margin: 20px 6% 0 6%;
+}
+
+.statistics h2 {
+  color: #a1afbc;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  letter-spacing: 1px;
+}
+
+.statistics .age,
+.statistics .weight,
+.statistics .bmi,
+.statistics .fat {
+  display: block;
+  width: 50%;
+  height: 100px;
+  box-sizing: border-box;
+  float: left;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.statistics .age {
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.statistics .title {
+  color: white;
+  letter-spacing: 2px;
+  font-size: 1.5em;
+  position: relative;
+  margin-top: -13px;
+  display: block;
+  line-height: 100px;
+}
+
+.statistics .title:after {
+  color: #90a0aa;
+  font-size: 1em;
+  letter-spacing: 0px;
+  position: absolute;
+  bottom: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.statistics .title-weight:after {
+  content: 'Weight';
+}
+
+.statistics .title-age:after {
+  content: 'Age';
+}
+
+.statistics .title-bmi:after {
+  content: 'BMI';
+}
+
+.statistics .title-fat:after {
+  content: 'Fat';
+}
+
+.statistics .height {
+  height: 150px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.statistics .height .icon {
+  display: block;
+  width: 50%;
+  height: 100%;
+  float: left;
+  background: url("https://svgshare.com/i/4xQ.svg");
+  background-size: 120px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.statistics .height .data {
+  display: block;
+  width: 50%;
+  float: left;
+}
+
+.statistics .height .data span {
+  display: block;
+  position: relative;
+  line-height: 130px;
+  font-size: 1.75em;
+  color: white;
+}
+
+.statistics .height .data span:after {
+  content: 'Height';
+  color: #90a0aa;
+  font-size: 1em;
+  line-height: 20px;
+  letter-spacing: 0px;
+  position: absolute;
+  left: 0;
+  bottom: 25px;
+}
+
+.float-none {
+  clear: both;
+}
+
+
 .content-column {
-	background: white;
-	width: 1000%;
-	min-width: 70%;
-	@media only screen and (max-width: 1250px) {
-		width: 77%;
-	}
-	z-index: 0;
+	position: relative;
+  background: white;
+  right: 199px;
+  width: 182%;
+  height: 1000px;
 	.header-container {
+    border: 5px solid red;
+    background-image: url("");
 		width: 100%;
-		height: 331px;
-		overflow: hidden;
+		height: 311px;
+		
 	}
 	.nav {
+    
 		width: 50%;
 		float: left;
 		font-size: 0.9em;
@@ -477,6 +206,7 @@ body {
 		}
 	}
 	.select-boxes {
+    
 		float: left;
 		width: 50%;
 		.content {
@@ -484,7 +214,13 @@ body {
 			float: right;
 		}
 	}
+  .split{
+    border: 3px solid black;
+    padding: 10px;
+    height: 250px;
+  }
 	.split-container {
+    border: 5px solid red;
 		display: flex;
 		display: -webkit-flex;
 		flex-direction: row;
@@ -516,138 +252,12 @@ body {
 				border-right: none;
 			}
 		}
-		.kcalfood {
-			display: block;
-			color: #58676c;
-			font-size: 1.5em;
-			line-height: 2em;
-			width: 325px;
-			margin: auto;
-			position: relative;
-			font-weight: 300;
-			margin: 10px auto;
-			&:before {
-				content: '';
-				position: absolute;
-				height: 35px;
-				width: 35px;
-				
-				left: 20px;
-				top: 50%;
-				transform: translateY(-50%);
-			}
-			
-		}
-		.healthyroutine {
-      display: block;
-			color: #58676c;
-			font-size: 1.5em;
-			line-height: 2em;
-			width: 325px;
-			margin: auto;
-			position: relative;
-			font-weight: 300;
-			margin: 10px auto;
-			
-    }
+		
 		
 			
 		}
 	}
-	.daybmi {
-		.totals {
-			width: 30%;
-			float: left;
-			.weight {
-				margin-top: 135px;
-				margin-left: 35%;
-				.hours {
-					position: relative;
-					color: #58676c;
-					font-size: 3em;
-					height: 20px;
-					font-weight: 300;
-					margin-right: 0.5em;
-					&:after {
-						position: absolute;
-						font-size: 0.4em;
-						color: #899599;
-						bottom: 10px;
-						right: -15px;
-						height: 20px;
-						line-height: 20px;
-						content: 'h';
-					}
-				}
-				.minutes {
-					
-					&:after {
-						right: -22px;
-						content: 'm';
-					}
-				}
-				p {
-					color: #a7afb2;
-					font-weight: 300;
-					margin: 0;
-					margin-top: -5px;
-				}
-			}
-			.split {
-				display: block;
-				float: left;
-				width: 20%;
-				margin: 30px 15%;
-				font-weight: bold;
-				color: #58676c;
-				p {
-          
-					color: #a7afb2;
-					font-weight: 300;
-					margin: 0;
-				}
-			}
-			
-		}
-		.sleep-graph {
-			width: 70%;
-			float: left;
-			.sleep-graph-container {
-        font-size: 2em;
-				margin-left: 35%;
-				width: 70%;
-				margin: auto;
-				margin-top: 30px;
-        margin-left: 18%;
-				.chart-container {
-					height: 200px;
-					margin-top: -20px;
-					padding-bottom: 20px;
-				}
-			}
-      .sleep-graph-bmi {
-       
-				margin-left: 35%;
-				width: 80%;
-				margin: auto;
-				margin-top: 30px;
-        margin-left: 245%;
-        }
-			h2 {
-				display: inline-block;
-				margin: 0;
-				color: #828989;
-				font-weight: 300;
-				text-indent: 15px;
-				line-height: 30px;
-			}
-			.sleep-select-wrapper {
-				
-				display: block;
-				float: right;
-			}
-		}
-	}
+	
 	.bottom {
 		border-bottom: none !important;
 		border-top: 1px solid #dddfe1;
@@ -672,42 +282,29 @@ body {
 			.date {
 				 font-size: 0.7em;
 			}
-			.month {
-				display: block;
-				text-transform: capitalize;
-			}
+			
 		}
 		.content {
 			box-sizing: margin-box;
 			width: 50%;
 			float: left;
-			.appointment-table {
-				margin-left: 15px;
-				height: 92px;
-				text-align: left;
-				font-size: 0.55em;
-				border-collapse: collapse;
-				td {
-					padding: 0;
-				}
-			}
+      
+			
 		}
 	}
-	.map-overlay {
-		position: absolute;
-		top: 0;
-		left: 50%;
-		transform: translateX(-50%);
-		.steps {
-			display: block;
-			font-size: 2em;
-			color: #58676c;
-		}
-		.distance {
-			display: block;
-			font-size: 0.75em;
-			color: #a6acaf;
-			font-weight: 400;
-		}
-	}
+	
+  .promotion {
 
+    position: fixed;
+    top: 25%;
+    right: 0.5%;
+    width: 14.4%;
+    
+    
+    
+    .split{
+      border: 3px solid black;
+      padding: 10px;
+      height: 550px;
+    }
+  }
