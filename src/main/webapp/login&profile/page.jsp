@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -32,8 +33,8 @@
               </a>
               <ol>
                 <li><a class="menu__body-link" href="">자유 게시판</a></li>
-                <li><a class="menu__body-link" href="">질문 게시판</a></li>
-                <li><a class="menu__body-link" href="">리뷰 게시판</a></li>
+                <li><a class="menu__body-link" href="">리뷰 게시판</a></li>
+                <li><a class="menu__body-link" href="">질문 게시판</a></li>
               </ol>
               <!-- /.menu__body-link -->
 
