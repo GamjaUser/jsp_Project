@@ -7,141 +7,26 @@
 <head>
 <meta charset="UTF-8">
 <title>캘린더</title>
+<link href="
+https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css
+" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="../css/calender.css">
-<style>
-    .calendar-cal {
-        margin-bottom: 20px;
-    }
-    .calendar h1 {
-        display: inline-block;
-    }
-    .calendar .nav {
-        display: inline-block;
-        float: right;
-    }
-    .nav button {
-        margin: 5px;
-    }
-</style>
-<script>
-    function changeDate(deltaYear, deltaMonth) {
-        var yearInput = document.getElementById("year");
-        var monthInput = document.getElementById("month");
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../js/calender.js"></script>
+<script src="../js/page.js"></script>
 
-        var year = parseInt(yearInput.value) + deltaYear;
-        var month = parseInt(monthInput.value) + deltaMonth;
 
-        if (month < 1) {
-            month = 12;
-            year--;
-        } else if (month > 12) {
-            month = 1;
-            year++;
-        }
-
-        yearInput.value = year;
-        monthInput.value = month;
-        document.getElementById("dateForm").submit();
-    }
-</script>
 </head>
 <body>
-<section>
 
-  <article>
-    <div class="menu">
-      <input id="menu--toggle"
-             type="checkbox" />
-      <!-- /#menu--toggle -->
-      <label class="menu--toggle__trigger"
-             for="menu--toggle"></label>
-      <!-- /.menu--toggle__trigger -->
-      <label class="menu--toggle__burger"
-             for="menu--toggle"></label>
-      <!-- /.menu--toggle__burger -->
-
-
-      <ul class="menu__body">
-        <li class="menu__body-element">
-          <a class="menu__body-link"
-             href="">
-            <h3>게시판</h3>   
-          </a>
-			  <ol>
-			  	<li><a class="menu__body-link"href="">자유 게시판</a></li>
-			  	<li><a class="menu__body-link"href="">질문 게시판</a></li>
-			  	<li><a class="menu__body-link"href="">리뷰 게시판</a></li>
-			  </ol>
-          <!-- /.menu__body-link -->
-          
-        </li>
-        
-        <!-- /.menu__body-element -->
-
-        <li class="menu__body-element">
-          <a class="menu__body-link"
-             href=""
-             >
-				 <h3>Calendar</h3>
-          </a>
-          <!-- /.menu__body-link -->
-        </li>
-        <!-- /.menu__body-element -->
-
-        <li class="menu__body-element">
-          <a class="menu__body-link"
-             href="">
-            <h3>shop</h3>
-          </a>
-          <!-- /.menu__body-link -->
-        </li>
-        <li class="menu__body-element">
-          <a class="menu__body-link"
-             href="" arget="_blank">
-            <h3>setting</h3>
-          </a>
-          <!-- /.menu__body-link -->
-        </li>
-        <!-- /.menu__body-element -->
-      </ul>
-      <!-- /.menu__body -->
-    </div>
-    <!-- /.menu -->
-  </article>
-
-
-  <article>
-    <div class="promotion">
-    </div>
-    <!-- /.promotion -->
-  </article>
-
-</section>
-
-  
-  
-  
 <div class="container">
-  <div class="menu-column">
-    <ul class="nav">
-    	<a href="../login&profile/profile.jsp">
-      <li class="profile-img"></li>
-    	</a>
-      <li class="board"></li>
-      <a href="../calender/calender.jsp">
-      <li class="calendar"></li>
-      </a>
-      <li class="shop"></li>
-      <li class="settings"></li>
-    </ul>
+  <div id="modal_menubar">
+    <div id="modalContent_menubar">
+      
+    </div>
   </div>
-	</div>
-
-
-
-
-
-
+	<div id="main_content">
+            
 <%
 // 현재 년도 설정
 Calendar cal = Calendar.getInstance();
@@ -160,9 +45,9 @@ cal.set(inputYear, inputMonth - 1, 1); // 해당 년도와 월의 1일로 설정
    
     <div class="nav-cal">
     	<h1>
-    <button type="button" class="nav-button" onclick="changeDate(0, -1)"> <- </button>
+    <button type="button" class="nav-button" onclick="changeDate(0, -1)"> < </button>
     <%= inputYear %>년 <%= inputMonth %>월 달력 
-    <button type="button" class="nav-button" onclick="changeDate(0, 1)">-></button>
+    <button type="button" class="nav-button" onclick="changeDate(0, 1)">></button>
 </h1>
       <br />  
     </div>
@@ -209,6 +94,8 @@ cal.set(inputYear, inputMonth - 1, 1); // 해당 년도와 월의 1일로 설정
         <input type="hidden" id="month" name="month" value="<%= inputMonth %>">
     </form>
 </div>
-
+		
+        </div>
+</div>
 </body>
 </html>
