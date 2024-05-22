@@ -1,6 +1,5 @@
 package common;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,62 +14,62 @@ public class JDBConnect {
     public PreparedStatement psmt;  
     public ResultSet rs;
 
-    // ±âº» »ı¼ºÀÚ
+    // ê¸°ë³¸ ìƒì„±ì
     public JDBConnect() {
         try {
-            // JDBC µå¶óÀÌ¹ö ·Îµå
+            // JDBC ë“œë¼ì´ë²„ ë¡œë“œ
             Class.forName("oracle.jdbc.OracleDriver");
 
-            // DB¿¡ ¿¬°á
+            // DBì— ì—°ê²°
             String url = "jdbc:oracle:thin:@localhost:1521:xe";  
             String id = "musthave";
             String pwd = "1234"; 
             con = DriverManager.getConnection(url, id, pwd); 
 
-            System.out.println("DB ¿¬°á ¼º°ø(±âº» »ı¼ºÀÚ)");
+            System.out.println("DB ì—°ê²° ì„±ê³µ(ê¸°ë³¸ ìƒì„±ì)");
         }
         catch (Exception e) {            
             e.printStackTrace();
         }
     }
 
-    // µÎ ¹øÂ° »ı¼ºÀÚ
+    // ë‘ ë²ˆì§¸ ìƒì„±ì
     public JDBConnect(String driver, String url, String id, String pwd) {
         try {
-            // JDBC µå¶óÀÌ¹ö ·Îµå
+            // JDBC ë“œë¼ì´ë²„ ë¡œë“œ
             Class.forName(driver);  
 
-            // DB¿¡ ¿¬°á
+            // DBì— ì—°ê²°
             con = DriverManager.getConnection(url, id, pwd);
 
-            System.out.println("DB ¿¬°á ¼º°ø(ÀÎ¼ö »ı¼ºÀÚ 1)");
+            System.out.println("DB ì—°ê²° ì„±ê³µ(ì¸ìˆ˜ ìƒì„±ì 1)");
         }
         catch (Exception e) {            
             e.printStackTrace();
         }
     }
 
-    // ¼¼ ¹øÂ° »ı¼ºÀÚ
+    // ì„¸ ë²ˆì§¸ ìƒì„±ì
     public JDBConnect(ServletContext application) {
         try {
-            // JDBC µå¶óÀÌ¹ö ·Îµå
+            // JDBC ë“œë¼ì´ë²„ ë¡œë“œ
             String driver = application.getInitParameter("OracleDriver"); 
             Class.forName(driver); 
 
-            // DB¿¡ ¿¬°á
+            // DBì— ì—°ê²°
             String url = application.getInitParameter("OracleURL"); 
             String id = application.getInitParameter("OracleId");
             String pwd = application.getInitParameter("OraclePwd");
             con = DriverManager.getConnection(url, id, pwd);
 
-            System.out.println("DB ¿¬°á ¼º°ø(ÀÎ¼ö »ı¼ºÀÚ 2)"); 
+            System.out.println("DB ì—°ê²° ì„±ê³µ(ì¸ìˆ˜ ìƒì„±ì 2)"); 
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    // ¿¬°á ÇØÁ¦(ÀÚ¿ø ¹İ³³)
+    // ì—°ê²° í•´ì œ(ìì› ë°˜ë‚©)
     public void close() { 
         try {            
             if (rs != null) rs.close(); 
@@ -78,7 +77,7 @@ public class JDBConnect {
             if (psmt != null) psmt.close();
             if (con != null) con.close(); 
 
-            System.out.println("JDBC ÀÚ¿ø ÇØÁ¦");
+            System.out.println("JDBC ìì› í•´ì œ");
         }
         catch (Exception e) {
             e.printStackTrace();
