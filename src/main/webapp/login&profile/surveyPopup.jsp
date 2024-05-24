@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,47 +12,51 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../js/surveyPopup.js"></script>
   <script>
-  $(document).ready(function() {
-	  $('#submit').on('click', function(e) {
-	    e.preventDefault(); // 기본 폼 제출 동작 방지
-	    var formData = $('#j').serialize(); // 폼 데이터 직렬화
-	    $.ajax({
-	      type: 'POST',
-	      url: 'signupProcess.jsp',
-	      data: formData,
-	      success: function(response) {
-	        // 성공적으로 전송된 후 수행할 작업
-	        $('body').html(response); // JSP 응답을 페이지에 표시
-	      },
-	      error: function(error) {
-	        // 오류 발생 시 수행할 작업
-	        alert('폼 전송 중 오류가 발생했습니다.');
-	      }
-	    });
-	  });
+    $(document).ready(function() {
+      $('#submit').on('click', function(e) {
+        e.preventDefault(); // 기본 폼 제출 동작 방지
 
-	  // 이전 버튼 클릭 이벤트
-	  $('.mm-prev-btn button').on('click', function(e) {
-	    e.preventDefault();
-	    var currentPage = $('.mm-survey-page.active');
-	    var prevPage = currentPage.prev('.mm-survey-page');
-	    if (prevPage.length > 0) {
-	      currentPage.removeClass('active');
-	      prevPage.addClass('active');
-	    }
-	  });
+        var age = $('input[name="age"]').val();
+        var gender = $('input[name="gender"]:checked').val();
+        var height = $('input[name="height"]').val();
+        var weight = $('input[name="weight"]').val();
+        var exerciseEXP = $('input[name="exerciseEXP"]:checked').val();
+        var goals = $('input[name="goals"]:checked').val();
 
-	  // 다음 버튼 클릭 이벤트
-	  $('.mm-next-btn button').on('click', function(e) {
-	    e.preventDefault();
-	    var currentPage = $('.mm-survey-page.active');
-	    var nextPage = currentPage.next('.mm-survey-page');
-	    if (nextPage.length > 0) {
-	      currentPage.removeClass('active');
-	      nextPage.addClass('active');
-	    }
-	  });
-	});
+        // 데이터 sessionStorage에 저장
+        sessionStorage.setItem('age', age);
+        sessionStorage.setItem('gender', gender);
+        sessionStorage.setItem('height', height);
+        sessionStorage.setItem('weight', weight);
+        sessionStorage.setItem('exerciseEXP', exerciseEXP);
+        sessionStorage.setItem('goals', goals);
+
+        alert('설문조사 데이터가 저장되었습니다');
+        closeModal(); // 모달 닫기 함수 호출
+      });
+
+      // 이전 버튼 클릭 이벤트
+      $('.mm-prev-btn button').on('click', function(e) {
+        e.preventDefault();
+        var currentPage = $('.mm-survey-page.active');
+        var prevPage = currentPage.prev('.mm-survey-page');
+        if (prevPage.length > 0) {
+          currentPage.removeClass('active');
+          prevPage.addClass('active');
+        }
+      });
+
+      // 다음 버튼 클릭 이벤트
+      $('.mm-next-btn button').on('click', function(e) {
+        e.preventDefault();
+        var currentPage = $('.mm-survey-page.active');
+        var nextPage = currentPage.next('.mm-survey-page');
+        if (nextPage.length > 0) {
+          currentPage.removeClass('active');
+          nextPage.addClass('active');
+        }
+      });
+    });
   </script>
 </head>
 <body>

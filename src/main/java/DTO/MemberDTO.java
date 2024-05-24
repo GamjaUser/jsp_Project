@@ -5,7 +5,7 @@ public class MemberDTO {
     private String password;
     private String gender;
     private int age;
-    private String goals;
+    private int goals;
     private int exerciseEXP;
     private int level;
 
@@ -42,11 +42,11 @@ public class MemberDTO {
         this.age = age;
     }
 
-    public String getGoals() {
+    public int getGoals() {
         return goals;
     }
 
-    public void setGoals(String goals) {
+    public void setGoals(int goals) {
         this.goals = goals;
     }
 
