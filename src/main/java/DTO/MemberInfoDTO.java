@@ -7,6 +7,7 @@ public class MemberInfoDTO {
     private int weight;
     private int height;
     private Date sdate; // java.util.Date 또는 java.sql.Date 사용
+	private String formattedSDate;
 
     // Getter와 Setter
     public String getId() {
@@ -39,5 +40,13 @@ public class MemberInfoDTO {
 
     public void setSdate(Date sdate) {
         this.sdate = sdate;
+    }
+
+    public String getFormattedSDate() {
+        return formattedSDate;
+    }
+
+    public void setFormattedSDate(String formattedSDate) {
+        this.formattedSDate = formattedSDate;
     }
 }

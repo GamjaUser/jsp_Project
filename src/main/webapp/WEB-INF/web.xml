@@ -27,6 +27,14 @@
   	<param-value>1234</param-value>
   </context-param>
   	<!-- 로그인페이지설정 -->
+<!--   	<servlet> -->
+<!-- 		<servlet-name>Profile</servlet-name> -->
+<!-- 		<servlet-class>Profile.ProfileController</servlet-class> -->
+<!-- 	</servlet>   -->
+<!--   <servlet-mapping> -->
+<!--   	<servlet-name>Profile</servlet-name> -->
+<!--   	<url-pattern>/HealthyCareService/profile.do</url-pattern> -->
+<!--   </servlet-mapping> -->
 
     
     

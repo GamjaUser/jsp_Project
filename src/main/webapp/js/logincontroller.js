@@ -27,6 +27,7 @@ $(document).ready(function() {
 	        success: function(response) {
 	          if (response.trim() === 'available') {
 	            alert('사용 가능한 아이디입니다.');
+	            sessionStorage.clear();
 	            isIdValid = true;
 	          } else {
 	            alert('이미 사용 중인 아이디입니다.');
@@ -65,7 +66,7 @@ $(document).ready(function() {
 	            success: function(response) {
 	                if (response.trim() === 'success') {
 	                    alert('로그인 성공! 환영합니다.');
-	                    window.location.href = 'profile.jsp?id=' + id; // 로그인 성공 시 프로필 페이지로 이동
+	                    window.location.href = '/Profile/profile.do?id=' + encodeURIComponent(id); // 로그인 성공 시 프로필 페이지로 이동
 	                } else if (response.trim() === 'fail') {
 	                    alert('로그인 실패 아이디 또는 비밀번호를 확인해주세요.');
 	                } else {
@@ -81,61 +82,63 @@ $(document).ready(function() {
 	    });
 
 	    
-	    //회원가입 
-	    $('#signUp').on('click', function(e) {
-	      e.preventDefault();
-	      sessionStorage.clear();
-	      if (!isIdValid) {
-	        alert('아이디 중복 검사를 통과해야 합니다.');
-	        return;
-	      }
-
-	      if (!validatePassword()) {
-	        return;
-	      }
-
-	      var id = $('#sign-id').val();
-	      var password = $('#password-signup').val();
-	      var age = sessionStorage.getItem('age');
-	      var gender = sessionStorage.getItem('gender');
-	      var height = sessionStorage.getItem('height');
-	      var weight = sessionStorage.getItem('weight');
-	      var exerciseEXP = sessionStorage.getItem('exerciseEXP');
-	      var goals = sessionStorage.getItem('goals');
-	      var level = 1;
-				var url = '/login/signup.do'
-	      var currentDate = new Date();
+				    //회원가입 
+				    $('#signUp').on('click', function(e) {
+			  e.preventDefault();
+			  
+			  if (!isIdValid) {
+			    alert('아이디 중복 검사를 통과해야 합니다.');
+			    return;
+			  }
+			
+			  if (!validatePassword()) {
+			    return;
+			  }
+			
+			  var id = $('#sign-id').val();
+			  var password = $('#password-signup').val();
+			  var age = sessionStorage.getItem('age');
+			  var gender = sessionStorage.getItem('gender');
+			  var height = sessionStorage.getItem('height');
+			  var weight = sessionStorage.getItem('weight');
+			  var exerciseEXP = sessionStorage.getItem('exerciseEXP');
+			  var goals = sessionStorage.getItem('goals');
+			  var level = 1;
+			  var url = '/login/signup.do';
+			
+			  var currentDate = new Date();
 	      var sdate = currentDate.toISOString();
-
-	      $.ajax({
-	        type: 'POST',
-	        url: url,
-	        data: {
-	          id: id,
-	          password: password,
-	          age: age,
-	          gender: gender,
-	          height: height,
-	          weight: weight,
-	          exerciseEXP: exerciseEXP,
-	          goals: goals,
-	          level: level,
-	          sdate: sdate
-	        },
-	        success: function(response) {
-	          if (response.trim() === 'success') {
-	            alert('환영합니다');
-	            sessionStorage.clear();
-	            window.location.href = 'login.jsp';
-	          } else  {
-	            alert('아이디 및 비밀번호를 입력해주세요');
-	            history.back();
-	          }
-	        },
-	        error: function() {
-	          alert('아이디 및 비밀번호, 설문조사에 정보를 정확히 기입해주세요.');
-	          history.back();
-	        }
-	      });
-	    });
+			  
+			  $.ajax({
+			    type: 'POST',
+			    url: url,
+			    data: {
+			      id: id,
+			      password: password,
+			      age: age,
+			      gender: gender,
+			      height: height,
+			      weight: weight,
+			      exerciseEXP: exerciseEXP,
+			      goals: goals,
+			      level: level,
+			      sdate: sdate // YYYY-MM-DD 형식으로 변환된 날짜를 전달
+			    },
+			    success: function(response) {
+			      if (response.trim() === 'success') {
+			        alert('환영합니다');
+			        sessionStorage.clear();
+			        window.location.href = 'login.jsp';
+			      } else  {
+			        alert('아이디 및 비밀번호를 입력해주세요');
+			        history.back();
+			      }
+			    },
+			    error: function(xhr, status, error) {
+			      console.error("Error: ", status, error);
+			      alert('아이디 및 비밀번호, 설문조사에 정보를 정확히 기입해주세요.');
+			      history.back();
+			    }
+			  });
+			});
 	  });

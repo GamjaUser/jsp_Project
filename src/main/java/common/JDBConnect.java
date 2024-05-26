@@ -11,7 +11,7 @@ import javax.servlet.ServletContext;
 public class JDBConnect {
     public Connection con;
     public Statement stmt;  
-    public PreparedStatement psmt;  
+    public PreparedStatement pstmt;  
     public ResultSet rs;
 
     // 기본 생성자
@@ -74,7 +74,7 @@ public class JDBConnect {
         try {            
             if (rs != null) rs.close(); 
             if (stmt != null) stmt.close();
-            if (psmt != null) psmt.close();
+            if (pstmt != null) pstmt.close();
             if (con != null) con.close(); 
 
             System.out.println("JDBC 자원 해제");

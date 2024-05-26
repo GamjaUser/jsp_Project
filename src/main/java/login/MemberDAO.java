@@ -24,15 +24,15 @@ public class MemberDAO extends JDBConnect{
         	String query = "INSERT INTO member "
         			     + "(id, password, gender, age, goals, exerciseEXP, \"level\") "
         			     + "VALUES (? ,?, ?, ?, ?, ?, ?)";
-        	psmt = con.prepareStatement(query);
-            psmt.setString(1, member.getId());
-            psmt.setString(2, member.getPassword());
-            psmt.setString(3, member.getGender());
-            psmt.setInt(4, member.getAge());
-            psmt.setInt(5, member.getGoals());
-            psmt.setInt(6, member.getExerciseEXP());
-            psmt.setInt(7, member.getLevel());
-            dto = psmt.executeUpdate();
+        	pstmt = con.prepareStatement(query);
+            pstmt.setString(1, member.getId());
+            pstmt.setString(2, member.getPassword());
+            pstmt.setString(3, member.getGender());
+            pstmt.setInt(4, member.getAge());
+            pstmt.setInt(5, member.getGoals());
+            pstmt.setInt(6, member.getExerciseEXP());
+            pstmt.setInt(7, member.getLevel());
+            dto = pstmt.executeUpdate();
         }catch(Exception e) {
         	System.out.println("Exception[insertMember]: "+ e.getMessage());
         }
@@ -60,10 +60,10 @@ public class MemberDAO extends JDBConnect{
             String sql = "SELECT * "
             		   + "FROM member "
             		   + "WHERE id = ? AND password = ?";
-            psmt = con.prepareStatement(sql);
-            psmt.setString(1, member.getId());
-            psmt.setString(2, member.getPassword());
-            rs = psmt.executeQuery();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, member.getId());
+            pstmt.setString(2, member.getPassword());
+            rs = pstmt.executeQuery();
 
             // 결과가 존재하면 success 반환
             if (rs.next()) {
@@ -75,7 +75,7 @@ public class MemberDAO extends JDBConnect{
             // 리소스 정리
             try {
                 if (rs != null) rs.close();
-                if (psmt != null) psmt.close();
+                if (pstmt != null) pstmt.close();
                 if (con != null) con.close();
             } catch (SQLException e) {
                 e.printStackTrace(); // 에러 처리 코드 작성
@@ -84,26 +84,43 @@ public class MemberDAO extends JDBConnect{
 
         return result;
     }
-
     
     
+    //프로필페이지 정보 출력
+    public MemberDTO selectProfileView(String id) {
+    	MemberDTO dto = new MemberDTO(); // DTO 객체 생성
+        String query = "SELECT * FROM member WHERE id=?";  // 쿼리문 템플릿 준비
+        try {
+        	pstmt = con.prepareStatement(query);
+        	pstmt.setString(1, id);
+        	rs = pstmt.executeQuery();
+        	
+        	if(rs.next()) {
+        		dto.setId(rs.getString("id"));
+        		dto.setAge(rs.getInt("age"));
+        		dto.setGender(rs.getString("gender"));
+        		dto.setExerciseEXP(rs.getInt("exerciseEXP"));
+        		dto.setGoals(rs.getInt("goals"));
+        		dto.setLevel(rs.getInt("level"));
+        	}
+        	
+        }catch(Exception e) {
+            System.out.println("Exception[selectProfileView]: " + e.getMessage());
+            e.printStackTrace();
+        }
+		return dto;
+    	
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    //관리자 모드 메소드
+    //관리자모드
     // ID로 특정 회원을 조회하는 메서드
     public MemberDTO getMemberById(String id) throws SQLException {
         String query = "SELECT * FROM member WHERE id = ?";
-        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+        try (PreparedStatement ptsmt = con.prepareStatement(query)) {
             pstmt.setString(1, id);
             try {
-            	psmt = con.prepareStatement(query);
-    			rs = psmt.executeQuery();
+            	pstmt = con.prepareStatement(query);
+    			rs = pstmt.executeQuery();
                 if (rs.next()) {
                     MemberDTO member = new MemberDTO();
                     member.setId(rs.getString("id"));
@@ -121,14 +138,14 @@ public class MemberDAO extends JDBConnect{
         }
         return null;
     }
-
+    
     // 모든 회원 정보를 조회하는 메서드
     public List<MemberDTO> getAllMembers() throws SQLException {
         List<MemberDTO> members = new ArrayList<>();
         String query = "SELECT * FROM member";
         try  {
-        	psmt = con.prepareStatement(query);
-        	rs = psmt.executeQuery();
+        	pstmt = con.prepareStatement(query);
+        	rs = pstmt.executeQuery();
             while (rs.next()) {
                 MemberDTO member = new MemberDTO();
                 member.setId(rs.getString("id"));
@@ -151,8 +168,8 @@ public class MemberDAO extends JDBConnect{
     	List<MemberDTO> update = new ArrayList<MemberDTO>();
     	String query = "UPDATE member SET password = ?, gender = ?, age = ?, goals = ?, exerciseEXP = ?, level = ? WHERE id = ?";
         try {
-        	psmt = con.prepareStatement(query);
-			rs = psmt.executeQuery();
+        	pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				MemberDTO dto = new MemberDTO();
 				dto.setPassword(rs.getString("password"));
@@ -175,9 +192,9 @@ public class MemberDAO extends JDBConnect{
     	int result = 0;
         try {
         	String query = "DELETE FROM member WHERE id = ?";
-        	psmt = con.prepareStatement(query);
-            psmt.setString(1, id);
-            result = psmt.executeUpdate();
+        	pstmt = con.prepareStatement(query);
+            pstmt.setString(1, id);
+            result = pstmt.executeUpdate();
         }catch(Exception e) {
         	System.out.println("Exception[deleteMember]: "+ e.getMessage());
         }

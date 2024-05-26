@@ -113,9 +113,7 @@
   content: 'BMI';
 }
 
-.statistics .title-fat:after {
-  content: 'Fat';
-}
+
 
 .statistics .height {
   height: 150px;

@@ -11,9 +11,9 @@
   <link rel="stylesheet" type="text/css" href="../css/login.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-full.min.js"></script>
-  
   <script src="../js/login.js"></script>
-  <script src="../js/loginconroller.js"></script>
+	<script src="../js/logincontroller.js"></script>
+	
   
 </head>
 
@@ -36,9 +36,14 @@
           <form id="form-signup" method="post" onsubmit="return false;">
             <div class="form-element form-stack">
               <label for="id" class="form-label">ID</label>
+             
+         
+              <div class="form-element form-submit">
               <input id="sign-id" type="text" name="sign-id">
-              <button id="checkId" type="button" >중복 검사</button>
-            </div>
+              <button id="checkId" class="checkId" type="button" >중복 검사</button>
+              </div>
+              
+              </div>
             <div class="form-element form-stack">
               <label for="password-signup" class="form-label">Password</label>
               <input id="password-signup" type="password" name="password">

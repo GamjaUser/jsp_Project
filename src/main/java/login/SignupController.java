@@ -29,15 +29,15 @@ public class SignupController extends HttpServlet {
         int goals = Integer.parseInt(request.getParameter("goals"));
         int level = Integer.parseInt(request.getParameter("level"));
         String sdateString = request.getParameter("sdate");
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        Date utilDate = null;
-        try {
-            utilDate = dateFormat.parse(sdateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        java.sql.Date sdate = new java.sql.Date(utilDate.getTime());
+     // sdateString 변환
+     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+     Date utilDate = null;
+     try {
+         utilDate = dateFormat.parse(sdateString);
+     } catch (ParseException e) {
+         e.printStackTrace();
+     }
+     java.sql.Date sdate = new java.sql.Date(utilDate.getTime());
 
         MemberDTO member = new MemberDTO();
         member.setId(id);
