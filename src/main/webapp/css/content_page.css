@@ -1,0 +1,259 @@
+@charset "EUC-KR";
+
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+#modal_menubar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background-color: transparent;
+}
+
+body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: "Cairo", sans-serif;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.flex-fill {
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-start {
+  justify-content: flex-start;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-start {
+  align-items: flex-start;
+}
+
+.align-items-end {
+  align-items: flex-end;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0turn;
+}
+@keyframes conic-rotate {
+  to {
+    --angle: 1turn;
+  }
+}
+.table-container {
+  position: relative;
+  display: flex;
+  width: 85vw;
+  height: calc(((var(--data-limit) + 1) * 2rem) + 10rem);
+  transform-style: preserve-3d;
+  box-shadow: inset 0 -0.5rem 1rem rgba(255, 255, 255, 0.5), inset 0 0 1rem rgba(93, 229, 187, 0.3);
+  border: 2px solid rgba(93, 229, 187, 0.5);
+  border-radius: 1rem;
+  flex-direction: column;
+}
+.table-container::before {
+  position: absolute;
+  display: flex;
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: conic-gradient(from var(--angle), #80FF80, rgba(93, 229, 187, 0.5), #80FF80, royalblue, #80FF80);
+  filter: blur(0.5rem);
+  transform: translatez(-2px);
+  z-index: -2;
+  opacity: 0.99;
+  animation: conic-rotate 12s infinite linear;
+}
+.table-container::after {
+  position: absolute;
+  display: flex;
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  transform: translatez(-1px);
+  z-index: -1;
+  border-radius: inherit;
+}
+
+.table {
+  position: relative;
+  display: flex;
+  width: 100%;
+  padding: 1rem 0 0 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(90deg, transparent, rgba(128, 255, 128, 0.15), transparent);
+  -webkit-background-image: linear-gradient(90deg, transparent, rgba(128, 255, 128, 0.15), transparent);
+  overflow: hidden;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+.table .table-row {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: inherit;
+  width: calc(100% - 4rem);
+  padding: 0 2rem;
+  transition: opacity .5s;
+}
+
+#board_type, #title_input {
+  height: 10%;
+  margin-left: 2%;
+}
+
+#board_type {
+  width: 15%;
+  margin-top: 2%;
+  text-align: center;
+  font-size: 20px;
+  background-color: transparent;
+  border-width: 0px 0px 3px 0px;
+  outline: none;
+}
+
+#title_input {
+  width: 50%;
+  margin-top: 1%;
+  border-radius: 12px;
+  padding-left: 2%;
+}
+
+#file_input{
+  margin-top:3%;
+  margin-left:3%;
+}
+
+#content_input1 {
+  height: 60%;
+  width: 90%;
+  margin-top: 1%;
+  margin-left: 2%;
+  border-radius: 12px;
+  padding: 2% 0 0 2%;
+}
+
+
+#enroll_button{
+	position: absolute;
+    margin-top : 37%;
+    margin-left : 63%;
+}
+
+
+#golist_button{
+  position:absolute;
+  margin-top:37%;
+  margin-left:77%;
+}
+
+.sub_container{
+  height:93%;
+  margin-top:3%;
+}
+
+#searchField{
+	margin-left:3%;
+}
+
+#contentBox{
+	height: 60%;
+  	margin-left: 2%;
+  	border-radius: 12px;
+ 	padding: 2% 0 0 2%;
+}
+
+.child_contentBox{
+	display:inline-block;
+}
+
+#content_input2{
+	height: 100%;
+  width: 50%;
+  margin-top: 1%;
+  margin-left: 2%;
+  border-radius: 12px;
+  padding: 2% 0 0 2%;
+}
+
+#product_box{
+	background-color:pink;
+	
+	height: 100%;
+  width: 20%;
+  margin-top: 1%;
+  margin-left: 5%;
+  border-radius: 12px;
+  padding: 2% 0 0 2%;
+}
+
+
+/* component */
+
+.star-rating {
+  display:flex;
+  flex-direction: row-reverse;
+  font-size:1.5em;
+  justify-content:space-around;
+  padding:1em 12.4em 0;
+  text-align:center;
+  width:5em;
+}
+
+.star-rating input {
+  display:none;
+}
+
+.star-rating label {
+  color:#ccc;
+  cursor:pointer;
+}
+
+.star-rating :checked ~ label {
+  color:#f90;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color:#fc0;
+}
+
+.sub_titleField{
+	display:inline-block;
+}
