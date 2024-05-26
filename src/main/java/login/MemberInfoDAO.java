@@ -8,36 +8,66 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
+import DTO.MemberDTO;
 import DTO.MemberInfoDTO;
+import common.JDBConnect;
 
-public class MemberInfoDAO {
-    private Connection connection;
-
-    // 생성자: 데이터베이스 연결을 초기화합니다.
-    public MemberInfoDAO(Connection connection) {
-        this.connection = connection;
+public class MemberInfoDAO extends JDBConnect {
+	public MemberInfoDAO(ServletContext application) {
+        super(application);
     }
-
     // 새로운 회원 정보를 member_info 테이블에 삽입하는 메서드
-    public void insertMemberInfo(MemberInfoDTO memberInfo) throws SQLException {
-        String query = "INSERT INTO member_info (id, Weight, height, sdate) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-            pstmt.setString(1, memberInfo.getId());
+    public int insertMemberInfo(MemberInfoDTO memberInfo){
+        int dto = 0;
+    	try {
+        	String query = "INSERT INTO member_info "
+        				 + "(id, Weight, height, sdate) "
+        				 + "VALUES (?, ?, ?,TO_DATE(?,'YYYY-MM-DD'))";
+        	pstmt = con.prepareStatement(query);
+        	pstmt.setString(1, memberInfo.getId());
             pstmt.setInt(2, memberInfo.getWeight());
             pstmt.setInt(3, memberInfo.getHeight());
             pstmt.setDate(4, memberInfo.getSdate());
-            pstmt.executeUpdate();
+            dto = pstmt.executeUpdate();
         }catch(Exception e) {
         	System.out.println("Exception[insertMemberInfo]: "+ e.getMessage());
         }
+    	return dto;
     }
-
+    
+    public MemberInfoDTO selectProfileView_info(String id) {
+        MemberInfoDTO dto = new MemberInfoDTO();
+        String query = "SELECT * FROM member_info WHERE id = ?";
+        try {
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+            
+            if(rs.next()) {
+                dto.setHeight(rs.getInt("height"));
+                dto.setWeight(rs.getInt("weight"));
+                dto.setSdate(rs.getDate("sdate")); // java.sql.Date 형식이 아닌 java.util.Date 형식으로 설정
+            }
+        } catch(Exception e) {
+            System.out.println("Exception[selectProfileView_info]: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return dto;
+    }
+    
+    
+    
+    //관리자 모드
     // ID로 특정 회원 정보를 조회하는 메서드
     public MemberInfoDTO getMemberInfoById(String id) throws SQLException {
         String query = "SELECT * FROM member_info WHERE id = ?";
-        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+        try (PreparedStatement psmt = con.prepareStatement(query)) {
             pstmt.setString(1, id);
-            try (ResultSet rs = pstmt.executeQuery()) {
+            try {
+            	pstmt = con.prepareStatement(query);
+    			rs = pstmt.executeQuery();
                 if (rs.next()) {
                     MemberInfoDTO memberInfo = new MemberInfoDTO();
                     memberInfo.setId(rs.getString("id"));
@@ -57,8 +87,9 @@ public class MemberInfoDAO {
     public List<MemberInfoDTO> getAllMemberInfo() throws SQLException {
         List<MemberInfoDTO> memberInfos = new ArrayList<>();
         String query = "SELECT * FROM member_info";
-        try (PreparedStatement pstmt = connection.prepareStatement(query);
-             ResultSet rs = pstmt.executeQuery()) {
+        try {
+        	pstmt = con.prepareStatement(query);
+        	rs = pstmt.executeQuery();
             while (rs.next()) {
                 MemberInfoDTO memberInfo = new MemberInfoDTO();
                 memberInfo.setId(rs.getString("id"));
@@ -74,27 +105,38 @@ public class MemberInfoDAO {
     }
 
     // 회원 정보를 업데이트하는 메서드
-    public void updateMemberInfo(MemberInfoDTO memberInfo) throws SQLException {
-        String query = "UPDATE member_info SET Weight = ?, height = ?, sdate = ? WHERE id = ?";
-        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-            pstmt.setInt(1, memberInfo.getWeight());
-            pstmt.setInt(2, memberInfo.getHeight());
-            pstmt.setDate(3, memberInfo.getSdate());
-            pstmt.setString(4, memberInfo.getId());
-            pstmt.executeUpdate();
+    public List<MemberInfoDTO> updateMemberInfo(MemberInfoDTO memberInfo) throws SQLException {
+    	List<MemberInfoDTO> update = new ArrayList<MemberInfoDTO>();
+    	String query = "UPDATE member_info SET weight = ?, height = ?, sdate = ? WHERE id = ?";
+        try {
+        	pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				MemberInfoDTO dto = new MemberInfoDTO();
+				dto.setWeight(rs.getInt("weight"));
+				dto.setHeight(rs.getInt("height"));
+				dto.setSdate(rs.getDate("sdate"));
+				dto.setId(rs.getString("id"));
+				update.add(dto);
+	           
+			}
         }catch(Exception e) {
         	System.out.println("Exception[updateMemberInfo]: "+ e.getMessage());
         }
+        return update;
     }
 
     // 특정 ID의 회원 정보를 삭제하는 메서드
-    public void deleteMemberInfo(String id) throws SQLException {
-        String query = "DELETE FROM member_info WHERE id = ?";
-        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+    public int deleteMemberInfo(String id) throws SQLException {
+        int result = 0;
+    	try{
+        	String query = "DELETE FROM member_info WHERE id = ?";
+        	pstmt = con.prepareStatement(query);
             pstmt.setString(1, id);
-            pstmt.executeUpdate();
+            result = pstmt.executeUpdate();
         }catch(Exception e) {
         	System.out.println("Exception[deleteMemberInfo]: "+ e.getMessage());
         }
+    	return result;
     }
 }
