@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -10,53 +11,10 @@
   <link rel="stylesheet" type="text/css" href="../css/login.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-full.min.js"></script>
+  
   <script src="../js/login.js"></script>
-  <script>
-    $(document).ready(function() {
-      // Sign Up 버튼 클릭 시 모든 데이터 전송
-      $('#signUp').on('click', function(e) {
-        e.preventDefault();
-
-        // form 데이터 수집
-        var id = $('#id').val();
-        var password = $('#password-signup').val();
-        var age = sessionStorage.getItem('age');
-        var gender = sessionStorage.getItem('gender');
-        var height = sessionStorage.getItem('height');
-        var weight = sessionStorage.getItem('weight');
-        var exerciseEXP = sessionStorage.getItem('exerciseEXP');
-        var goals = sessionStorage.getItem('goals');
-
-        $.ajax({
-          type: 'POST',
-          url: 'signupProcess.jsp',
-          data: {
-            id: id,
-            password: password,
-            age: age,
-            gender: gender,
-            height: height,
-            weight: weight,
-            exerciseEXP: exerciseEXP,
-            goals: goals
-          },
-          success: function(response) {
-            if (response.trim() === 'success') {
-              alert('환영합니다');
-              window.location.href = 'profile.jsp';
-            } else {
-              alert('회원가입에 실패하였습니다');
-              history.back();
-            }
-          },
-          error: function() {
-            alert('회원가입에 실패하였습니다');
-            history.back();
-          }
-        });
-      });
-    });
-  </script>
+  <script src="../js/loginconroller.js"></script>
+  
 </head>
 
 <body>
@@ -77,12 +35,17 @@
           <h2>Sign Up</h2>
           <form id="form-signup" method="post" onsubmit="return false;">
             <div class="form-element form-stack">
-              <label for="email" class="form-label">ID</label>
-              <input id="id" type="text" name="id">
+              <label for="id" class="form-label">ID</label>
+              <input id="sign-id" type="text" name="sign-id">
+              <button id="checkId" type="button" >중복 검사</button>
             </div>
             <div class="form-element form-stack">
               <label for="password-signup" class="form-label">Password</label>
               <input id="password-signup" type="password" name="password">
+            </div>
+            <div class="form-element form-stack">
+              <label for="password-signup-check" class="form-label">Password check</label>
+              <input id="password-signup-check" type="password" name="password-check">
             </div>
             <div class="form-element form-checkbox">
               <input id="confirm-terms" type="checkbox" name="confirm" value="yes" onchange="handleCheckboxChange()">
@@ -95,7 +58,7 @@
             </div>
             <div class="form-element form-submit">
               <button id="signUp" class="signup" type="submit" name="signup">Sign up</button>
-              <button id="goLeft" class="signup off">Log In</button> <br /><br /><br /><br /><br />
+              <button id="goLeft" class="signup off">Log In</button>
             </div>
           </form>
         </div>
@@ -105,8 +68,8 @@
           <h2>Login</h2>
           <form id="form-login" method="post" onsubmit="return false;">
             <div class="form-element form-stack">
-              <label for="username-login" class="form-label">Username</label>
-              <input id="username-login" type="text" name="username">
+              <label for="username-login" class="form-label">ID</label>
+              <input id="login-id" type="text" name="login-Id">
             </div>
             <div class="form-element form-stack">
               <label for="password-login" class="form-label">Password</label>
@@ -123,4 +86,5 @@
   </div>
   <canvas id="canvas" width="800" height="600"></canvas>
 </body>
+
 </html>

@@ -53,13 +53,13 @@ public class JDBConnect {
     public JDBConnect(ServletContext application) {
         try {
             // JDBC 드라이버 로드
-            String driver = application.getInitParameter("OracleDriver"); 
+            String driver = application.getInitParameter("oracleDriver"); 
             Class.forName(driver); 
 
             // DB에 연결
-            String url = application.getInitParameter("OracleURL"); 
-            String id = application.getInitParameter("OracleId");
-            String pwd = application.getInitParameter("OraclePwd");
+            String url = application.getInitParameter("oracleUrl"); 
+            String id = application.getInitParameter("oracleId");
+            String pwd = application.getInitParameter("oraclePwd");
             con = DriverManager.getConnection(url, id, pwd);
 
             System.out.println("DB 연결 성공(인수 생성자 2)"); 

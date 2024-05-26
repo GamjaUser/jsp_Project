@@ -19,10 +19,12 @@ public class MemberInfoDAO extends JDBConnect {
         super(application);
     }
     // 새로운 회원 정보를 member_info 테이블에 삽입하는 메서드
-    public int insertMemberInfo(MemberInfoDTO memberInfo) throws SQLException {
+    public int insertMemberInfo(MemberInfoDTO memberInfo){
         int dto = 0;
     	try {
-        	String query = "INSERT INTO member_info (id, Weight, height, sdate) VALUES (?, ?, ?, ?)";
+        	String query = "INSERT INTO member_info "
+        				 + "(id, Weight, height, sdate) "
+        				 + "VALUES (?, ?, ?,TO_DATE(?,'YYYY-MM-DD'))";
         	psmt = con.prepareStatement(query);
         	psmt.setString(1, memberInfo.getId());
             psmt.setInt(2, memberInfo.getWeight());
