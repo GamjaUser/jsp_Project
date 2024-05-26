@@ -38,11 +38,10 @@
               <label for="id" class="form-label">ID</label>
              
          
-              <div class="form-element form-submit">
               <input id="sign-id" type="text" name="sign-id">
-              <button id="checkId" class="checkId" type="button" >중복 검사</button>
+              <div class="form-element form-submit">
+              <button id="checkId" class="signup" type="button" >중복 검사</button>
               </div>
-              
               </div>
             <div class="form-element form-stack">
               <label for="password-signup" class="form-label">Password</label>

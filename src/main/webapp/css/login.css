@@ -20,6 +20,7 @@ body {
   left: 0;
   width: 50%;
   height: 100%;
+  
 }
 
 #back {
@@ -45,6 +46,7 @@ body {
   overflow: hidden;
   margin-left: 50%;
   position: absolute;
+  
 }
 
 .topLayer {
@@ -77,26 +79,21 @@ input {
   left: 0;
   position: absolute;
 }
-
 .left label {
   color: #e3e3e3;
 }
-
 .left input {
   border-bottom: 1px solid #e3e3e3;
   color: #e3e3e3;
 }
-
 .left input:focus, .left input:active {
   border-color: #03A9F4;
   color: #03A9F4;
 }
-
 .left input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px #2C3034 inset;
   -webkit-text-fill-color: #e3e3e3;
 }
-
 .left a {
   color: #03A9F4;
 }
@@ -109,19 +106,15 @@ input {
   right: 0;
   position: absolute;
 }
-
 .right label {
   color: #212121;
 }
-
 .right input {
   border-bottom: 1px solid #212121;
 }
-
 .right input:focus, .right input:active {
   border-color: #673AB7;
 }
-
 .right input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px #f9f9f9 inset;
   -webkit-text-fill-color: #212121;
@@ -154,7 +147,6 @@ input {
 .form-element {
   margin: 1.6em 0;
 }
-
 .form-element.form-submit {
   margin: 1.6em 0 0;
 }
@@ -202,7 +194,6 @@ input {
   display: flex;
   align-items: center;
 }
-
 .form-checkbox label {
   margin: 0 6px 0;
   font-size: 0.72em;
@@ -224,34 +215,20 @@ button {
   outline: 0;
   transition: all 0.25s;
 }
-
-/* 중복 검사 버튼 색상 지정 */
-button.checkId {
-	background: #2e96ea;
-}
-
 button.signup {
   background: #2e96ea;
 }
-
 button.login {
   background: #30c8ca;
 }
-
 button.off {
   background: none;
   box-shadow: none;
   margin: 0;
 }
-
-button.off.checkId{
-	color: #2e96ea;
-}
-
 button.off.signup {
   color: #2e96ea;
 }
-
 button.off.login {
   color: #30c8ca;
 }
@@ -259,32 +236,19 @@ button.off.login {
 button:focus, button:active, button:hover {
   box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
 }
-
-button:focus.checkId, button:active.checkId, button:hover.checkId {
-  background: #30c8ca;
-}
-
 button:focus.signup, button:active.signup, button:hover.signup {
   background: #30c8ca;
 }
-
 button:focus.login, button:active.login, button:hover.login {
   background: #2e96ea;
 }
-
 button:focus.off, button:active.off, button:hover.off {
   box-shadow: #30c8ca;
-}
-
-button:focus.off.checkId, button:active.off.checkId, button:hover.off.checkId {
-  color: #ffffff;
-  background: #30c8ca;
 }
 button:focus.off.signup, button:active.off.signup, button:hover.off.signup {
   color: #ffffff;
   background: #30c8ca;
 }
-
 button:focus.off.login, button:active.off.login, button:hover.off.login {
   color: #ffffff;
   background: #2e96ea;
