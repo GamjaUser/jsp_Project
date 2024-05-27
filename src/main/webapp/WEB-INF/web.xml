@@ -21,7 +21,7 @@
   <context-param>
   	<param-name>oracleId</param-name>
 
-  	<param-value>musthave</param-value>
+  	<param-value>master</param-value>
   </context-param>
   <context-param>
   	<param-name>oraclePwd</param-name>

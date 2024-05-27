@@ -1,4 +1,4 @@
-package Profile;
+package Controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +11,8 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import login.MemberDAO;
-import login.MemberInfoDAO;
+import DAO.MemberDAO;
+import DAO.MemberInfoDAO;
 import DTO.MemberDTO;
 import DTO.MemberInfoDTO;
 

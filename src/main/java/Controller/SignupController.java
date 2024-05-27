@@ -1,4 +1,4 @@
-package login;
+package Controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,8 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import login.MemberDAO;
-import login.MemberInfoDAO;
+import DAO.MemberDAO;
+import DAO.MemberInfoDAO;
 import DTO.MemberDTO;
 import DTO.MemberInfoDTO;
 

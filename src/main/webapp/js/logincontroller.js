@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	    
 	    //중복검사
 		  var isIdValid = false; // 아이디 중복 여부 플래그
 			
@@ -27,7 +28,7 @@ $(document).ready(function() {
 	        success: function(response) {
 	          if (response.trim() === 'available') {
 	            alert('사용 가능한 아이디입니다.');
-	            sessionStorage.clear();
+	            
 	            isIdValid = true;
 	          } else {
 	            alert('이미 사용 중인 아이디입니다.');
@@ -108,7 +109,7 @@ $(document).ready(function() {
 			
 			  var currentDate = new Date();
 	      var sdate = currentDate.toISOString();
-			  
+			  sessionStorage.clear();
 			  $.ajax({
 			    type: 'POST',
 			    url: url,
@@ -130,8 +131,9 @@ $(document).ready(function() {
 			        sessionStorage.clear();
 			        window.location.href = 'login.jsp';
 			      } else  {
-			        alert('아이디 및 비밀번호를 입력해주세요');
-			        history.back();
+			        alert('아이디 및 비밀번호를 다시 입력해주세요');
+			        sessionStorage.clear();
+			        window.location.href = 'login.jsp';
 			      }
 			    },
 			    error: function(xhr, status, error) {
