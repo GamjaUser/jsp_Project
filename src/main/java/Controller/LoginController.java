@@ -1,4 +1,4 @@
-package login;
+package Controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import login.MemberDAO;
+import DAO.MemberDAO;
 import DTO.MemberDTO;
 
 @WebServlet("/login/login.do")
@@ -22,7 +22,7 @@ public class LoginController extends HttpServlet {
         member.setId(id);
         member.setPassword(password);
 
-        MemberDAO memberDAO = new MemberDAO(getServletContext());
+        DAO.MemberDAO memberDAO = new DAO.MemberDAO(getServletContext());
         String result = memberDAO.memberLogin(member);
 
         response.setContentType("text/plain");
