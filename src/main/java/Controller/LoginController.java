@@ -27,8 +27,8 @@ public class LoginController extends HttpServlet {
 
         MemberDAO memberDAO = new DAO.MemberDAO(getServletContext());
         
-        MemberDAO member_user = new MemberDAO(getServletContext());
-        MemberInfoDAO memberinfo_user = new MemberInfoDAO(getServletContext()); 
+        MemberDAO user = new MemberDAO(getServletContext());
+        MemberInfoDAO user_info = new MemberInfoDAO(getServletContext()); 
         String result = memberDAO.memberLogin(member);
 
         response.setContentType("text/plain");
@@ -38,11 +38,11 @@ public class LoginController extends HttpServlet {
          // 로그인 성공 시 세션에 사용자 정보 저장
             HttpSession session = request.getSession();
             
-            MemberDTO member_profile = member_user.selectProfileView(id); // 사용자의 정보를 가져옴
-            MemberInfoDTO memberinfo_profile = memberinfo_user.selectProfileView_info(id);
+            MemberDTO member_profile = user.selectProfileView(id); // 사용자의 정보를 가져옴
+            MemberInfoDTO memberinfo_profile = user_info.selectProfileView_info(id);
             session.setAttribute("member", member_profile);
             session.setAttribute("member_info", memberinfo_profile);
-        } else if(result.equals("fail")) {
+        } else {
             response.getWriter().write("fail");
         }
     }

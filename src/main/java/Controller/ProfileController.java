@@ -20,14 +20,14 @@ public class ProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("user") == null || session.getAttribute("userinfo") == null) {
-            // 세션이 없거나 사용자가 로그인되지 않은 경우 로그인 페이지로 리다이렉트
-            response.sendRedirect(request.getContextPath() + "/login/login.do");
-            return;
-        }
+//        if (session == null || session.getAttribute("user") == null || session.getAttribute("userinfo") == null) {
+//            // 세션이 없거나 사용자가 로그인되지 않은 경우 로그인 페이지로 리다이렉트
+//            response.sendRedirect(request.getContextPath() + "/login/login.do");
+//            return;
+//        }
 
         MemberDTO memberdto = (MemberDTO) session.getAttribute("member");
-        MemberInfoDTO memberInfodto = (MemberInfoDTO) session.getAttribute("member_info");
+        MemberInfoDTO memberInfodto =  (MemberInfoDTO) session.getAttribute("member_info");
 
         // BMI 계산
         double height = memberInfodto.getHeight() / 100.0; // 키를 미터로 변환
