@@ -5,14 +5,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import DAO.MemberDAO;
-import DAO.MemberInfoDAO;
 import DTO.MemberDTO;
 import DTO.MemberInfoDTO;
 
@@ -22,16 +19,15 @@ public class ProfileController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("user") == null || session.getAttribute("userinfo") == null) {
+            // 세션이 없거나 사용자가 로그인되지 않은 경우 로그인 페이지로 리다이렉트
+            response.sendRedirect(request.getContextPath() + "/login/login.do");
+            return;
+        }
 
-        MemberDAO memberdao = new MemberDAO(getServletContext());
-        MemberInfoDAO memberinfodao = new MemberInfoDAO(getServletContext());
-
-        // 회원 정보 불러오기
-        MemberDTO memberdto = memberdao.selectProfileView(id);
-        MemberInfoDTO memberInfodto = memberinfodao.selectProfileView_info(id);
-        memberdao.close();
-        memberinfodao.close();
+        MemberDTO memberdto = (MemberDTO) session.getAttribute("member");
+        MemberInfoDTO memberInfodto = (MemberInfoDTO) session.getAttribute("member_info");
 
         // BMI 계산
         double height = memberInfodto.getHeight() / 100.0; // 키를 미터로 변환
@@ -58,7 +54,7 @@ public class ProfileController extends HttpServlet {
         request.setAttribute("bmi", bmi);
         request.setAttribute("bmiStatus", bmiStatus);
         
-     // MemberInfoDTO에서 sdate를 가져온 후
+        // MemberInfoDTO에서 sdate를 가져온 후
         Date sdate = memberInfodto.getSdate();
 
         // sdate를 원하는 형식으로 포맷
