@@ -1,0 +1,174 @@
+/* 기본 요소 리셋 */
+body, h1, ul, button {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 바디 스타일 */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+#modal_menubar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background-color: transparent;
+}
+
+
+
+/* 컨테이너 스타일 */
+.vip-content {
+  position: fixed;
+  top: 150px;
+  left: 180px;
+  height: 700px;
+  width: 1300px;
+  
+  margin: 20px auto;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row; /* 컨테이너를 가로로 배치 */
+}
+.home{
+	position: fixed;
+	left: 100px;
+	width: 50%;
+		float: left;
+		font-size: 0.9em;
+		font-weight: 500;
+		line-height: 1;
+		.content {
+			margin: 50px 0 0 50px;
+			white-space: nowrap;
+		}
+	.shape {
+			font-family: 'Nunito', sans-serif;
+			font-weight: 200;
+			font-size: 6em;
+			color: #8b9494;	
+		}
+		.score {	
+			color: #34d0c4;
+		}
+}
+/* 이미지 갤러리 스타일 */
+.thumb-gallery {
+  text-align: center;
+  padding: 20px;
+  border-right: 1px solid #ddd; /* 이미지와 정보 구분 */
+  flex: 1; /* 가용 공간을 차지 */
+}
+
+.thumb-gallery img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* 상품 정보 스타일 */
+.item-topinfo {
+  padding: 20px;
+  flex: 1; /* 가용 공간을 차지 */
+  display: flex;
+  flex-direction: column; /* 자식 요소를 세로로 배치 */
+  justify-content: space-between; /* 요소들 간의 공간 배분 */
+}
+
+.item-topinfo_headline {
+  margin-bottom: 20px;
+}
+
+.itemtit {
+  position: relative;
+  top: 40px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+/* 가격 정보 스타일 */
+.price {
+  display: flex;
+  align-items: center;
+}
+
+.price .box__icon {
+  width: 24px;
+  height: 24px;
+  background: url('icon.png') no-repeat center center;
+  margin-right: 10px;
+}
+
+.price_real {
+  position: absolute;
+  top: 270px;
+  font-size: 35px;
+  font-weight: bold;
+  color: #e60023;
+}
+
+.unit {
+  font-size: 18px;
+  color: #666;
+  margin-left: 5px;
+}
+
+/* 숨김 섹션 (필요한 경우) */
+.section_seleted_list {
+  display: none;
+}
+
+/* 하단 버튼 스타일 */
+.form_bottom {
+  padding: 20px 0 0 0;
+  border-top: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.section_bottombtns {
+  display: flex;
+  
+  gap: 30px; /* 버튼 간격 추가 */
+}
+
+.btn_primary {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, opacity 0.3s; /* 부드러운 호버 효과 */
+}
+
+/* 장바구니 버튼 스타일 */
+.btn_white {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.btn_white:hover {
+  background-color: #f0f0f0;
+}
+
+/* 구매 버튼 스타일 */
+.btn_blue {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn_blue:hover {
+  background-color: #0056b3;
+}
