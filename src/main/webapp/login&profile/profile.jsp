@@ -21,6 +21,9 @@
       <div class="summary-column">
         <div class="profile-img" id="profileImage"><img src="https://placeimg.com/400/400/face" />
           <div class="name">회원 <br> 프로필</div>
+          <form action="${pageContext.request.contextPath}/profile/logout" method="post">
+    		<button type="submit">로그아웃</button>
+		  </form>
         </div>
         <div class="statistics">
           <h2>summary</h2>
