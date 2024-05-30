@@ -3,17 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="../js/shop.js"></script>
 <meta charset="UTF-8">
 <title>page</title>
 <link rel="stylesheet" type="text/css" href="../css/shop.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="../js/page.js"></script>
 
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../js/shop.js"></script>
+<script src="../js/page.js"></script>
 </head>
 
-<body>
+<!-- <body> -->
 
  <div class="container">
     <div id="modal_menubar">
