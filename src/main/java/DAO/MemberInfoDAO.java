@@ -1,8 +1,13 @@
 package DAO;
 
+
+import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +20,9 @@ public class MemberInfoDAO extends DBConnPool {
 	public MemberInfoDAO(ServletContext application) {
         super();
     }
+	
+	
+
     // 새로운 회원 정보를 member_info 테이블에 삽입하는 메서드
     public int insertMemberInfo(MemberInfoDTO memberInfo){
         int dto = 0;
@@ -53,6 +61,37 @@ public class MemberInfoDAO extends DBConnPool {
         }
         return dto;
     }
+    
+ // 회원 정보를 업데이트하는 메서드
+    public MemberInfoDTO updateMemberInfo(String id, int height, int weight) throws SQLException {
+    	MemberInfoDTO dto = new MemberInfoDTO();
+        try {
+        	String query = "UPDATE member_info SET weight = ?, height = ?, sdate = ? WHERE id = ?";
+        	pstmt = conn.prepareStatement(query);
+        	pstmt.setInt(1, weight);
+        	pstmt.setInt(2, height);
+        	pstmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+            pstmt.setString(4, id);
+            
+            rs = pstmt.executeQuery();
+        }catch(Exception e) {
+            System.out.println("Exception[updateMemberInfo]: " + e.getMessage());
+            e.printStackTrace();
+        }
+       
+    
+        return dto;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -101,27 +140,7 @@ public class MemberInfoDAO extends DBConnPool {
         return memberInfos;
     }
 
-    // 회원 정보를 업데이트하는 메서드
-    public List<MemberInfoDTO> updateMemberInfo(MemberInfoDTO memberInfo) throws SQLException {
-    	List<MemberInfoDTO> update = new ArrayList<MemberInfoDTO>();
-    	String query = "UPDATE member_info SET weight = ?, height = ?, sdate = ? WHERE id = ?";
-        try {
-        	pstmt = conn.prepareStatement(query);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				MemberInfoDTO dto = new MemberInfoDTO();
-				dto.setWeight(rs.getInt("weight"));
-				dto.setHeight(rs.getInt("height"));
-				dto.setSdate(rs.getDate("sdate"));
-				dto.setId(rs.getString("id"));
-				update.add(dto);
-	           
-			}
-        }catch(Exception e) {
-        	System.out.println("Exception[updateMemberInfo]: "+ e.getMessage());
-        }
-        return update;
-    }
+ 
 
     // 특정 ID의 회원 정보를 삭제하는 메서드
     public int deleteMemberInfo(String id) throws SQLException {
