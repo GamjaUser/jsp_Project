@@ -120,6 +120,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+        <form action="" method="post">
+        
+        <c:set var="order" scope="request">
           <table class="orderTable">
             <tr>
               <th>회원</th>
@@ -173,6 +176,9 @@
               <td>1000000</td>
             </tr>
           </table>
+          </c:set>
+          
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary">결제하기</button>

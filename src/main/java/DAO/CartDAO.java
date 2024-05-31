@@ -11,7 +11,6 @@ import javax.servlet.ServletContext;
 import DTO.CartDTO;
 import DTO.ProductCartDTO;
 import common.DBConnPool;
-import common.JDBConnect;
 
 public class CartDAO extends DBConnPool{
 	public CartDAO() {
@@ -34,7 +33,7 @@ public class CartDAO extends DBConnPool{
 					+"  VALUES (src.productid, src.id, ?)";
 			
 			
-			pstmt = con.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, "user05"); //장바구니 사용자
 			pstmt.setInt(2, 1); //장바구니에 들어갈 상품 고유번호
@@ -60,7 +59,7 @@ public class CartDAO extends DBConnPool{
 		    		+" join product p on p.productid = c.productid"
 		    		+" WHERE id = ?";
 		    
-		    pstmt = con.prepareStatement(sql);
+		    pstmt = conn.prepareStatement(sql);
 		    
 		    pstmt.setString(1, id);
 		    
@@ -99,7 +98,7 @@ public class CartDAO extends DBConnPool{
 		String sql = "delete from cart "
 				+" WHERE productid = ? AND id= ? ";
 		
-		try(PreparedStatement pstmt = con.prepareStatement(sql)) {
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			
 			
 			pstmt.setInt(1, productid);

@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,28 +12,30 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.CartDAO;
+import DTO.MemberDTO;
 import DTO.ProductCartDTO;
 
-@WebServlet("/shoppping/cartMain.do")
+@WebServlet("/shopping/cartMain.do")
 public class CartController extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		CartDAO dao = new CartDAO();
-		System.out.println(1);
-		HttpSession session = req.getSession(); //¼¼¼Ç ¸¸µé±â
+		HttpSession session = req.getSession(); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 		
-//		memberDTO dto = new memberDTO(); //memberDTO »ý¼º
+		if(session == null) {
+			response.sendRedirect(request.getContextPath() + "/login&profile/login.jsp");
+		}
+		
+		MemberDTO dto = (MemberDTO) session.getAttribute("member"); //memberDTO ï¿½ï¿½ï¿½ï¿½
 
-//		session.setAttribute("user", UserDto);
-//		dto = (memberDTO) session.getAttribute("member"); //user ¼¼¼Ç °¡Á®¿À±â
+		String id = dto.getId(); //ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½
 		
-//		String id = dto.getId(); //¼¼¼Ç¿¡¼­ À¯Àú ¹Þ±â
-		
-//		List<ProductCartDTO> products = dao.selectList(id); //¼¼¼Ç¿ë
-		List<ProductCartDTO> products = dao.selectList("user01");
+		List<ProductCartDTO> products = dao.selectList(id); //ï¿½ï¿½ï¿½Ç¿ï¿½
+//		List<ProductCartDTO> products = dao.selectList("user01");
 		dao.close();
+		System.out.println("cart");
 		
 //		System.out.println(products);
 		
