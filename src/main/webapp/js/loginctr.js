@@ -67,7 +67,7 @@ $(document).ready(function() {
 	            success: function(response) {
 	                if (response.trim() === 'success') {
 	                    alert('로그인 성공! 환영합니다.');
-	                    window.location.href = '/Profile/profile.do?id=' + encodeURIComponent(id); // 로그인 성공 시 프로필 페이지로 이동
+	                    window.location.href = '/HealthyCareLife/profile.do'; // 로그인 성공 시 프로필 페이지로 이동
 	                } else if (response.trim() === 'fail') {
 	                    alert('로그인 실패 아이디 또는 비밀번호를 확인해주세요.');
 	                } else {

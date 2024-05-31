@@ -25,6 +25,7 @@
     		<button type="submit">로그아웃</button>
 		  </form>
         </div>
+        <br><br>
         <div class="statistics">
           <h2>summary</h2>
           <div class="age"><span class="title title-age">${dto.age}</span></div>
@@ -56,22 +57,21 @@
          식단 추천
          
         </div>
+        
         <div class="split">
-          운동루틴 추천
-          
-        </div>
-        <div class="split">
-          <h2>BMI 측정</h2>
-          <div class="weight">체중
-            <input type='text' name="weight">
-            <input type="submit" value="입력" name="bmiupdate">
-          </div>
-          
-          <h2>당신의 BMI는</h2>
-          <h2>입니다</h2>
-          
-          
-        </div>
+		  <h2>BMI 측정</h2>
+		  <form action="${pageContext.request.contextPath}/profile/updateBMI" method="post">
+		    <div class="weight">체중 (kg)
+		      <input type="text" name="weight" required>
+		    </div>
+		    <div class="height">신장 (cm)
+		      <input type="text" name="height" required>
+		    </div>
+		    <input type="submit" value="입력" name="bmiupdate">
+		  </form>
+		  <h2>당신의 BMI는 ${bmi}입니다</h2>
+		  <h2>${bmiStatus}</h2>
+		</div>
         <div class="float-none"></div>
         <div class="split-container">
           <div class="split bottom">

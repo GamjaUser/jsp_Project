@@ -13,7 +13,7 @@ import java.util.Date;
 import DTO.MemberDTO;
 import DTO.MemberInfoDTO;
 
-@WebServlet("/Profile/profile.do")
+@WebServlet("/HealthyCareLife/profile.do")
 public class ProfileController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
