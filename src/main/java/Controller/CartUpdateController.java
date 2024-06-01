@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+
 import DAO.CartDAO;
 import DTO.MemberDTO;
 
@@ -17,7 +19,7 @@ import DTO.MemberDTO;
 @WebServlet("/shopping/Cartupdate.do")
 public class CartUpdateController extends HttpServlet{
 
-	private static final long serialVersionUID = 1L;
+//	private static final long serialVersionUID = 1L;
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cntstr = "1";
@@ -57,6 +59,18 @@ public class CartUpdateController extends HttpServlet{
 		System.out.println(id);
 		
 		int result = cdao.insertCart(id, productId, cnt);
+		
+        // JSON 응답 생성
+        JSONObject responseJson = new JSONObject();
+        if (result == 1) {
+            responseJson.put("success", true);
+            resp.setContentType("application/json");
+            resp.getWriter().write(responseJson.toString());
+        } else {
+            responseJson.put("success", false);
+            resp.setContentType("application/json");
+            resp.getWriter().write(responseJson.toString());
+        }
 		
 	}	
 }
