@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 
 import DTO.MemberDTO;
+import DTO.MemberInfoDTO;
 import common.DBConnPool;
 
 public class MemberDAO extends DBConnPool{
@@ -163,8 +164,7 @@ public class MemberDAO extends DBConnPool{
     }
 
     // 회원 정보를 업데이트하는 메서드
-    public List<MemberDTO> updateMember(MemberDTO member) throws SQLException {
-    	List<MemberDTO> update = new ArrayList<MemberDTO>();
+    public void updateMember(MemberInfoDTO infoDTO) throws SQLException {
     	String query = "UPDATE member SET password = ?, gender = ?, age = ?, goals = ?, exerciseEXP = ?, level = ? WHERE id = ?";
         try {
         	pstmt = conn.prepareStatement(query);
@@ -177,13 +177,11 @@ public class MemberDAO extends DBConnPool{
 				dto.setGoals(rs.getInt("goals"));
 				dto.setExerciseEXP(rs.getInt("exerciseEXP"));
 				dto.setLevel(rs.getInt("level"));
-				dto.setId(rs.getString("id"));
-				update.add(dto);
+				dto.setId(rs.getString("id"));				
 			}
         }catch(Exception e) {
         	System.out.println("Exception[updateMember]: "+ e.getMessage());
-        }
-        return update;
+        }  
     }
 
     // 특정 ID의 회원을 삭제하는 메서드
