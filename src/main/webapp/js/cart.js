@@ -16,7 +16,7 @@ $(function() {
 $(function(){
   $('.remove button').click(function() {
 	
-    removeItem(this);
+    removeItem(this);    
   });
 });
 
@@ -105,9 +105,29 @@ function updateQuantity(quantityInput) {
   /* Calculate line price */
   var productRow = $(quantityInput).parent().parent();
   var price = parseFloat(productRow.children('.price').text());
-  var quantity = $(quantityInput).val();
+  var quantity = $(quantityInput).val(); // 상품 갯수
   var linePrice = price * quantity;
+  var productId = productRow.data('product-id'); //상품 고유번호
+  
+  console.log("update ", productId)
+  $.ajax({
+    url: '/shopping/Cartupdate.do', // Controller의 경로
+    type: 'POST',
+    data: {
+      productId: productId, // 제품 ID
+      cnt: quantity// 업데이트된 수량
+    },
+    success: function(response) {
+      // 성공적으로 처리됐을 때의 로직
+      console.log('수량 업데이트 성공:', response);
+    },
+    error: function(xhr, status, error) {
+      // 오류 처리
+      console.error('수량 업데이트 실패:', error);
+    }
+  });
 
+  
   /* Update line price display and recalc cart totals */
   productRow.children('.subtotal').each(function() {
     $(this).fadeOut(fadeTime, function() {
@@ -118,7 +138,8 @@ function updateQuantity(quantityInput) {
   });
 
   productRow.find('.item-quantity').text(quantity);
-  updateSumItems();
+  updateSumItems();	
+
 }
 
 function updateSumItems() {
@@ -129,38 +150,87 @@ function updateSumItems() {
   $('.total-items').text(sumItems);
 }
 
+
+
 /* Remove item from cart */
+//function removeItem(removeButton) {
+//  /* Remove row from DOM and recalc cart total */
+//  const productRow = $(removeButton).parent().parent().parent();
+//  const productId = $(removeButton).parent().parent().attr('data-id');
+//  // 물품 아이디
+//  // controller 회원 아이디 세션에서 가져와 함
+//  removeProduct(productId).then(check => {
+//	if(check){
+//	    productRow.slideUp(fadeTime, function() {
+//	      productRow.remove();
+//	      recalculateCart();
+//	      updateSumItems();
+//	    });	
+//	}
+//  });
+//}
+//
+//const removeProduct = async (productId) => {
+//	let check = false;
+//  console.log('productid: ' + productId);
+//    await axios.post('/removeProduct.do', { productId })
+//        .then(response => {
+//            if (response.data.success) {
+//				check = true;
+//            } else {
+//                alert('Failed to remove product');
+//            }
+//        })
+//        .catch(error => {
+//            console.error('There was an error!', error);
+//        });
+//        
+//    return check
+//}
+
+
 function removeItem(removeButton) {
   /* Remove row from DOM and recalc cart total */
   const productRow = $(removeButton).parent().parent().parent();
-  const productId = $(removeButton).parent().parent().attr('data-id');
+  const productId = $(removeButton).parent().parent().attr('data-product-id');
   // 물품 아이디
   // controller 회원 아이디 세션에서 가져와 함
   removeProduct(productId).then(check => {
-	if(check){
-	    productRow.slideUp(fadeTime, function() {
-	      productRow.remove();
-	      recalculateCart();
-	      updateSumItems();
-	    });	
-	}
+    if (check) {
+      productRow.slideUp(fadeTime, function() {
+        productRow.remove();
+        recalculateCart();
+        updateSumItems();
+      }); 
+    }
   });
 }
 
 const removeProduct = async (productId) => {
-	let check = false;
+  let check = false;
   console.log('productid: ' + productId);
-    await axios.post('/healthy_for_your_life/removeProduct.do', { productId })
-        .then(response => {
-            if (response.data.success) {
-				check = true;
-            } else {
-                alert('Failed to remove product');
-            }
-        })
-        .catch(error => {
-            console.error('There was an error!', error);
-        });
-        
-    return check
+  
+  try {
+    await $.ajax({
+      url: '/removeProduct.do',
+      type: 'POST',
+      data: { productId: productId }, // 데이터는 폼 데이터 형식으로 전송
+      success: function(response) {
+        if (response.success) {
+          check = true;
+        } else {
+          alert('Failed to remove product');
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error('There was an error!', error);
+      }
+    });
+  } catch (error) {
+    console.error('There was an error!', error);
+  }
+
+  return check;
 }
+
+

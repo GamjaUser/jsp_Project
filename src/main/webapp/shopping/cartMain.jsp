@@ -65,7 +65,7 @@
           <c:otherwise>
             <c:forEach var="product" items="${products}" varStatus="loop">
               <div class="basket-product">
-                <div class="product" data-id="${product.productId}">
+                <div class="product" data-product-id="${product.productId}">
                   <div class="item">
                     <div class="product-image">
                       <img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="Placeholder Image 2" class="product-frame">
@@ -120,9 +120,6 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-        <form action="" method="post">
-        
-        <c:set var="order" scope="request">
           <table class="orderTable">
             <tr>
               <th>회원</th>
@@ -176,9 +173,6 @@
               <td>1000000</td>
             </tr>
           </table>
-          </c:set>
-          
-          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary">결제하기</button>

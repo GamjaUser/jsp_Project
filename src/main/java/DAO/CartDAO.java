@@ -17,27 +17,23 @@ public class CartDAO extends DBConnPool{
 		super();
 	}
 	
-	public int insertCart(int productId, String userId, int cnt) { 
+	public int insertCart(String id, int productId, int cnt) { 
 		int result = 0;
-		CartDTO dto = new CartDTO();
 		
+		String sql = "MERGE INTO cart c"
+				+" USING (SELECT ? AS id, ? AS productid FROM dual) src"
+				+" ON (c.\"ID\" = src.id AND c.PRODUCTID = src.productid)"
+				+" WHEN MATCHED THEN"
+				+"  UPDATE SET c.CNT = c.CNT + ?"
+				+" WHEN NOT MATCHED THEN"
+				+" 	INSERT (PRODUCTID, \"ID\", CNT)"
+				+"  VALUES (src.productid, src.id, ?)";
 		
-		try {
-			String sql = "MERGE INTO cart c" // 중복이 있으면 cnt가 올라가는 SQL문
-					+" USING (SELECT ? AS id, ? AS productid FROM dual) src"
-					+" ON (c.\"ID\" = src.id AND c.PRODUCTID = src.productid)"
-					+" WHEN MATCHED THEN"
-					+"  UPDATE SET c.CNT = c.CNT + ?"
-					+" WHEN NOT MATCHED THEN"
-					+" 	INSERT (PRODUCTID, \"ID\", CNT)"
-					+"  VALUES (src.productid, src.id, ?)";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
 			
-			
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, "user05"); //장바구니 사용자
-			pstmt.setInt(2, 1); //장바구니에 들어갈 상품 고유번호
-			pstmt.setInt(3, cnt); //장바구니에 들어갈 상품 갯수 
+			pstmt.setString(1, id); 
+			pstmt.setInt(2, productId); 
+			pstmt.setInt(3, cnt);
 			pstmt.setInt(4, cnt);
 			result = pstmt.executeUpdate();
 			
@@ -50,17 +46,15 @@ public class CartDAO extends DBConnPool{
 		return result;
 	}
 	
-	public List<ProductCartDTO> selectList(String id){ //유저 ID
+	public List<ProductCartDTO> selectList(String id){ 
 		
-		List<ProductCartDTO> productList = new Vector<>(); //고유상품번호를 담아주는 리스트
+		List<ProductCartDTO> productList = new Vector<>(); 
 		
-		try {
-		    String sql = "select * from cart c"
-		    		+" join product p on p.productid = c.productid"
-		    		+" WHERE id = ?";
-		    
-		    pstmt = conn.prepareStatement(sql);
-		    
+		String sql = "select * from cart c"
+				+" join product p on p.productid = c.productid"
+				+" WHERE id = ?";
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){		    
 		    pstmt.setString(1, id);
 		    
 		    rs = pstmt.executeQuery();
@@ -83,15 +77,13 @@ public class CartDAO extends DBConnPool{
 		    }
 		} catch (SQLException e) {
 		    System.out.println("Ex : " + e.getMessage());
-		} finally {
-		    close();
 		}
-		
 		System.out.println("dao : " + productList);
 		
 		System.out.println("size : " + productList.size());
 		return productList;
 	}
+		
 	
 	public int delectCart(int productid, String id) {
 		int result = 0;
