@@ -21,23 +21,30 @@ public class CartController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("CartList");
+		
 		CartDAO dao = new CartDAO();
-		HttpSession session = req.getSession(); //���� �����
+		HttpSession session = req.getSession(); 
 		
-		if(session == null) {
-			response.sendRedirect(request.getContextPath() + "/login&profile/login.jsp");
-		}
-		
-		MemberDTO dto = (MemberDTO) session.getAttribute("member"); //memberDTO ����
+		System.out.println("req : "  + req.getContextPath());
 
-		String id = dto.getId(); //���ǿ��� ���� �ޱ�
+        MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+        
+        //세션 검사
+        if(mdto == null) {
+        	
+        	resp.sendRedirect("/login&profile/login.jsp");
+        	return;
+        }
+        
+		String id = mdto.getId(); //memberDTO에 저장된 ID 가져온다
 		
-		List<ProductCartDTO> products = dao.selectList(id); //���ǿ�
-//		List<ProductCartDTO> products = dao.selectList("user01");
+		System.out.println("id : " + id);
+		
+		List<ProductCartDTO> products = dao.selectList(id); 
 		dao.close();
-		System.out.println("cart");
 		
-//		System.out.println(products);
+		System.out.println("cart");
 		
 		req.setAttribute("products", products);
         req.getRequestDispatcher("/shopping/cartMain.jsp").forward(req, resp);
