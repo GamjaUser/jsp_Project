@@ -62,40 +62,51 @@ public class MemberInfoDAO extends DBConnPool {
         return dto;
     }
     
- // 회원 정보를 업데이트하는 메서드
-    public MemberInfoDTO updateMemberInfo(String id, int height, int weight) throws SQLException {
-    	MemberInfoDTO dto = new MemberInfoDTO();
+    // 회원 정보를 업데이트하는 메서드
+    public void updateMember(MemberInfoDTO memberInfo) throws SQLException {
+        
         try {
-        	String query = "UPDATE member_info SET weight = ?, height = ?, sdate = ? WHERE id = ?";
-        	pstmt = conn.prepareStatement(query);
-        	pstmt.setInt(1, weight);
-        	pstmt.setInt(2, height);
-        	pstmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
-            pstmt.setString(4, id);
             
-            rs = pstmt.executeQuery();
-        }catch(Exception e) {
-            System.out.println("Exception[updateMemberInfo]: " + e.getMessage());
-            e.printStackTrace();
-        }
-       
+            
+            String query = "UPDATE member_info SET weight = ?, height = ?, sdate = TO_DATE(?,'YYYY-MM-DD') WHERE id = ?";
+
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, memberInfo.getWeight());
+            pstmt.setInt(2, memberInfo.getHeight());
+            pstmt.setDate(3, memberInfo.getSdate()); // Setting current timestamp
+            pstmt.setString(4, memberInfo.getId());
+
+            int rowsUpdated = pstmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                conn.commit(); // 커밋
+                System.out.println("업데이트가 성공적으로 수행되었습니다.");
+            }else if(rowsUpdated < 0) {
+            	System.out.println("저장이 안됨");
+            }else {
+            	System.out.println("아이디: " + memberInfo.getId());
+            	System.out.println("신장: " + memberInfo.getHeight());
+            	System.out.println("체중: " + memberInfo.getWeight());
+            	
+            	
+            }
+        } catch (Exception e) {
+            System.out.println("Exception[updateMember]: " + e.getMessage());
+            System.out.println("아이디: " + memberInfo.getId());
+        	System.out.println("신장: " + memberInfo.getHeight());
+        	System.out.println("체중: " + memberInfo.getWeight());
+        	
+        	
+        }      
+    }	
     
-        return dto;
-    }
     
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //관리자 모드
+
+
+
+	//관리자 모드
     // ID로 특정 회원 정보를 조회하는 메서드
     public MemberInfoDTO getMemberInfoById(String id) throws SQLException {
         String query = "SELECT * FROM member_info WHERE id = ?";
@@ -155,4 +166,6 @@ public class MemberInfoDAO extends DBConnPool {
         }
     	return result;
     }
+
+
 }

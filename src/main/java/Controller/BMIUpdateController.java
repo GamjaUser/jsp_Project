@@ -1,5 +1,6 @@
 package Controller;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,53 +9,60 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.MemberInfoDAO;
+import DTO.MemberDTO;
 import DTO.MemberInfoDTO;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 @WebServlet("/profile/updateBMI")
 public class BMIUpdateController extends HttpServlet {
-	 private static final long serialVersionUID = 1L;
-	 
+    private static final long serialVersionUID = 1L;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 폼에서 체중과 신장 값을 가져옴
+        HttpSession session = request.getSession();
+        MemberDTO memberdto = (MemberDTO) session.getAttribute("member");
+        String id = memberdto.getId();
+        System.out.println(id);
+        
         int weight = Integer.parseInt(request.getParameter("weight"));
         int height = Integer.parseInt(request.getParameter("height"));
 
-        // BMI 계산
-        double bmi = calculateBMI(weight, height);
+        double heightInMeters = height / 100.0;
+        double bmi = weight / (heightInMeters * heightInMeters);
+        bmi = Math.round(bmi * 10.0) / 10.0;
+        String bmiStatus;
 
-        // 세션에 BMI 업데이트
-        HttpSession session = request.getSession();
-        session.setAttribute("bmi", bmi);
+        if (bmi < 18.5) {
+            bmiStatus = "저체중";
+        } else if (bmi < 24.9) {
+            bmiStatus = "정상 체중";
+        } else if (bmi < 29.9) {
+            bmiStatus = "과체중";
+        } else {
+            bmiStatus = "비만";
+        }
 
-        // 데이터베이스 업데이트
-        MemberInfoDTO memberInfo = (MemberInfoDTO) session.getAttribute("member_info");
-        String id = memberInfo.getId();
+        Date currentDate = new Date();
+
+        MemberInfoDTO dto = new MemberInfoDTO();
+        dto.setId(id);
+        dto.setWeight(weight);
+        dto.setHeight(height);
+        dto.setSdate(new java.sql.Date(currentDate.getTime()));
+
+        MemberInfoDAO memberDAO = new MemberInfoDAO(getServletContext());
         try {
-			updateDatabase(id, weight, height);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} // MemberInfoDAO에서 데이터베이스 업데이트 메소드 호출
+            memberDAO.updateMember(dto);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        session.setAttribute("dtoinfo", dto);
+        session.setAttribute("bmi2", bmi);
+        session.setAttribute("bmiStatus2", bmiStatus);
 
-        // 다시 프로필 페이지로 이동
-        response.sendRedirect(request.getContextPath() + "/Profile/profile.do");
-    }
-
-    private int calculateBMI(int weight, int height) {
-        // BMI 계산 로직
-        return weight / height;
-    }
-
-    private void updateDatabase(String id, int weight, int height) throws SQLException {
-        // MemberInfoDAO를 사용하여 데이터베이스 업데이트 로직 수행
-        MemberInfoDAO dao = new MemberInfoDAO(getServletContext());
-        dao.updateMemberInfo(id, weight, height);
+        response.sendRedirect(request.getContextPath() + "/HealthCareLife/profile.do");
     }
 }
