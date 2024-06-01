@@ -12,13 +12,11 @@
 
 .container {
   display: inline-flex;
-  
   width: 100%;
   min-width: 600px;
   justify-content: center;
   position: relative;
 }
-
 
 html,
 html a {
@@ -29,9 +27,11 @@ html a {
 body {
   background-color: #fff;
   color: #666;
-/*   font-family: 'Open Sans', sans-serif; */
   font-size: 62.5%;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;	
 }
 
 a {
@@ -61,16 +61,6 @@ button {
   outline: 0 none;
 }
 
-button {
-  background-color: #666;
-  color: #fff;
-}
-
-button:hover,
-button:focus {
-  background-color: #555;
-}
-
 img,
 .basket-module,
 .basket-labels,
@@ -98,7 +88,7 @@ button,
 .subtotal-value:before,
 .total-value:before,
 .promo-value:before {
-  content: '£';
+  content: '₩';
 }
 
 .hide {
@@ -108,7 +98,6 @@ button,
 main {
   clear: both;
   font-size: 0.75rem;
-  margin: 0 auto;
   overflow: hidden;
   padding: 1rem 0;
   width: 960px;
@@ -199,7 +188,6 @@ li.subtotal:before {
 .remove {
   bottom: 1.125rem;
   float: right;
-  position: absolute;
   right: 0;
   text-align: right;
   width: 45%;
@@ -269,6 +257,7 @@ aside {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  margin-top: 80px; 
 }
 
 .summary-total-items {
@@ -420,4 +409,8 @@ aside {
   .product-details {
     padding: 0 1rem;
   }
+}
+
+.m{
+  margin-top: 20px;
 }

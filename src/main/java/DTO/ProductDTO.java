@@ -1,26 +1,58 @@
 package DTO;
 
-public class ProductDTO {
-    private int prouctid; //»óÇ°°íÀ¯¹øÈ£
-    private String name; //»óÇ°ÀÌ¸§
-    private String img; //ÀÌ¹ÌÁö URL
-    private String comment; //»óÇ°¼³¸í
-    private int price; //ÆÇ¸Å°¡
-    private int cnt; //Àç°í
-    private String productKind; //»óÇ°Á¾·ù
+import oracle.sql.DATE;
 
-    public void setProuctid(int prouctid){this.prouctid = prouctid;}
+public class ProductDTO {
+    private int productId; //ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£
+    private String name; //ï¿½ï¿½Ç°ï¿½Ì¸ï¿½
+    private String img; //ï¿½Ì¹ï¿½ï¿½ï¿½ URL
+    private String comment; //ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
+    private int price; //ï¿½Ç¸Å°ï¿½
+    private int cnt; //ï¿½ï¿½ï¿½
+    private String productKind; //ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
+
+
+    public void setProdcutId(int productId){this.productId = productId;}
     public void setName(String name){this.name = name;}
     public void setImg(String img){this.img = img;}
     public void setComment(String comment){this.comment = comment;}
     public void setPrice(int price){this.price = price;}
-    private void setCnt(int cnt){this.cnt = cnt;}
-    private void setProductKind(String productKind){this.productKind = productKind;}
+    public void setCnt(int cnt){this.cnt = cnt;}
+    public void setProductKind(String productKind){this.productKind = productKind;}
 
+    public int getProductId() {
+    	return productId;
+    }
+
+    
+    public String getName() {
+        return name;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getCnt() {
+        return cnt;
+    }
+
+    public String getProductKind() {
+        return productKind;
+    }
+    
     @Override
     public String toString() {
         return "ProductDTO{" +
-                "prouctid=" + prouctid +
+                "prouctid=" + productId +
                 ", name='" + name + '\'' +
                 ", img='" + img + '\'' +
                 ", comment='" + comment + '\'' +
