@@ -9,10 +9,10 @@
   <meta charset="UTF-8">
   <title>mainprofile</title>
   <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="../css/profile.css">
+  <link rel="stylesheet" type="text/css" href="../css/profile2.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="../js/page.js"></script>
-  <script src="../js/profile.js"></script>
+  <script src="../js/profile2.js"></script>
 </head>
 
 <body>
@@ -46,7 +46,7 @@
       </div>
       <div class="content-column">
         <div class="header-container" id="headerContainer">
-          <div class="nav">
+          <div class="nav_profile">
             <div class="content">
               <p>안녕하세요 <span class="name">${dto.id} 님</span>환영합니다</p>
               <span class="shape score">Healthy</span><span class="shape">life</span>
@@ -57,35 +57,38 @@
             <canvas id="bpChart" style="position: relative; z-index: 100;"></canvas>
           </div>
         </div>
-        <div class="split-container">
-         식단 추천
-         
+        <div class="split-food">
+          <button id="toggleMealRecommendation" class="toggle-button">식단 추천 보기</button>
+          <div class="meal-recommendation-content">
+            <!-- 식단 추천 내용 -->
+            dddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          </div>
         </div>
         
-        <div class="split-container">
-          <div class="split left">
-              <h2>BMI 측정</h2>
-              <form action="${pageContext.request.contextPath}/profile/updateBMI" method="post">
-                  <div class="form-group">
-                      <label for="weight">체중 (kg)</label>
-                      <input type="number" id="weight" name="weight" required>
-                      
-                  </div>
-                  
-                  <div class="form-group">
-                      <label for="height">신장 (cm)</label>
-                      <input type="number" id="height" name="height" required>
-                  </div>
-                  <div class="form-right">
-                      <button type="submit" id="btnstyle" class="sub">입력</button>
-                  </div>
-              </form>
-          </div>
-          <div class="split right">
-              <h2>당신의 BMI는 ${bmi2}입니다</h2>
-              <h2>${bmiStatus2}</h2>
-          </div>
-      </div>
+       <div class="split-container">
+    <div class="split left">
+        <h2>BMI 측정</h2>
+        <form action="${pageContext.request.contextPath}/profile/updateBMI" method="post">
+            <div class="form-group">
+                <label for="weight">체중 (kg)</label>
+                <input type="number" id="weight" name="weight" required>
+            </div>
+            <div class="form-group">
+                <label for="height">신장 (cm)</label>
+                <input type="number" id="height" name="height" required>
+            </div>
+            <div class="form-right">
+                <button type="submit" id="btnstyle" class="sub">입력</button>
+            </div>
+        </form>
+    </div>
+    <div class="split right">
+        <h2>당신의 BMI는 ${bmi2}입니다</h2>
+        <h2>${bmiStatus2}</h2>
+    </div>
+</div>
+
       
       
       
@@ -130,4 +133,3 @@
 </body>
 
 </html>
-
