@@ -12,7 +12,6 @@
 
 .container {
   display: inline-flex;
-  
   width: 100%;
   min-width: 600px;
   justify-content: center;
