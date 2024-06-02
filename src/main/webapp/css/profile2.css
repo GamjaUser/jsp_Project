@@ -1,4 +1,4 @@
-/*프로필 css*/
+ /*프로필 css*/
 *,
 *:before,
 *:after {
@@ -206,8 +206,8 @@
 .content-column {
 	position: relative;
   background: white;
-  right: 150px;
-  width: 162%;
+  right: 180px;
+  width: 170%;
   height: 900px;
 	.header-container {
     border: 5px solid red;
@@ -216,7 +216,7 @@
 		height: 311px;
 		
 	}
-	.nav {
+	.nav_profile {
     
 		width: 50%;
 		float: left;
@@ -360,14 +360,17 @@
   background: #30c8ca;
 }
 
-.meal-recommendation-content {
-  display: none;
-}
 
 .meal-recommendation-content {
   display: none;
   overflow: hidden;
-  transition: max-height 0.3s ease-out;
+  
+  transition: max-height 0.3s ease-out; /* 변경된 부분: max-height에 대한 트랜지션 추가 */
+}
+
+.meal-recommendation-content.active {
+  display: block;
+  max-height: 500px; /* 변경된 부분: 토글되었을 때의 최대 높이 설정 */
 }
 
 .toggle-button {
@@ -433,6 +436,47 @@
 		}
 	}
 }
+
+
+.split-food {
+    background-color: #e8f5e9;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #c8e6c9;
+    border-radius: 5px;
+}
+
+.split-food .toggle-button {
+    background-color: #81c784;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.split-food .toggle-button:hover {
+    background-color: #66bb6a;
+}
+
+.split-food .meal-recommendation-content {
+    display: none;
+    margin-top: 20px;
+}
+
+.split-food .meal-recommendation-content.active {
+    display: block;
+}
+
+.split-food .meal-recommendation-content p {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
   .promotion {
 
     position: fixed;
