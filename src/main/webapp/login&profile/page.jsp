@@ -91,7 +91,7 @@
         <a href="../calender/calender.jsp">
           <li class="calendar"></li>
         </a>
-        <a href="/shopping/shopMain.jsp"><li class="shop"></li></a>
+        <a href="/shopping/shopMain.do"><li class="shop"></li></a>
         <a href="/shopping/cartMain.do"><li class="shopping-cart"></li></a>
         <li class="settings"></li>
       </ul>
