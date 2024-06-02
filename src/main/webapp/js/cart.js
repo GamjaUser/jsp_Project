@@ -109,36 +109,27 @@ function updateQuantity(quantityInput) {
   var linePrice = price * quantity;
   var productId = productRow.data('product-id'); //상품 고유번호
   
-  console.log("update ", productId)
-  $.ajax({
-    url: '/shopping/Cartupdate.do', // Controller의 경로
-    type: 'POST',
-    data: {
-      productId: productId, // 제품 ID
-      cnt: quantity// 업데이트된 수량
-    },
-    success: function(response) {
-      // 성공적으로 처리됐을 때의 로직
-      console.log('수량 업데이트 성공:', response);
-    },
-    error: function(xhr, status, error) {
-      // 오류 처리
-      console.error('수량 업데이트 실패:', error);
-    }
-  });
+  
+  
+  updateCnt(productId, quantity).then(check =>{
+  console.log("ProductId ", productId)
+	if(check){
+	  /* Update line price display and recalc cart totals */
+	  productRow.children('.subtotal').each(function() {
+	    $(this).fadeOut(fadeTime, function() {
+	      $(this).text(linePrice);
+	      recalculateCart();
+	      $(this).fadeIn(fadeTime);
+	    });
+	  });
+	
+	  productRow.find('.item-quantity').text(quantity);
+	  updateSumItems();			
+	}
+	
+	});
 
   
-  /* Update line price display and recalc cart totals */
-  productRow.children('.subtotal').each(function() {
-    $(this).fadeOut(fadeTime, function() {
-      $(this).text(linePrice);
-      recalculateCart();
-      $(this).fadeIn(fadeTime);
-    });
-  });
-
-  productRow.find('.item-quantity').text(quantity);
-  updateSumItems();	
 
 }
 
@@ -233,4 +224,35 @@ const removeProduct = async (productId) => {
   return check;
 }
 
-
+const updateCnt = async(productId,quantity) =>{
+	let check = false;
+	
+	console.log("productCnt : ", quantity)
+	
+	try{
+		await   $.ajax({
+		    url: '/shopping/Cartupdate.do', // Controller의 경로
+		    type: 'POST',
+		    data: {
+		      productId: productId, // 제품 ID
+		      cnt: quantity// 업데이트된 수량
+		    },
+		    success: function(response) {
+		      // 성공적으로 처리됐을 때의 로직
+		    	if (response.success) {
+			          check = true;
+		        } else {
+		          alert('Failed to update product');
+		        }
+		    },
+		    error: function(xhr, status, error) {
+		      // 오류 처리
+		      console.error('수량 업데이트 실패:', error);
+		    }
+		  });	
+	} catch (error) {
+  	  console.error('There was an error!', error);
+  	}
+	
+	return check;
+}

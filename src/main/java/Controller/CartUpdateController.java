@@ -22,7 +22,7 @@ public class CartUpdateController extends HttpServlet{
 //	private static final long serialVersionUID = 1L;
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String cntstr = "1";
+		int result;
 		
 		CartDAO cdao = new CartDAO();
 		
@@ -42,23 +42,31 @@ public class CartUpdateController extends HttpServlet{
         	return;
 		}
 		
-		if(parameterCnt == 2) {
-			cntstr = req.getParameter("cnt");			
-		}
-
-		String prorductIdstr = req.getParameter("productId"); 
-
-		int productId = Integer.parseInt(prorductIdstr);
-		int cnt = Integer.parseInt(cntstr);
-		
-		System.out.println(productId);
-		System.out.println(cnt);
-
-		
+		//세션에 저장된 유저 아이디 저장
 		String id = mdto.getId();
 		System.out.println(id);
+
+		//productId 저장
+		String productIdstr = req.getParameter("productId"); 
+		int productId = Integer.parseInt(productIdstr);
+
+		System.out.println("productId : " + productId);
 		
-		int result = cdao.insertCart(id, productId, cnt);
+		//파라미터 2개일떄
+		if(parameterCnt == 2) { 
+			String cntstr = req.getParameter("cnt");
+			
+			int cnt = Integer.parseInt(cntstr);
+			
+			System.out.println("cnt : " + cnt);
+
+			result = cdao.insertCart(id, productId, cnt);
+
+		}
+		//파라미터 1개일떄
+		else {
+			result = cdao.insertCart(id, productId);
+		}
 		
         // JSON 응답 생성
         JSONObject responseJson = new JSONObject();

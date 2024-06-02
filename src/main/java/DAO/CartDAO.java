@@ -24,21 +24,47 @@ public class CartDAO extends DBConnPool{
 				+" USING (SELECT ? AS id, ? AS productid FROM dual) src"
 				+" ON (c.\"ID\" = src.id AND c.PRODUCTID = src.productid)"
 				+" WHEN MATCHED THEN"
-				+"  UPDATE SET c.CNT = c.CNT + ?"
+				+"  UPDATE SET c.CNT = ?"
 				+" WHEN NOT MATCHED THEN"
 				+" 	INSERT (PRODUCTID, \"ID\", CNT)"
-				+"  VALUES (src.productid, src.id, ?)";
+				+"  VALUES (src.productid, src.id, 1)";
+		
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
 			
 			pstmt.setString(1, id); 
 			pstmt.setInt(2, productId); 
 			pstmt.setInt(3, cnt);
-			pstmt.setInt(4, cnt);
 			result = pstmt.executeUpdate();
 			
+		}catch (SQLException e) {
+			System.out.println("Ex : " + e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	//메소드 오버로딩
+	public int insertCart(String id, int productId) { 
+		int result = 0;
+		
+		String sql = "MERGE INTO cart c"
+				+" USING (SELECT ? AS id, ? AS productid FROM dual) src"
+				+" ON (c.\"ID\" = src.id AND c.PRODUCTID = src.productid)"
+				+" WHEN MATCHED THEN"
+				+"  UPDATE SET c.CNT = c.CNT +1"
+				+" WHEN NOT MATCHED THEN"
+				+" 	INSERT (PRODUCTID, \"ID\", CNT)"
+				+"  VALUES (src.productid, src.id, 1)";
+		
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
 			
-			System.out.println(1);
+			pstmt.setString(1, id); 
+			pstmt.setInt(2, productId); 
+
+			result = pstmt.executeUpdate();
+			
 		}catch (SQLException e) {
 			System.out.println("Ex : " + e.getMessage());
 		}
@@ -96,6 +122,7 @@ public class CartDAO extends DBConnPool{
 			pstmt.setInt(1, productid);
 			pstmt.setString(2, id);
 			result = pstmt.executeUpdate();
+			
 		}catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Ex : " + e.getMessage());
