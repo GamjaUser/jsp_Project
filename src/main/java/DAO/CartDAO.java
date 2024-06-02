@@ -11,39 +11,32 @@ import javax.servlet.ServletContext;
 import DTO.CartDTO;
 import DTO.ProductCartDTO;
 import common.DBConnPool;
-import common.JDBConnect;
 
 public class CartDAO extends DBConnPool{
 	public CartDAO() {
 		super();
 	}
 	
-	public int insertCart(int productId, String userId, int cnt) { 
+	public int insertCart(String id, int productId, int cnt) { 
 		int result = 0;
-		CartDTO dto = new CartDTO();
+		
+		String sql = "MERGE INTO cart c"
+				+" USING (SELECT ? AS id, ? AS productid FROM dual) src"
+				+" ON (c.\"ID\" = src.id AND c.PRODUCTID = src.productid)"
+				+" WHEN MATCHED THEN"
+				+"  UPDATE SET c.CNT = ?"
+				+" WHEN NOT MATCHED THEN"
+				+" 	INSERT (PRODUCTID, \"ID\", CNT)"
+				+"  VALUES (src.productid, src.id, 1)";
 		
 		
-		try {
-			String sql = "MERGE INTO cart c" // Áßº¹ÀÌ ÀÖÀ¸¸é cnt°¡ ¿Ã¶ó°¡´Â SQL¹®
-					+" USING (SELECT ? AS id, ? AS productid FROM dual) src"
-					+" ON (c.\"ID\" = src.id AND c.PRODUCTID = src.productid)"
-					+" WHEN MATCHED THEN"
-					+"  UPDATE SET c.CNT = c.CNT + ?"
-					+" WHEN NOT MATCHED THEN"
-					+" 	INSERT (PRODUCTID, \"ID\", CNT)"
-					+"  VALUES (src.productid, src.id, ?)";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
 			
-			
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setString(1, "user05"); //Àå¹Ù±¸´Ï »ç¿ëÀÚ
-			pstmt.setInt(2, 1); //Àå¹Ù±¸´Ï¿¡ µé¾î°¥ »óÇ° °íÀ¯¹øÈ£
-			pstmt.setInt(3, cnt); //Àå¹Ù±¸´Ï¿¡ µé¾î°¥ »óÇ° °¹¼ö 
-			pstmt.setInt(4, cnt);
+			pstmt.setString(1, id); 
+			pstmt.setInt(2, productId); 
+			pstmt.setInt(3, cnt);
 			result = pstmt.executeUpdate();
 			
-			
-			System.out.println(1);
 		}catch (SQLException e) {
 			System.out.println("Ex : " + e.getMessage());
 		}
@@ -51,17 +44,43 @@ public class CartDAO extends DBConnPool{
 		return result;
 	}
 	
-	public List<ProductCartDTO> selectList(String id){ //À¯Àú ID
+	//ë©”ì†Œë“œ ì˜¤ë²„ë¡œë”©
+	public int insertCart(String id, int productId) { 
+		int result = 0;
 		
-		List<ProductCartDTO> productList = new Vector<>(); //°íÀ¯»óÇ°¹øÈ£¸¦ ´ã¾ÆÁÖ´Â ¸®½ºÆ®
+		String sql = "MERGE INTO cart c"
+				+" USING (SELECT ? AS id, ? AS productid FROM dual) src"
+				+" ON (c.\"ID\" = src.id AND c.PRODUCTID = src.productid)"
+				+" WHEN MATCHED THEN"
+				+"  UPDATE SET c.CNT = c.CNT +1"
+				+" WHEN NOT MATCHED THEN"
+				+" 	INSERT (PRODUCTID, \"ID\", CNT)"
+				+"  VALUES (src.productid, src.id, 1)";
 		
-		try {
-		    String sql = "select * from cart c"
-		    		+" join product p on p.productid = c.productid"
-		    		+" WHERE id = ?";
-		    
-		    pstmt = con.prepareStatement(sql);
-		    
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+			
+			pstmt.setString(1, id); 
+			pstmt.setInt(2, productId); 
+
+			result = pstmt.executeUpdate();
+			
+		}catch (SQLException e) {
+			System.out.println("Ex : " + e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	public List<ProductCartDTO> selectList(String id){ 
+		
+		List<ProductCartDTO> productList = new Vector<>(); 
+		
+		String sql = "select * from cart c"
+				+" join product p on p.productid = c.productid"
+				+" WHERE id = ?";
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)){		    
 		    pstmt.setString(1, id);
 		    
 		    rs = pstmt.executeQuery();
@@ -84,27 +103,26 @@ public class CartDAO extends DBConnPool{
 		    }
 		} catch (SQLException e) {
 		    System.out.println("Ex : " + e.getMessage());
-		} finally {
-		    close();
 		}
-		
 		System.out.println("dao : " + productList);
 		
 		System.out.println("size : " + productList.size());
 		return productList;
 	}
+		
 	
 	public int delectCart(int productid, String id) {
 		int result = 0;
 		String sql = "delete from cart "
 				+" WHERE productid = ? AND id= ? ";
 		
-		try(PreparedStatement pstmt = con.prepareStatement(sql)) {
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			
 			
 			pstmt.setInt(1, productid);
 			pstmt.setString(2, id);
 			result = pstmt.executeUpdate();
+			
 		}catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Ex : " + e.getMessage());

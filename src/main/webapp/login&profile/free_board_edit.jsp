@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>free_board</title>
+<title>free_board_edit</title>
 <script type="text/javascript">
     function validateForm(form) {
         if (form.name.value == "") {
@@ -26,6 +26,7 @@
     }
 </script>
 <link rel="stylesheet" type="text/css" href="../css/free_board.css">
+<link rel="stylesheet" type="text/css" href="../css/free_board_edit.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="../js/page.js"></script>
 </head>
@@ -46,19 +47,19 @@
     <tr>
         <td>작성자</td>
         <td>
-            <input type="text" name="name" style="width:150px;" value="${dto.name }" />
+            <input type="text" name="name" style="width:150px;height:30px;" value="${dto.name }" />
         </td>
     </tr>
     <tr>
         <td>제목</td>
         <td>
-            <input type="text" name="title" style="width:90%;" value="${dto.title }" />
+            <input type="text" name="title" style="width:90%;height:30px;" value="${dto.title }" />
         </td>
     </tr>
     <tr>
         <td>내용</td>
         <td>
-            <textarea name="content" style="width:90%;height:100px;">${dto.content }</textarea>
+            <textarea name="content" style="width:90%;height:130px;">${dto.content }</textarea>
         </td>
     </tr>
     <tr>
@@ -69,10 +70,10 @@
     </tr>
     <tr>
         <td colspan="2" align="center">
-            <button type="submit">작성 완료</button>
-            <button type="reset">RESET</button>
-            <button type="button" onclick="">
-                목록 바로가기
+            <button type="submit" class="custom-btn btn-3"><span>작성 완료</span></button>
+            <button type="reset" class="custom-btn btn-3"><span>RESET</span></button>
+            <button type="button" class="custom-btn btn-3" onclick="location.href='../mvcboard/list.do'">
+                <span>목록 바로가기</span>
             </button>
         </td>
     </tr>

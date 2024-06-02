@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>free_board</title>
+<title>free_board_view</title>
 
 <link rel="stylesheet" type="text/css" href="../css/free_board.css">
 <link rel="stylesheet" type="text/css" href="../css/free_board_view.css">
@@ -39,7 +39,7 @@
         <td>제목</td>
         <td colspan="3">${dto.title }</td>
     </tr>
-    <tr>
+    <tr class="content_box">
         <td>내용</td>
         <td colspan="3" height="100">${dto.content }</td>
     </tr>
@@ -74,6 +74,7 @@
         </td>
     </tr>
 </table>
+
 	</div>
 </body>
 </html>

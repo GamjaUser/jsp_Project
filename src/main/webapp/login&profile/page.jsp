@@ -83,6 +83,7 @@
 
 
     <div class="menu-column">
+    	
       <ul class="nav1">
         <a href="../login&profile/profile.jsp">
           <li class="profile-img"></li>
@@ -91,8 +92,8 @@
         <a href="../calender/calender.jsp">
           <li class="calendar"></li>
         </a>
-        <a href="${pageContext.request.contextPath}/shopping/shopMain.jsp"><li class="shop"></li></a>
-        <a href="${pageContext.request.contextPath}/shopping/cartMain.do?id=user01"><li class="shopping-cart"></li></a>
+        <a href="/shopping/shopMain.do"><li class="shop"></li></a>
+        <a href="/shopping/cartMain.do"><li class="shopping-cart"></li></a>
         <li class="settings"></li>
       </ul>
     </div>

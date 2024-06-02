@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>free_board</title>
+<title>free_board_list</title>
 <link rel="stylesheet" type="text/css" href="../css/free_board.css">
 <link rel="stylesheet" type="text/css" href="../css/free_board_list.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

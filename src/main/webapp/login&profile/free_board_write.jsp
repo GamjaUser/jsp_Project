@@ -67,7 +67,7 @@
     </tr>
     <tr>
         <td colspan="2" align="center">
-            <button type="submit" class="custom-btn btn-3"><span>작성 완료</span></button>
+            <button type="submit" class="custom-btn btn-3"><span>작성완료</span></button>
             <button type="reset" class="custom-btn btn-3"><span>RESET</span></button>
             <button type="button" class="custom-btn btn-3" onclick="location.href='../mvcboard/list.do'"><span>목록 바로가기</span></button>
         </td>

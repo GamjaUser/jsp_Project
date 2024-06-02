@@ -1,3 +1,71 @@
+/* @charset "UTF-8"; */
+
+/* #modal_menubar { */
+/*   position: fixed; */
+/*   top: 0; */
+/*   left: 0; */
+/*   z-index: 3; */
+/*   background-color: transparent; */
+/* } */
+
+/* .container { */
+/*     padding-top: 80px; menubar를 고려하여 패딩 추가 */
+/* } */
+
+/* .shopCloumn { */
+/*     width: 100%; */
+/*     margin: 0 auto; */
+/* } */
+
+/* .wrapper { */
+/*     width: 100%; */
+/* } */
+
+/* .wiki .input-group { */
+/*     max-width: 600px; */
+/*     margin: 0 auto; */
+/* } */
+
+/* .item { */
+/*     background-color: #fff; */
+/*     border: 1px solid #dee2e6; */
+/*     border-radius: 10px; */
+/*     padding: 15px; */
+/*     text-align: center; */
+/*     transition: transform 0.3s ease; */
+/* } */
+
+/* .item:hover { */
+/*     transform: scale(1.05); */
+/* } */
+
+/* .item img { */
+/*     max-width: 100%; */
+/*     border-radius: 5px; */
+/* } */
+
+/* .card-title { */
+/*     font-size: 18px; */
+/*     margin: 10px 0; */
+/* } */
+
+/* .card-text { */
+/*     font-size: 16px; */
+/*     color: #555; */
+/* } */
+
+/* button { */
+/*     border: 1px solid #722A1B; */
+/*     padding: 4px 14px; */
+/*     background-color: #fff; */
+/*     color: #722A1B; */
+/*     text-transform: uppercase; */
+/*     margin: 5px 0; */
+/*     font-weight: bold; */
+/*     cursor: pointer; */
+/* } */
+
+
 @charset "UTF-8";
 
 #modal_menubar {
@@ -9,102 +77,73 @@
 }
 
 .container {
-  display: inline-flex;
-  
-  width: 100%;
-  min-width: 600px;
-  justify-content: center;
-  position: relative;
+    padding-top: 80px; /* menubar를 고려하여 패딩 추가 */
 }
 
-/* shop css */
-body {
-    background-color: white;
-    font: normal 13px/1.5 Georgia, Serif;
-    color: #333;
+.shopCloumn {
+    width: 100%;
+    margin: 0 auto;
 }
+
 .wrapper {
-    width: 705px;
-    height: 1000px;
-    margin: 20px auto;
-    padding: 20px;
+    width: 100%;
 }
-h1 {
-    display: inline-block;
-    background-color: #333;
-    color: #fff;
-    font-size: 20px;
-    font-weight: normal;
-    text-transform: uppercase;
-    padding: 4px 20px;
-    float: left;
+
+.wiki .input-group {
+    max-width: 600px;
+    margin: 0 auto;
 }
-.clear {
-    clear: both;
-}
-.items {
-    display: block;
-    margin: 20px 0;
-}
+
 .item {
     background-color: #fff;
-    float: left;
-    margin: 0 10px 10px 0;
-    width: 205px;
-    height: 310px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
 }
-.item img { 
-    display: block;
-    margin: auto;
+
+.item:hover {
+    transform: scale(1.05);
 }
-h2 {
-    font-size: 16px;
-    display: block;
-    border-bottom: 1px solid #ccc;
-    margin: 0 0 10px 0;
-    padding: 0 0 5px 0;
+
+.item img {
+    max-width: 100%;
+    border-radius: 5px;
 }
+
+.card-title {
+    font-size: 24px; /* 폰트 크기 증가 */
+    margin: 10px 0;
+    color: #2c3e50; /* 색상 변경 */
+    font-weight: bold; /* 폰트 두껍게 */
+    text-transform: capitalize; /* 첫 글자 대문자 */
+    letter-spacing: 1px; /* 글자 간격 */
+}
+
+.card-text {
+    font-size: 20px; /* 폰트 크기 증가 */
+    color: #e74c3c; /* 색상 변경 */
+    font-weight: bold; /* 폰트 두껍게 */
+    margin-bottom: 15px; /* 하단 마진 추가 */
+    border-top: 1px solid #dee2e6; /* 상단 경계선 추가 */
+    padding-top: 10px; /* 상단 패딩 추가 */
+}
+
+.card-text em {
+    color: #e74c3c; /* 가격 강조 색상 */
+    font-style: normal; /* 이탤릭체 해제 */
+}
+
 button {
     border: 1px solid #722A1B;
     padding: 4px 14px;
     background-color: #fff;
     color: #722A1B;
     text-transform: uppercase;
-    float: right;
     margin: 5px 0;
     font-weight: bold;
     cursor: pointer;
 }
- span { 
-     float: right; 
-}
-
-
-
-/* shop css */
-
-.shopCloumn{
-    width: 100%;
-    height: 100%;
-    min-width: 70%;
-    z-index: 0; 
-}
-
-
-.wiki{
-    border-bottom: 2px solid #000;
-	margin-bottom: 3rem;
-}
-
-#search{
-	
-	font-size: 1.5rem;
-	border: none;
-    font-style: italic;
-    width: 570px;
-}
-
-
-
 
 

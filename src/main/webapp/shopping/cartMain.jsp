@@ -65,7 +65,7 @@
           <c:otherwise>
             <c:forEach var="product" items="${products}" varStatus="loop">
               <div class="basket-product">
-                <div class="product" data-id="${product.productId}">
+                <div class="product" data-product-id="${product.productId}">
                   <div class="item">
                     <div class="product-image">
                       <img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="Placeholder Image 2" class="product-frame">
