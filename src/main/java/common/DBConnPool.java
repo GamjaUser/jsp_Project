@@ -13,11 +13,18 @@ public class DBConnPool {
 	protected Connection conn;
 	protected PreparedStatement pstmt;
 	protected ResultSet rs;
+	private static DataSource ds;
+	
 	public DBConnPool() {
 		try {
 			Context initCtx = new InitialContext();
-			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			DataSource ds = (DataSource) envCtx.lookup("jdbc/dbcp_myoracle");
+			
+			ds = (DataSource) initCtx.lookup("java:comp/env/jdbc/jsp_project");
+			
+			if(ds != null) {
+				System.out.println("Socuess[ConnPool] : Connect");
+			}
+			
 			conn = ds.getConnection();
 			System.out.println("DB 커넥션 풀 연걸 성공!");
 		} catch (Exception e) {

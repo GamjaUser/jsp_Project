@@ -16,17 +16,15 @@ import DTO.MemberDTO;
 import DTO.ProductCartDTO;
 
 @WebServlet("/shopping/cartMain.do")
-public class CartController extends HttpServlet{
+public class ViewCartController extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("CartList");
+		System.out.println("ViewCart");
 		
 		CartDAO dao = new CartDAO();
 		HttpSession session = req.getSession(); 
-		
-		System.out.println("req : "  + req.getContextPath());
 
         MemberDTO mdto = (MemberDTO) session.getAttribute("member");
         

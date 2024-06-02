@@ -37,11 +37,11 @@ public class RemoveProduct extends HttpServlet {
        
     	CartDAO cdao = new CartDAO();
     	
-    	int productId = Integer.parseInt(productIdStr); //int�ڷ������� ��ȯ
+    	int productId = Integer.parseInt(productIdStr); 
     	
     	System.out.println("productId : " + productId);
 
-    	String memberId = mdto.getId(); //���� ���� ���� ����
+    	String memberId = mdto.getId();
     	int result = cdao.delectCart(productId, memberId);
     	cdao.close();
     	
