@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,101 +37,22 @@
 			<div class="clear"></div>
 			<!-- items -->
 			<div class="items">
-				<!-- single item -->
-				<div class="item">
-					<img src="http://img.tjskl.org.cn/pic/z2577d9d-200x200-1/pinarello_lungavita_2010_single_speed_bike.jpg" alt="item" />
-					<h2>Item 1</h2>
-		
-					<p>Price: <em>$449</em>
-					</p>
-					<button class="add-to-cart" type="button">Add to cart</button>
-				</div>
-				<!--/ single item -->
-				<!-- single item -->
-				<div class="item">
-					<img src="http://img.tjskl.org.cn/pic/z2577d9d-200x200-1/pinarello_lungavita_2010_single_speed_bike.jpg" alt="item" />
-					<h2>Item 1</h2>
-		
-					<p>Price: <em>$449</em>
-					</p>
-					<button class="add-to-cart" type="button">Add to cart</button>
-				</div>
-				<!--/ single item -->
-				<!-- single item -->
-				<div class="item">
-					<img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="item" />
-					<h2>Item 1</h2>
-		
-					<p>Price: <em>$449</em>
-					</p>
-					<button class="add-to-cart" type="button">Add to cart</button>
-				</div>
-				<!--/ single item -->
-				
-				<div class="item">
-					<img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="item" />
-					<h2>Item 1</h2>
-		
-					<p>Price: <em>$449</em>
-					</p>
-					<button class="add-to-cart" type="button">Add to cart</button>
-				</div>
-				<div class="item">
-					<img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="item" />
-					<h2>Item 1</h2>
-		
-					<p>Price: <em>$449</em>
-					</p>
-					<button class="add-to-cart" type="button">Add to cart</button>
-				</div>
-							<div class="item">
-					<img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="item" />
-					<h2>Item 1</h2>
-		
-					<p>Price: <em>$449</em>
-					</p>
-					<button class="add-to-cart" type="button">Add to cart</button>
-				</div>
-							<div class="item">
-					<img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="item" />
-					<h2>Item 1</h2>
-		
-					<p>Price: <em>$449</em>
-					</p>
-					<button class="add-to-cart" type="button">Add to cart</button>
-				</div>
-							<div class="item">
-					<img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="item" />
-					<h2>Item 1</h2>
-		
-					<p>Price: <em>$449</em>
-					</p>
-					<button class="add-to-cart" type="button">Add to cart</button>
-				</div>
-							<div class="item">
-					<img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="item" />
-					<h2>Item 1</h2>
-		
-					<p>Price: <em>$449</em>
-					</p>
-					<button class="add-to-cart" type="button">Add to cart</button>
-				</div>
-							<div class="item">
-					<img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="item" />
-					<h2>Item 1</h2>
-		
-					<p>Price: <em>$449</em>
-					</p>
-					<button class="add-to-cart" type="button">Add to cart</button>
-				</div>
-							<div class="item">
-					<img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="item" />
-					<h2>Item 1</h2>
-		
-					<p>Price: <em>$449</em>
-					</p>
-					<button class="add-to-cart" type="button">Add to cart</button>
-				</div>
+		        <c:choose>
+		          <c:when test="${empty products}">
+		            <h2>없음</h2>
+		          </c:when>
+					<c:otherwise>
+            			<c:forEach var="product" items="${products}" varStatus="loop">
+							<!-- single item -->
+							<div class="item" data-product-id="${product.productId}">
+								<img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="item" />
+								<h2>${product.name}</h2>
+								<p>가격: <em>${product.price}</em></p>
+								<button class="add-to-cart" type="button">Add to cart</button>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<!--/ items -->
 		</div>
