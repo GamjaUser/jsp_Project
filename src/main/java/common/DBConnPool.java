@@ -17,7 +17,7 @@ public class DBConnPool {
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			DataSource ds = (DataSource) envCtx.lookup("dbcp_myoracle");
+			DataSource ds = (DataSource) envCtx.lookup("jdbc/jsp_project");
 			conn = ds.getConnection();
 			System.out.println("DB 커넥션 풀 연걸 성공!");
 		} catch (Exception e) {
