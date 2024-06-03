@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <title>mainprofile</title>
   <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="../css/profile2.css">
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="../js/page.js"></script>
   <script src="../js/profile2.js"></script>
@@ -34,6 +31,10 @@ $(document).ready(function() {
                 document.getElementById("proValue2").innerText = response.pro2 + "g";
                 document.getElementById("fatValue2").innerText = response.fat2 + "g";
                 document.getElementById("mealValue").innerText = response.meal + "kcal";
+
+                renderFoods(response.carbohydrateFoods, "carbohydrateFoods");
+                renderFoods(response.proteinFoods, "proteinFoods");
+                renderFoods(response.fatFoods, "fatFoods");
             },
             error: function(xhr, status, error) {
                 console.error("AJAX 요청 실패:", error);
@@ -42,8 +43,28 @@ $(document).ready(function() {
     });
 });
 
+function renderFoods(foods, containerId) {
+    var container = document.getElementById(containerId);
+    container.innerHTML = "";
+    foods.forEach(function(food) {
+        var foodItem = document.createElement("div");
+        foodItem.classList.add("food-item");
+        var img = document.createElement("img");
+        img.src = food.image;
+        var name = document.createElement("p");
+        name.innerText = food.name;
+        var nutrient = document.createElement("p");
+        nutrient.innerText =  food.nutrient + "g";
+        var calories = document.createElement("p");
+        calories.innerText = food.calories + "kcal";
+        foodItem.appendChild(img);
+        foodItem.appendChild(name);
+        foodItem.appendChild(nutrient);
+        foodItem.appendChild(calories);
+        container.appendChild(foodItem);
+    });
+}
 </script>
-
 <body>
   <div class="container">
     <div id="modal_menubar">
@@ -87,123 +108,35 @@ $(document).ready(function() {
         </div>
       </div>
       
-     <div class="split-food">
-     
-      <button id="toggleMealRecommendation" class="toggle-button">식단 추천 보기</button>
-   
+      <div class="split-food">
+        <button id="toggleMealRecommendation" class="toggle-button">식단 추천 보기</button>
         <div class="meal-recommendation-content">
-            <!-- 식단 추천 내용 -->
-            <h1>회원 님의 식단 가이드</h1>
-            <p>기초 대사량 <br><span id="bmValue"></span> <br><br><br><br>활동 대사량 <br><span id="amValue"></span></p>
-            <div class="meal">
+          <h1>회원 님의 식단 가이드</h1>
+          <p>기초 대사량 <br><span id="bmValue"></span> <br><br><br><br>활동 대사량 <br><span id="amValue"></span></p>
+          <div class="meal">
             일일 섭취 열량 : <span id="imValue"></span> <br>
             = <span id="mealValue"></span> X 3끼니
-            </div>
-            <div class="kcalguide">
-                <p>끼니당 영양소 <br> 섭취 목표</p>
-                <div class="kcalguide1"><br>탄수화물 <br><br> <span id="carValue"></span></div>
-                <div class="kcalguide1"><br>단백질 <br><br> <span id="proValue"></span></div>
-                <div class="kcalguide1"><br>지방 <br><br> <span id="fatValue"></span></div>
-            </div>
-            <div class="meal-recommendation-content-food">
-                <p>탄수화물 <span id="carValue2"></span> 섭취</p> <br>
-                <div class="food-item">
-                    <img src="../food_imgfile/쌀밥.jpg" alt="Carbohydrate Image">
-                    <p>음식 이름</p>
-                    <p>100g</p>
-                </div>
-                <div class="food-item">
-                    <img src="../food_imgfile/흑미밥.jpeg" alt="Carbohydrate Image">
-                    <p>음식 이름</p>
-                    <p>100g</p>
-                </div>
-                <div class="food-item">
-                    <img src="../food_imgfile/쌀밥.jpg" alt="Carbohydrate Image">
-                    <p>음식 이름</p>
-                    <p>100g</p>
-                </div>
-                <div class="food-item">
-                    <img src="../food_imgfile/흑미밥.jpeg" alt="Carbohydrate Image">
-                    <p>음식 이름</p>
-                    <p>100g</p>
-                </div> <br>
-                <div class="food-item">
-                    <img src="../food_imgfile/쌀밥.jpg" alt="Carbohydrate Image">
-                    <p>음식 이름</p>
-                    <p>100g</p>
-                </div>
-                <div class="food-item">
-                    <img src="../food_imgfile/흑미밥.jpeg" alt="Carbohydrate Image">
-                    <p>음식 이름</p>
-                    <p>100g</p>
-                </div>
-                <div class="food-item">
-                    <img src="../food_imgfile/쌀밥.jpg" alt="Carbohydrate Image">
-                    <p>음식 이름</p>
-                    <p>100g</p>
-                </div>
-                
-                
-                <!-- 탄수화물 음식 이미지와 정보 -->
-            </div>
-            <div class="meal-recommendation-content-food">
-                <p>단백질 <span id="proValue2"></span> 섭취</p> <br>
-                <div class="food-item">
-                  <img src="../food_imgfile/돼지고기.jpeg" alt="Carbohydrate Image">
-                  <p>음식 이름</p>
-                  <p>100g</p>
-              </div>
-              <div class="food-item">
-                <img src="../food_imgfile/소고기.jpeg" alt="Carbohydrate Image">
-                <p>음식 이름</p>
-                <p>100g</p>
-            </div>
-                <div class="food-item">
-                  <img src="../food_imgfile/돼지고기.jpeg" alt="Carbohydrate Image">
-                  <p>음식 이름</p>
-                  <p>100g</p>
-              </div><br>
-              <div class="food-item">
-                <img src="../food_imgfile/소고기.jpeg" alt="Carbohydrate Image">
-                <p>음식 이름</p>
-                <p>100g</p>
-            </div> 
-                <div class="food-item">
-                  <img src="../food_imgfile/돼지고기.jpeg" alt="Carbohydrate Image">
-                  <p>음식 이름</p>
-                  <p>100g</p>
-              </div>
-             
-                <!-- 단백질 음식 이미지와 정보 -->
-            </div>
-            <div class="meal-recommendation-content-food">
-                <p>지방 <span id="fatValue2"></span> 섭취</p> <br>
-                <div class="food-item">
-                  <img src="../food_imgfile/아보카도.jpeg" alt="Carbohydrate Image">
-                  <p>음식 이름</p>
-                  <p>100g</p>
-              </div>
-              <div class="food-item">
-                  <img src="../food_imgfile/아보카도.jpeg" alt="Carbohydrate Image">
-                  <p>음식 이름</p>
-                  <p>100g</p>
-              </div>
-              <div class="food-item">
-                <img src="../food_imgfile/올리브.jpeg" alt="Carbohydrate Image">
-                <p>음식 이름</p>
-                <p>100g</p>
-            </div>
-                <div class="food-item">
-                  <img src="../food_imgfile/아보카도.jpeg" alt="Carbohydrate Image">
-                  <p>음식 이름</p>
-                  <p>100g</p>
-              </div>
-              
-          
-                <!-- 지방 음식 이미지와 정보 -->
-            </div>
+          </div>
+          <div class="kcalguide">
+            <p>끼니당 영양소 <br> 섭취 목표</p>
+            <div class="kcalguide1"><br>탄수화물 <br><br> <span id="carValue"></span></div>
+            <div class="kcalguide1"><br>단백질 <br><br> <span id="proValue"></span></div>
+            <div class="kcalguide1"><br>지방 <br><br> <span id="fatValue"></span></div>
+          </div>
+          <div class="meal-recommendation-content-food">
+            <p>탄수화물 <span id="carValue2"></span> 섭취</p> <br>
+            <div id="carbohydrateFoods"></div>
+          </div>
+          <div class="meal-recommendation-content-food">
+            <p>단백질 <span id="proValue2"></span> 섭취</p> <br>
+            <div id="proteinFoods"></div>
+          </div>
+          <div class="meal-recommendation-content-food">
+            <p>지방 <span id="fatValue2"></span> 섭취</p> <br>
+            <div id="fatFoods"></div>
+          </div>
         </div>
-    </div>
+      </div>
     
 
 
@@ -225,8 +158,8 @@ $(document).ready(function() {
           </form>
         </div>
         <div class="split right">
-          <h2>당신의 BMI는 ${bmi2}입니다</h2>
-          <h2>${bmiStatus2}</h2>
+          <h2>당신의 BMI는 ${bmi}입니다</h2>
+          <h2>${bmiStatus}</h2>
         </div>
       </div>
       <div class="float-none"></div>
@@ -262,14 +195,9 @@ $(document).ready(function() {
         <p>변경 날짜: ${dtoinfo.sdate}</p>
         <h2>광고페이지</h2>
         <br>
-        <h3>영양 정보</h3>
-            <p>기초 대사량 (BM): <span id="bmValue"></span></p>
-            <p>활동 대사량 (AM): <span id="amValue"></span></p>
-            <p>일일 섭취 권장량 (IM): <span id="imValue"></span></p>
-            <p>탄수화물: <span id="carValue"></span></p>
-            <p>단백질: <span id="proValue"></span></p>
-            <p>지방: <span id="fatValue"></span></p>
-            <p>끼니 섭취 권장량: <span id="mealValue"></span></p>
+        <div class="meal-recommendation-content-food" id="carbohydrateFoods"></div>
+<div class="meal-recommendation-content-food" id="proteinFoods"></div>
+<div class="meal-recommendation-content-food" id="fatFoods"></div>
       </div>
     </div>
   </div>
