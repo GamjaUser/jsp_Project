@@ -4,7 +4,7 @@ $(function() {
         var imgtodrag = $(this).closest('.item').find("img").eq(0); // 현재 아이템의 이미지를 찾습니다.
         let productId = $(this).closest('.item').attr('data-product-id'); // 제품 ID를 가져옵니다.
 
-        console.log("productId", productId);
+        console.log("img : ", imgtodrag);
         
         insertItem(productId).then(check =>{
       if(check){
