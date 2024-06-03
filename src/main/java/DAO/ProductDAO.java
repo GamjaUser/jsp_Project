@@ -70,6 +70,35 @@ public class ProductDAO extends DBConnPool{
 		return productList;
 	}
 	
+	public ProductDTO selectProduct(int productId) {
+		ProductDTO dto = new ProductDTO();
+		
+		String sql = "select * from product where productid = ?";
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			System.out.println("단일상품 페이지1");
+			pstmt.setInt(1, productId);
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			dto.setProdcutId(rs.getInt("productid"));
+			dto.setName(rs.getString("name"));
+			dto.setImg(rs.getString("img"));
+			dto.setComment(rs.getNString("comment"));
+			dto.setPrice(rs.getInt("price"));
+			dto.setProductKind(rs.getString("productkind"));
+			
+			
+		}catch (SQLException e) {
+			// TODO: handle exception
+			System.out.println("Ex : " + e.getMessage());
+		}
+		
+		return dto;
+	}
+	
 	public List<ProductDTO> searchProduct(String name) {
 		
 		List<ProductDTO> productList = new Vector<ProductDTO>();
