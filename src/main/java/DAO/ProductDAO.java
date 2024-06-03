@@ -69,4 +69,40 @@ public class ProductDAO extends DBConnPool{
 		
 		return productList;
 	}
+	
+	public List<ProductDTO> searchProduct(String name) {
+		
+		List<ProductDTO> productList = new Vector<ProductDTO>();
+		
+		String sql = "select * from product where name"
+				+" like '%' || ? || '%'";
+		
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			System.out.println(1);
+			pstmt.setString(1, name);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				
+				dto.setProdcutId(rs.getInt("productid"));
+				dto.setName(rs.getString("name"));
+				dto.setImg(rs.getString("img"));
+				dto.setComment(rs.getNString("comment"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setProductKind(rs.getString("productkind"));
+				
+				productList.add(dto);
+			}
+		}catch (SQLException e ) {
+			// TODO: handle exception
+			System.out.println("Ex : " + e.getMessage());
+		}
+		
+		return productList; 
+		}
+
+
 }

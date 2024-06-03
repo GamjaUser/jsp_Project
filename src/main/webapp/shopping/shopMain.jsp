@@ -35,6 +35,7 @@
                 </div>
             </div>
             <div class="outcome"></div>
+  
             
             <div class="row">
                 <c:choose>
