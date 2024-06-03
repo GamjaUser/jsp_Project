@@ -38,6 +38,6 @@ public class ViewProductController extends HttpServlet{
 		
 		System.out.println(products);
 		req.setAttribute("products", products);
-        req.getRequestDispatcher("/shopping/shopMain.jsp").forward(req, resp);        
+        req.getRequestDispatcher("/shopping/shopMain.jsp").forward(req, resp);
 	}
 }
