@@ -19,7 +19,7 @@ public class SignupController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	System.out.println(1);
-        request.setCharacterEncoding("UTF-8");
+    	request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
         String password = request.getParameter("password");
         int age = Integer.parseInt(request.getParameter("age"));
