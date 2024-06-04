@@ -1,14 +1,13 @@
- /*프로필 css*/
+/*프로필 css*/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;	
+  padding: 0;
 }
 
 #modal_menubar {
-  position: fixed;
   top: 0;
   left: 0;
   z-index: 3;
@@ -16,16 +15,16 @@
 }
 
 .container {
-  display: inline-flex;
-  
+  display: inline;
+  position: relative; /* 변경: absolute -> relative */
   width: 100%;
   min-width: 600px;
   justify-content: center;
-  position: relative;
 }
 
 .summary-column {
-  position: fixed;
+  position: relative;
+  display: inline-block;
   left: 4.7%;
   width: 17%;
   height: 332%;
@@ -111,8 +110,6 @@
 .statistics .title-bmi:after {
   content: 'BMI';
 }
-
-
 
 .statistics .height {
   height: 150px;
@@ -200,208 +197,208 @@
   background: #30c8ca;
 }
 
-
 .content-column {
-	position: relative;
+  display: inline-block;
+  position: relative; /* 변경: absolute -> relative */
   background: white;
-  left: 80px;
+  border: 5px solid red;
   width: 60%;
   height: 900px;
-	.header-container {
-    
-    background-image: url("");
-		width: 100%;
-		height: 311px;
-		
-	}
-	.nav_profile {
-    
-		width: 50%;
-		float: left;
-		font-size: 0.9em;
-		font-weight: 500;
-		line-height: 1;
-		.content {
-			margin: 50px 0 0 50px;
-			white-space: nowrap;
-		}
-		p {
-			text-transform: uppercase;
-			color: #899191;
-			letter-spacing: 1px;
-		}
-		.name {
-			color: #636d6d;
-		}
-		.shape {
-			font-family: 'Nunito', sans-serif;
-			font-weight: 200;
-			font-size: 6em;
-			color: #8b9494;	
-		}
-		.score {	
-			color: #34d0c4;
-		}
-	}
-	.select-boxes {
-    
-		float: left;
-		width: 50%;
-		.content {
-			margin: 40px;
-			float: right;
-		}
-	}
-  .split{
-    
-    padding: 10px;
-    height: 250px;
-  }
-
-
-
-
-	/* BMI 측정 */
-  .split-container {
-    border: 5px solid #b2ebf2; /* 연한 청록색 테두리 */
-    display: flex;
-    width: 100%;
-    margin: auto;
-    justify-content: center;
-    background: #ffffff; /* 흰색 배경 */
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .split {
-    position: relative;
-    width: 100%;
-    text-align: center;
-    font-size: 1.7em;
-    font-weight: 300;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-
-  .left {
-    border-right: 1px solid #b2ebf2; /* 연한 청록색 구분선 */
-    background: #ffffff; /* 흰색 배경 */
-  }
-  
-  .right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #ffffff; /* 흰색 배경 */
-  }
-
-  .split form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .form-group {
-    display: flex;
-    position: relative;
-    left: 50px;
-    top: 20px;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .split form label {
-    margin-right: 10px;
-    width: 120px;
-    text-align: left;
-    color: #00796b; /* 진한 청록색 텍스트 */
-  }
-  
-  .split input[type="number"] {
-    width: calc(80% - 120px);
-    padding: 8px;
-    box-sizing: border-box;
-    border: 1px solid #b2ebf2; /* 연한 청록색 테두리 */
-    border-radius: 24px;
-    transition: border-color 0.3s ease;
-    margin-left: 10px;
-  }
-  
-  .split input[type="number"]:focus {
-    border-color: #2e96ea; /* 청록색 테두리 */
-  }
-
-  #btnstyle {
-    position: absolute;
-    left: 430px;
-    top: 125px;
-    padding: 0.8em 1.2em;
-    margin: 0 10px 0 0;
-    width: 125px;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 1em;
-    color: #fff;
-    line-height: 1em;
-    letter-spacing: 0.6px;
-    border-radius: 3px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
-    border: 0;
-    outline: 0;
-    transition: all 0.25s;
-    background: #2e96ea; /* 청록색 배경 */
-  }
-
-  #btnstyle:focus, #btnstyle:active, #btnstyle:hover {
-    background: #30c8ca; /* 밝은 청록색 배경 */
-    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .right h2 {
-    margin: 10px 0;
-    color: #00796b; /* 진한 청록색 텍스트 */
-  }
-
-	
-	.bottom {
-		border-bottom: none !important;
-		border-top: 1px solid #dddfe1;
-		h2 {
-			margin: 35px 0;
-			font-size: 0.9em;
-			font-weight: 300;
-		}
-	}
-	.appointments {
-		margin: 0 20%;
-		.calendar-container {
-			height: 140px;
-			padding-top: 24px;
-			min-width: 185px;
-		}
-		.calendar {
-			width: 92px;
-			float: left;
-			background: #f1f4f4;
-			padding: 14px 0;
-			.date {
-				 font-size: 0.7em;
-			}
-			
-		}
-		.content {
-			box-sizing: margin-box;
-			width: 50%;
-			float: left;
-      
-			
-		}
-	}
 }
 
+.header-container {
+  background-image: url("");
+  width: 100%;
+  height: 311px;
+}
 
+.nav_profile {
+  width: 50%;
+  float: left;
+  font-size: 0.9em;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.nav_profile .content {
+  margin: 50px 0 0 50px;
+  white-space: nowrap;
+}
+
+.nav_profile p {
+  text-transform: uppercase;
+  color: #899191;
+  letter-spacing: 1px;
+}
+
+.nav_profile .name {
+  color: #636d6d;
+}
+
+.nav_profile .shape {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 200;
+  font-size: 6em;
+  color: #8b9494;
+}
+
+.nav_profile .score {
+  color: #34d0c4;
+}
+
+.select-boxes {
+  float: left;
+  width: 50%;
+}
+
+.select-boxes .content {
+  margin: 40px;
+  float: right;
+}
+
+.split {
+  padding: 10px;
+  height: 250px;
+}
+
+/* BMI 측정 */
+.split-container {
+  border: 5px solid #b2ebf2; /* 연한 청록색 테두리 */
+  display: flex;
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+  background: #ffffff; /* 흰색 배경 */
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.split {
+  width: 100%;
+  text-align: center;
+  font-size: 1.7em;
+  font-weight: 300;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.left {
+  border-right: 1px solid #b2ebf2; /* 연한 청록색 구분선 */
+  background: #ffffff; /* 흰색 배경 */
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff; /* 흰색 배경 */
+}
+
+.split form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-group {
+  display: flex;
+  position: relative;
+  left: 50px;
+  top: 20px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.split form label {
+  margin-right: 10px;
+  width: 120px;
+  text-align: left;
+  color: #00796b; /* 진한 청록색 텍스트 */
+}
+
+.split input[type="number"] {
+  width: calc(80% - 120px);
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #b2ebf2; /* 연한 청록색 테두리 */
+  border-radius: 24px;
+  transition: border-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.split input[type="number"]:focus {
+  border-color: #2e96ea; /* 청록색 테두리 */
+}
+
+#btnstyle {
+  position: absolute;
+  left: 430px;
+  top: 125px;
+  padding: 0.8em 1.2em;
+  margin: 0 10px 0 0;
+  width: 125px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1em;
+  color: #fff;
+  line-height: 1em;
+  letter-spacing: 0.6px;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 0;
+  outline: 0;
+  transition: all 0.25s;
+  background: #2e96ea; /* 청록색 배경 */
+}
+
+#btnstyle:focus, #btnstyle:active, #btnstyle:hover {
+  background: #30c8ca; /* 밝은 청록색 배경 */
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.right h2 {
+  margin: 10px 0;
+  color: #00796b; /* 진한 청록색 텍스트 */
+}
+
+.bottom {
+  border-bottom: none !important;
+  border-top: 1px solid #dddfe1;
+}
+
+.bottom h2 {
+  margin: 35px 0;
+  font-size: 0.9em;
+  font-weight: 300;
+}
+
+.appointments {
+  margin: 0 20%;
+}
+
+.appointments .calendar-container {
+  height: 140px;
+  padding-top: 24px;
+  min-width: 185px;
+}
+
+.appointments .calendar {
+  width: 92px;
+  float: left;
+  background: #f1f4f4;
+  padding: 14px 0;
+}
+
+.appointments .calendar .date {
+  font-size: 0.7em;
+}
+
+.appointments .content {
+  box-sizing: margin-box;
+  width: 50%;
+  float: left;
+}
 
 /* 식단 추천 관리 */
 .split-food {
@@ -515,19 +512,15 @@
   color: #2e96ea;
 }
 
+.promotion {
+  position: fixed;
+  top: 25%;
+  right: 0.5%;
+  width: 14.4%;
+}
 
-  .promotion {
-
-    position: fixed;
-    top: 25%;
-    right: 0.5%;
-    width: 14.4%;
-    
-    
-    
-    .split{
-      border: 3px solid black;
-      padding: 10px;
-      height: 550px;
-    }
-  }
+.promotion .split {
+  border: 3px solid black;
+  padding: 10px;
+  height: 550px;
+}

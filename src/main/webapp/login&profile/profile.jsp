@@ -10,7 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="../css/profile2.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="../js/page.js"></script>
+
   <script src="../js/profile2.js"></script>
 </head>
 <script>
@@ -68,7 +68,7 @@ function renderFoods(foods, containerId) {
 <body>
   <div class="container">
     <div id="modal_menubar">
-      <div id="modalContent_menubar"></div>
+      <div id="modalContent_menubar"><%@ include file="../login&profile/page.jsp" %></div>
     </div>
     <div class="summary-column">
       <div class="profile-img" id="profileImage">
@@ -111,7 +111,7 @@ function renderFoods(foods, containerId) {
       <div class="split-food">
         <button id="toggleMealRecommendation" class="toggle-button">식단 추천 보기</button>
         <div class="meal-recommendation-content">
-          <h1>회원 님의 식단 가이드</h1>
+          <h1>${dto.id} 님의 식단 가이드</h1>
           <p>기초 대사량 <br><span id="bmValue"></span> <br><br><br><br>활동 대사량 <br><span id="amValue"></span></p>
           <div class="meal">
             일일 섭취 열량 : <span id="imValue"></span> <br>

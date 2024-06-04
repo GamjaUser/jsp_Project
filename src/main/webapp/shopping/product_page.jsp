@@ -11,14 +11,14 @@
     <link rel="stylesheet" href="../css/product_page.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrap JS 추가 -->
-    <script src="../js/page.js"></script>
+    
     <script src="../js/product_page.js"></script>
     
 </head>
 <body>
     <div id="modal_menubar"><!-- 모달출력코드 -->
         <div id="modalContent_menubar">
-            <!-- 모달출력 -->
+            <!-- 모달출력 --><%@ include file="../login&profile/page.jsp" %>
         </div>
     </div>
     <div class="home text-center mb-4 w-100">

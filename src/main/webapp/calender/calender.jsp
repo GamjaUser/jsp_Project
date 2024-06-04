@@ -13,7 +13,7 @@ https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css
 <link rel="stylesheet" type="text/css" href="../css/calender.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="../js/calender.js"></script>
-<script src="../js/page.js"></script>
+
 
 
 </head>
@@ -22,7 +22,7 @@ https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css
 <div class="container">
   <div id="modal_menubar">
     <div id="modalContent_menubar">
-      
+      <%@ include file="../login&profile/page.jsp" %>
     </div>
   </div>
 	<div id="main_content">
