@@ -234,7 +234,7 @@ const updateCnt = async(productId,quantity) =>{
 		    url: '/shopping/Cartupdate.do', // Controller의 경로
 		    type: 'POST',
 		    data: {
-		      productId: productId, // 제품 ID
+		      productId: prxoductId, // 제품 ID
 		      cnt: quantity// 업데이트된 수량
 		    },
 		    success: function(response) {
