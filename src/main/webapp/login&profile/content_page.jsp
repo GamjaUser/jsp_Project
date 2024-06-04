@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +8,11 @@
 <link rel="stylesheet" type="text/css" href="../css/content_page.css">
 <link rel="stylesheet" type="text/css" href="../css/freeBoard_button.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="../js/page.js"></script>
+
 </head>
 <body>
     <div id="modal_menubar">
-      <div id="modalContent_menubar"></div>
+      <div id="modalContent_menubar"><%@ include file="../login&profile/page.jsp" %></div>
     </div>
 	<div class="table-container" style="--data-limit: 9">
 	<select id="board_type" onchange="isShowDiv(this.value)">
@@ -25,17 +25,17 @@
 		<input type="text" id="title_input" name="title" placeholder="     Enter Your Title" required>
 		<textarea id="content_input1" placeholder="     Enter Your Content" required></textarea>
 		<div id="file_input">
-			÷������ : <input type="file" name="ofile"/>
+			첨부파일 : <input type="file" name="ofile"/>
 		</div>
 	</div>
 	<div id="subcontainer2" class="sub_container" style="display:none">
 		<div id="titleField">
 			<select name="searchField" id="searchField" class="sub_titleField">
-                <option value="productID">��ǰID</option>
-                <option value="productName">��ǰ��</option>
+                <option value="productID">상품ID</option>
+                <option value="productName">상품명</option>
             </select>
             <input type="text" name="searchWord" />
-            <input type="submit" value="�˻��ϱ�" />
+            <input type="submit" value="검색하기" />
             
 			<div class="star-rating" class="sub_titleField">
 			  <input type="radio" id="5-stars" name="rating" value="5" />
@@ -57,7 +57,7 @@
         </div>
             
         <div id="file_input">
-			÷������ : <input type="file" name="ofile"/>
+			첨부파일 : <input type="file" name="ofile"/>
 		</div>
 	</div>
 </div>

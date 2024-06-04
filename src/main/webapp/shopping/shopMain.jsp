@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -15,13 +16,13 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> <!-- jQuery UI 추가 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="../js/shop.js"></script>
-<script src="../js/page.js"></script>
+
 </head>
 
 <body>
 <div class="container mt-5">
-    <div id="modal_menubar" class="fixed-top">
-        <div id="modalContent_menubar"></div>
+    <div id="modal_menubar">
+        <div id="modalContent_menubar"><%@ include file="../login&profile/page.jsp" %></div>
     </div>
     <div class="shopCloumn">
         <div class="wrapper">
