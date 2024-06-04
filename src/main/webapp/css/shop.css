@@ -8,9 +8,6 @@
   background-color: transparent;
 }
 
-.container {
-    padding-top: 80px; /* menubar를 고려하여 패딩 추가 */
-}
 
 .shopCloumn {
     width: 100%;
@@ -79,3 +76,13 @@ button {
 }
 
 
+h1.text-center {
+	padding-bottom: 20px;
+    font-family: 'Arial', sans-serif; /* A simple and common font */
+    font-size: 60px; /* Adjust based on your layout */
+    color: #66c2a5; /* A closer match to the teal color seen in the image */
+    font-weight: normal; /* Ensures the font is not bold */
+    text-transform: capitalize; /* Capitalizes the first letter of each word */
+    letter-spacing: 8px; /* Increases spacing between letters */
+    
+}

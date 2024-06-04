@@ -23,9 +23,9 @@
     <div id="modal_menubar" class="fixed-top">
         <div id="modalContent_menubar"></div>
     </div>
-  
     <div class="shopCloumn">
         <div class="wrapper">
+        	<h1 class="text-center">Healthylife</h1> 
             <div class="wiki mb-3">
                 <div class="input-group">
                     <input type="search" name="search" id="search" class="form-control" placeholder="Search">
