@@ -1,6 +1,6 @@
 $(function() {
     $('#coreAddCartBtn').on('click', function() {
-        var cart = $('.shopping-cart'); // 쇼핑 카트 아이콘의 선택자
+        var cart = $('.shopping-cart-page'); // 쇼핑 카트 아이콘의 선택자
         var imgtodrag = $('.thumb-gallery img'); // 현재 아이템의 이미지를 찾습니다.
         let productId = imgtodrag.attr('data-product-id'); // 제품 ID를 가져옵니다.
 

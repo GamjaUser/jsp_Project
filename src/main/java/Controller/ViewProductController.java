@@ -22,6 +22,7 @@ public class ViewProductController extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("viewProduct");
 		
+		//세션 생성
 		HttpSession session = req.getSession();
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 		
@@ -33,8 +34,12 @@ public class ViewProductController extends HttpServlet{
 		
 		ProductDAO dao = new ProductDAO();
 		
+		//모든 상품 정보 list에 저장
 		List<ProductDTO> products = dao.listProduct();
 		dao.close();
+		
+		
+		
 		
 		System.out.println(products);
 		req.setAttribute("products", products);

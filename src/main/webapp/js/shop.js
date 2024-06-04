@@ -1,19 +1,27 @@
 $(function() {
     $('.add-to-cart').on('click', function () {
-        var cart = $('.shopping-cart'); // 쇼핑 카트 아이콘의 선택자
-        var imgtodrag = $(this).closest('.item').find("img").eq(0); // 현재 아이템의 이미지를 찾습니다.
-        let productId = $(this).closest('.item').attr('data-product-id'); // 제품 ID를 가져옵니다.
+	f(this);
+    });
+});
 
+function f(addCartBtn) {
+        let cart = $('.shopping-cart-page'); // 쇼핑 카트 아이콘의 선택자
+        let imgtodrag = $(addCartBtn).closest('.item').find("img").eq(0); // 현재 아이템의 이미지를 찾습니다.
+        let productId = $(addCartBtn).closest('.item').data('product-id'); // 제품 ID를 가져옵니다.
+		
+		console.log("cart : ", cart)
         console.log("img : ", imgtodrag);
+        console.log($(addCartBtn).closest('.item'));
+        console.log("productId: " + productId);
         
-        insertItem(productId).then(check =>{
+      insertItem(productId).then(check =>{
       if(check){
-        
         if (cart.length > 0 && imgtodrag.length > 0) {
-            var cartOffset = cart.offset(); // 카트 아이콘의 위치를 계산합니다.
-            var imgtodragOffset = imgtodrag.offset(); // 이미지의 위치를 계산합니다.
+            let cartOffset = cart.offset(); // 카트 아이콘의 위치를 계산합니다.
+            
+            let imgtodragOffset = imgtodrag.offset(); // 이미지의 위치를 계산합니다.
 
-            var imgclone = imgtodrag.clone()
+            let imgclone = imgtodrag.clone()
                 .css({
                     'opacity': '0.5',
                     'position': 'absolute',
@@ -37,7 +45,7 @@ $(function() {
                 'width': 0,
                 'height': 0
             }, function () {
-                $(this).detach();
+              //  $(addCartBtn).detach();
             });
         } else {
             alert('Failed to locate cart icon or image element');
@@ -45,12 +53,13 @@ $(function() {
         
         }
         }); 
-    });
-});
+}
 
 const insertItem = async (productId) => {
+    console.log("inserItem")
     let check = false;
-    
+
+	console.log(productId )
     try {
         await $.ajax({
             url: '/shopping/Cartupdate.do', // Controller의 URL로 변경하세요.
@@ -60,6 +69,7 @@ const insertItem = async (productId) => {
             },
             success: function(response) {
                 if (response.success) {
+					console.log("연결 성공")
                     check = true;
                 } else {
                     alert('Failed to add product to cart');
@@ -82,7 +92,7 @@ const insertItem = async (productId) => {
 
 $(document).ready(function() {
     $('.search').on('click', function() {
-        var searchTerm = $('#search').val().trim(); // 검색어를 가져옵니다.
+        let searchTerm = $('#search').val().trim(); // 검색어를 가져옵니다.
 
         if (searchTerm === "") {
             alert("검색어를 입력하세요.");
@@ -107,7 +117,7 @@ $(document).ready(function() {
     });
 
     function displayResults(results) {
-        var resultsContainer = $('.row');
+        let resultsContainer = $('.row');
         
         console.log("1 : ", resultsContainer)
         
@@ -117,67 +127,18 @@ $(document).ready(function() {
             return;
         }
 
-        var resultItems = results.map(function(result) {
+        let resultItems = results.map(function(result) {
             return '<div class="col-md-4 mb-4">' +
                    '<div class="card h-100 item" data-product-id="' + result.productId + '">' +
-                   '<img class="card-img-top" src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="item">' +
+                   '<a href="/shpping/ProductPage.do?productid="' + result.productId + '"><img class="card-img-top" src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="item"></a>' +
                    '<div class="card-body">' +
                    '<h5 class="card-title">' + result.name + '</h5>' +
                    '<p class="card-text">가격: <em>' + result.price + '</em></p>' +
-                   '<button class="btn btn-success add-to-cart" type="button">Add to Cart</button>' +
+                   '<button class="btn btn-success add-to-cart" type="button" onclick ="f(this)">Add to Cart</button>' +
                    '</div></div></div>';
         });
 
         resultsContainer.append(resultItems.join(''));
-        
-        $(function() {
-    $('.add-to-cart').on('click', function () {
-        var cart = $('.shopping-cart'); // 쇼핑 카트 아이콘의 선택자
-        var imgtodrag = $(this).closest('.item').find("img").eq(0); // 현재 아이템의 이미지를 찾습니다.
-        let productId = $(this).closest('.item').attr('data-product-id'); // 제품 ID를 가져옵니다.
 
-        console.log("productId", productId);
-        
-        insertItem(productId).then(check =>{
-      if(check){
-        
-        if (cart.length > 0 && imgtodrag.length > 0) {
-            var cartOffset = cart.offset(); // 카트 아이콘의 위치를 계산합니다.
-            var imgtodragOffset = imgtodrag.offset(); // 이미지의 위치를 계산합니다.
-
-            var imgclone = imgtodrag.clone()
-                .css({
-                    'opacity': '0.5',
-                    'position': 'absolute',
-                    'height': '150px',
-                    'width': '150px',
-                    'z-index': '100',
-                    'top': imgtodragOffset.top,
-                    'left': imgtodragOffset.left
-                })
-                .appendTo($('body'))
-                .animate({
-                    'top': cartOffset.top + 10,
-                    'left': cartOffset.left + 10,
-                    'width': 75,
-                    'height': 75
-                }, 700, 'swing', function () { // 기본 제공 easing 함수 사용
-                    $(this).detach();
-                });
-
-            imgclone.animate({
-                'width': 0,
-                'height': 0
-            }, function () {
-                $(this).detach();
-            });
-        } else {
-            alert('Failed to locate cart icon or image element');
-        }
-        
-        }
-        }); 
-    });
-});
     }
 });

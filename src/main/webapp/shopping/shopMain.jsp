@@ -18,7 +18,6 @@
 <script src="../js/shop.js"></script>
 
 </head>
-
 <body>
 <div class="container mt-5">
     <div id="modal_menubar">

@@ -133,5 +133,23 @@ public class ProductDAO extends DBConnPool{
 		return productList; 
 		}
 
-
+	
+	public int deleteProduct(int productId, String id) {
+		System.out.println("Delete Product");
+		int result = 0;
+		
+		String sql = "DELETE FROM productd WHERE productid = ? AND id = ?";
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, productId);
+			pstmt.setString(2, id);
+			
+			result = pstmt.executeUpdate();
+		}catch (SQLException e) {
+			// TODO: handle exception
+			System.out.println("Ex : " + e.getMessage());
+		}
+		
+		return result;
+	}
 }
