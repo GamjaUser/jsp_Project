@@ -17,7 +17,7 @@ import DTO.MemberInfoDTO;
 import common.DBConnPool;
 
 public class MemberInfoDAO extends DBConnPool {
-	public MemberInfoDAO(ServletContext application) {
+	public MemberInfoDAO() {
         super();
     }
 	

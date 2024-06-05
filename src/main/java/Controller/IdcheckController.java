@@ -21,7 +21,7 @@ public class IdcheckController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
 
-        MemberDAO memberDAO = new MemberDAO(getServletContext());
+        MemberDAO memberDAO = new MemberDAO();
         
         try {
             boolean isExist = memberDAO.idCheck(id);

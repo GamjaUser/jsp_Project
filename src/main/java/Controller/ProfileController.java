@@ -25,16 +25,15 @@ public class ProfileController extends HttpServlet {
         MemberDTO memberdto = (MemberDTO) session.getAttribute("member");
         MemberInfoDTO memberInfodto =  (MemberInfoDTO) session.getAttribute("member_info");
 
-        String id = memberdto.getId();
-        System.out.println(id);
-
-        
         if(memberdto == null || memberInfodto == null) {
         	
         	System.out.println("profile : " + memberdto);
         	response.sendRedirect("/login&profile/login.jsp");
         	return;
         }
+        
+        String id = memberdto.getId();
+        System.out.println(id);
 
         // BMI 계산
         double height = memberInfodto.getHeight() / 100.0; // 키를 미터로 변환

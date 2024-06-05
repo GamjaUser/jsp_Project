@@ -55,8 +55,8 @@ public class SignupController extends HttpServlet {
         memberInfo.setWeight(weight);
         memberInfo.setSdate(sdate);
 
-        MemberDAO memberDAO = new MemberDAO(getServletContext());
-        MemberInfoDAO memberInfoDAO = new MemberInfoDAO(getServletContext());
+        MemberDAO memberDAO = new MemberDAO();
+        MemberInfoDAO memberInfoDAO = new MemberInfoDAO();
 
         int memberSuccess = memberDAO.insertMember(member);
         int memberInfoSuccess = memberInfoDAO.insertMemberInfo(memberInfo);

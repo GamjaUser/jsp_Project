@@ -13,7 +13,7 @@ import DTO.MemberInfoDTO;
 import common.DBConnPool;
 
 public class MemberDAO extends DBConnPool{
-	public MemberDAO(ServletContext application) {
+	public MemberDAO() {
         super();
     }
   
@@ -31,7 +31,7 @@ public class MemberDAO extends DBConnPool{
             pstmt.setInt(4, member.getAge());
             pstmt.setInt(5, member.getGoals());
             pstmt.setInt(6, member.getExerciseEXP());
-            pstmt.setInt(7, member.getLevel());
+            pstmt.setInt(7, 1); //1 :일반 유저 0 : 관리자
             dto = pstmt.executeUpdate();
         }catch(Exception e) {
         	System.out.println("Exception[insertMember]: "+ e.getMessage());
@@ -54,16 +54,19 @@ public class MemberDAO extends DBConnPool{
     }
     
  // 아이디와 비밀번호로 로그인 확인
-    public String memberLogin(MemberDTO member) {       
+    public String memberLogin(String id, String password) {       
+    	
+    	System.out.println("id : " + id);
+    	System.out.println("pwd : " + password);
         String result = "fail";
-        try {     
-            String sql = "SELECT * "
-            		   + "FROM member "
-            		   + "WHERE id = ? AND password = ?";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, member.getId());
-            pstmt.setString(2, member.getPassword());
-            rs = pstmt.executeQuery();
+        String sql = "SELECT * "
+        		+ "FROM member "
+        		+ "WHERE id = ? AND password = ?";
+        try (PreparedStatement ptsmt = conn.prepareStatement(sql)){     
+            
+        	ptsmt.setString(1, id);
+        	ptsmt.setString(2, password);
+            rs = ptsmt.executeQuery();
 
             // 결과가 존재하면 success 반환
             if (rs.next()) {
@@ -71,16 +74,7 @@ public class MemberDAO extends DBConnPool{
             }
         } catch (SQLException e) {
             e.printStackTrace(); // 에러 처리 코드 작성
-        } finally {
-            // 리소스 정리
-            try {
-                if (rs != null) rs.close();
-                if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace(); // 에러 처리 코드 작성
-            }
-        }
+        }        
 
         return result;
     }
@@ -89,14 +83,19 @@ public class MemberDAO extends DBConnPool{
     //프로필페이지 정보 출력
     public MemberDTO selectProfileView(String id) {
     	MemberDTO dto = new MemberDTO(); // DTO 객체 생성
-        String query = "SELECT * FROM member WHERE id=?";  // 쿼리문 템플릿 준비
+    	
+    	 System.out.println("id : " + id);
+    	 
+        String sql = "SELECT * FROM member WHERE id=?";  // 쿼리문 템플릿 준비
+        
         try {
-        	pstmt = conn.prepareStatement(query);
+        	PreparedStatement pstmt = conn.prepareStatement(sql);
         	pstmt.setString(1, id);
         	rs = pstmt.executeQuery();
         	
         	if(rs.next()) {
         		dto.setId(rs.getString("id"));
+        		dto.setPassword(rs.getString("password"));
         		dto.setAge(rs.getInt("age"));
         		dto.setGender(rs.getString("gender"));
         		dto.setExerciseEXP(rs.getInt("exerciseEXP"));
@@ -104,7 +103,7 @@ public class MemberDAO extends DBConnPool{
         		dto.setLevel(rs.getInt("level"));
         	}
         	
-        }catch(Exception e) {
+        }catch(SQLException e) {
             System.out.println("Exception[selectProfileView]: " + e.getMessage());
             e.printStackTrace();
         }
