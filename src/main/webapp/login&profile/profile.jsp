@@ -8,10 +8,10 @@
   <meta charset="UTF-8">
   <title>mainprofile</title>
   <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="../css/profile2.css">
+  <link rel="stylesheet" type="text/css" href="../css/profile.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-  <script src="../js/profile2.js"></script>
+  <script src="../js/profile.js"></script>
 </head>
 <script>
 $(document).ready(function() {
@@ -68,12 +68,14 @@ function renderFoods(foods, containerId) {
 <body>
   <div class="container">
     <div id="modal_menubar">
-      <div id="modalContent_menubar"><%@ include file="../login&profile/page.jsp" %></div>
+      <div id="modalContent_menubar">
+        <%@ include file="../login&profile/page.jsp" %>
+      </div>
     </div>
     <div class="summary-column">
       <div class="profile-img" id="profileImage">
-        <img src="https://placeimg.com/400/400/face" />
-        <div class="name">회원 <br> 프로필${bm}</div>
+        
+        <div class="name"><br>${dto.id}님의 회원 프로필 <br>성별 : ${dto.gender}<br>목표: ${dto.goals}</div>
         <form action="${pageContext.request.contextPath}/profile/logout" method="post">
           <button type="submit" id="btnlogout" class="sub">로그아웃</button>
         </form>
@@ -90,9 +92,9 @@ function renderFoods(foods, containerId) {
         </div>
         <div class="bmi"><span class="title title-bmi">${bmi}</span></div>
         <div class="bmi"><span class="title title-fat">${bmiStatus}</span></div>
-        <div class="float-none"></div>
-      </div>
-      변경 날짜: ${dtoinfo.sdate} <br><br><br><br><br><br>
+      </div> 
+        <p>변경날짜 : ${dtoinfo.sdate}</p>
+      <div class="float-none1"></div>
     </div>
     <div class="content-column">
       <div class="header-container" id="headerContainer">
@@ -107,7 +109,7 @@ function renderFoods(foods, containerId) {
           <canvas id="bpChart" style="position: relative; z-index: 100;"></canvas>
         </div>
       </div>
-      
+
       <div class="split-food">
         <button id="toggleMealRecommendation" class="toggle-button">식단 추천 보기</button>
         <div class="meal-recommendation-content">
@@ -137,7 +139,7 @@ function renderFoods(foods, containerId) {
           </div>
         </div>
       </div>
-    
+
 
 
       <div class="split-container">
@@ -183,21 +185,7 @@ function renderFoods(foods, containerId) {
     </div>
     <div class="promotion">
       <div class="split">
-        <h1>테스트</h1>
-        <p>아이디: ${dto.id}</p>
-        <p>나이: ${dto.age}</p>
-        <p>성별: ${dto.gender}</p>
-        <p>키: ${dtoinfo.height}</p>
-        <p>몸무게: ${dtoinfo.weight}</p>
-        <p>운동 경력: ${dto.exerciseEXP}</p>
-        <p>목표: ${dto.goals}</p>
-        <p>레벨: ${dto.level}</p>
-        <p>변경 날짜: ${dtoinfo.sdate}</p>
-        <h2>광고페이지</h2>
-        <br>
-        <div class="meal-recommendation-content-food" id="carbohydrateFoods"></div>
-<div class="meal-recommendation-content-food" id="proteinFoods"></div>
-<div class="meal-recommendation-content-food" id="fatFoods"></div>
+         <%@ include file="../login&profile/profile_slide.jsp" %>
       </div>
     </div>
   </div>

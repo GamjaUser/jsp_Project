@@ -1,51 +1,66 @@
-/*프로필 css*/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
-}
-
-#modal_menubar {
-  top: 0;
-  left: 0;
-  z-index: 3;
-  background-color: transparent;
+  padding: 0;  
 }
 
 .container {
-  display: inline;
-  position: relative; /* 변경: absolute -> relative */
-  width: 100%;
-  min-width: 600px;
-  justify-content: center;
+  display: flex; /* inline-flex에서 flex로 변경 */
+
+  background-color: white;
+  margin: 0; /* 컨테이너 주위의 마진 제거 */
+}
+
+.summary-column,
+.content-column {
+  position: relative;
+  background-color: white;
+   /* 섹션의 높이를 부모 컨테이너의 높이로 설정 */
+}
+
+#modal_menubar{
+  position:fixed;
+  margin-right:100%;
+}
+
+.menu-column,
+.summary-column {
+  height: 100%; /* 부모 요소의 높이를 기준으로 동일하게 설정 */
+}
+
+.modalContent_menubar {
+  position: fixed;
+  border: 3px solid blue;
+  left: -29%;
+  height: 3771.5px;
+  width: 200px;
 }
 
 .summary-column {
-  position: relative;
-  display: inline-block;
-  left: 4.7%;
-  width: 17%;
-  height: 332%;
-  min-width: 325px;
-  max-width: 300px;
+  left: -18%;
+  width: 40%;
+  
   background: linear-gradient(#3d6281, #42656f);
+}
+
+.summary-column p {
+  height: 2700px;
+  margin-left: 20px;
+  width: 250px;
+  font-size: 20px;
+  color: #ffffff;
 }
 
 .profile-img {
   position: relative;
-  height: 331px;
-}
-
-.profile-img img {
-  width: 100%;
-  height: 100%;
+  height: 180px;
 }
 
 .profile-img .name {
   position: absolute;
-  bottom: 25px;
+  bottom: -23px;
   left: 1em;
   color: white;
   font-size: 1.5em;
@@ -53,7 +68,7 @@
 }
 
 .statistics {
-  margin: 20px 6% 0 6%;
+  margin: 15px 6% 0 6%;
 }
 
 .statistics h2 {
@@ -155,13 +170,17 @@
   clear: both;
 }
 
+.float-none1 {
+  height: 530px;
+}
+
 #btnlogout {
   position: absolute;
-  left: 170px;
-  top: 280px;
+  left: 140px;
+  top: 200px;	
   padding: 0.8em 1.2em;
   margin: 0 10px 0 0;
-  width: auto;
+  width: 120px;
   font-weight: 600;
   text-transform: uppercase;
   font-size: 1em;
@@ -194,26 +213,24 @@
 }
 
 #btnlogout:focus.sub, #btnlogout:active.sub, #btnlogout:hover.sub {
-  background: #30c8ca;
+  background: #ff0000;
 }
 
 .content-column {
   display: inline-block;
-  position: relative; /* 변경: absolute -> relative */
   background: white;
-  border: 5px solid red;
-  width: 60%;
-  height: 900px;
+  
+  width: 190%; /* 백분율로 너비 설정 */
+  left: -210px;
 }
 
 .header-container {
   background-image: url("");
   width: 100%;
-  height: 311px;
+  height: 271px;
 }
 
 .nav_profile {
-  width: 50%;
   float: left;
   font-size: 0.9em;
   font-weight: 500;
@@ -228,7 +245,8 @@
 .nav_profile p {
   text-transform: uppercase;
   color: #899191;
-  letter-spacing: 1px;
+  font-size: 18px;
+  letter-spacing: 2px;
 }
 
 .nav_profile .name {
@@ -239,26 +257,11 @@
   font-family: 'Nunito', sans-serif;
   font-weight: 200;
   font-size: 6em;
-  color: #8b9494;
+  color: #8b9494;	
 }
 
-.nav_profile .score {
+.nav_profile .score {	
   color: #34d0c4;
-}
-
-.select-boxes {
-  float: left;
-  width: 50%;
-}
-
-.select-boxes .content {
-  margin: 40px;
-  float: right;
-}
-
-.split {
-  padding: 10px;
-  height: 250px;
 }
 
 /* BMI 측정 */
@@ -274,6 +277,7 @@
 }
 
 .split {
+  position: relative;
   width: 100%;
   text-align: center;
   font-size: 1.7em;
@@ -332,9 +336,9 @@
 }
 
 #btnstyle {
-  position: absolute;
-  left: 430px;
-  top: 125px;
+  position: relative;
+  top: 15px;
+	left: 345px;
   padding: 0.8em 1.2em;
   margin: 0 10px 0 0;
   width: 125px;
@@ -512,15 +516,15 @@
   color: #2e96ea;
 }
 
+/* promotion 스타일 */
 .promotion {
   position: fixed;
-  top: 25%;
-  right: 0.5%;
-  width: 14.4%;
+  top: 15%;
+  right: 2.5%;
+  width: 400px;
 }
 
 .promotion .split {
-  border: 3px solid black;
-  padding: 10px;
-  height: 550px;
+ 
+  height: 10px;
 }
