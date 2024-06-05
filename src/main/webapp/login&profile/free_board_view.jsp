@@ -71,10 +71,20 @@
             <button type="button" onclick="location.href='../mvcboard/list.do';">
                 목록 바로가기
             </button>
+            <button type="button" id="commentLook_btn" onclick="openCommentPopup(${dto.idx});">
+			    댓글 보기
+			</button>
         </td>
     </tr>
 </table>
-
-	</div>
+</div>
+<!-- 모달 배경 -->
+<div id="modalBackground" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000;"></div>
+<!-- 모달 창 -->
+<div id="commentModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); width:80%; max-width:600px; height:650px; background:#fff; z-index:1001; overflow:auto;">
+  <!-- 모달 내용은 여기에 동적으로 로드됩니다. -->
+  <button id="closeModal" style="position:absolute; top:10px; right:8px; background-color:white; border:0; outline:0;">X</button>
+</div>
+	<script src="../js/free_board_view.js"></script>
 </body>
 </html>

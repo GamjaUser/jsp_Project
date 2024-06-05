@@ -23,18 +23,48 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import DTO.MemberDTO;
 
 @WebServlet("/mvcboard/delete.do")
 public class DeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		// session 검사
+		int result = 0;
+		
+    	HttpSession session = req.getSession();
+    	MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+        
+        if(mdto == null) {
+        	resp.sendRedirect("/login&profile/login.jsp");
+        	return;
+        }
+        //
+        
 		String idx = req.getParameter("idx");
 		MVCBoardDAO dao = new MVCBoardDAO();
+		
+		// session 검사
+        String writer = mdto.getId();
+        //관리자 세션 확인
+        if(mdto.getLevel() == 0) {
+        	result = dao.deletePost(idx);
+    	}
+        else {
+        	result = dao.deletePost(idx, writer);      	
+        }
+        
+        //유저 검사 꼭!
+            
+            
+         //
+		
 		// 게시물 삭제 후, 삭제된 행의 수를 반환받습니다.
-		int result = dao.deletePost(idx);
         dao.close();
 
         // 게시물 삭제 결과에 따른 처리 로직을 추가할 수 있습니다.

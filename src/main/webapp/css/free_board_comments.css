@@ -1,0 +1,169 @@
+body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+    }
+    h2, h3 {
+        color: #333;
+        margin: 10px;
+        font-weight:bold;
+    }
+    #commentsContainer {
+        background: #fff;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        height: 350px; /* Adjust height to fit the popup */
+        overflow-y: auto; /* Scrollable comments container */
+        margin-bottom: 10px; /* Space for the fixed comment form */
+        margin-top:20px;
+    }
+    .comment {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    .comment:last-child {
+        border-bottom: none;
+    }
+    .comment p {
+        margin: 5px 0;
+    }
+    .name {
+        font-weight: bold;
+        color: #007BFF;
+    }
+    .content {
+        display: inline-block;
+        margin-left: 10px;
+    }
+    .editComment, .deleteComment, .saveEdit, .cancelEdit {
+        margin-top: 5px;
+        padding: 5px 10px;
+        background-color: #fff; /* White background */
+	    color: #007BFF; /* Sky blue text */
+	    border: 1px solid #007BFF; /* Sky blue border */
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .editComment:hover, .deleteComment:hover, .saveEdit:hover, .cancelEdit:hover {
+        background-color: #007BFF; /* Sky blue background on hover */
+    	color: #fff; /* White text on hover */
+    }
+    .editForm {
+        margin-top: 10px;
+    }
+    #commentForm {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: fixed; /* Fixed at the bottom */
+        bottom: 0;
+        width: 100%;
+        height:43%;
+        box-sizing: border-box;
+    }
+    #commentForm input, #commentForm textarea {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin: 5px 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    .custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+
+/* 8 */
+.btn-8 {
+  background-color: #f0ecfc;
+background-image: linear-gradient(315deg, #f0ecfc 0%, #c797eb 74%);
+  line-height: 42px;
+  padding: 0;
+  border: none;
+  float:right;
+}
+.btn-8 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.btn-8:before,
+.btn-8:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  bottom: 0;
+  background: #c797eb;
+  /*box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.5),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);*/
+  transition: all 0.3s ease;
+}
+.btn-8:before{
+   height: 0%;
+   width: 2px;
+}
+.btn-8:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-8:hover:before {
+  height: 100%;
+}
+.btn-8:hover:after {
+  width: 100%;
+}
+.btn-8:hover{
+  background: transparent;
+}
+.btn-8 span:hover{
+  color: #c797eb;
+}
+.btn-8 span:before,
+.btn-8 span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  background: #c797eb;
+  /*box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.5),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);*/
+  transition: all 0.3s ease;
+}
+.btn-8 span:before {
+  width: 2px;
+  height: 0%;
+}
+.btn-8 span:after {
+  height: 2px;
+  width: 0%;
+}
+.btn-8 span:hover:before {
+  height: 100%;
+}
+.btn-8 span:hover:after {
+  width: 100%;
+}

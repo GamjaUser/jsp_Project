@@ -1,5 +1,6 @@
 package model2.mvcboard;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -119,7 +120,7 @@ public class MVCBoardDAO extends DBConnPool {
                 dto.setOfile(rs.getString(6));
                 dto.setSfile(rs.getString(7));
                 dto.setDowncount(rs.getInt(8));
-                dto.setVisitcount(rs.getInt(10));
+                dto.setVisitcount(rs.getInt(9));
             }
         }
         catch (Exception e) {
@@ -174,6 +175,26 @@ public class MVCBoardDAO extends DBConnPool {
 	    }
         return result;
     }
+    
+    // session 유저 검사
+    public int deletePost(String idx, String writer) {
+        int result = 0;
+        String query = "DELETE FROM mvcboard"
+                + " WHERE idx=? and writer=?"; 
+	    try {
+	        pstmt = conn.prepareStatement(query);
+	        pstmt.setString(1, idx);
+	        pstmt.setString(2, writer);
+	        result = pstmt.executeUpdate();
+	    }
+	    catch (Exception e) {
+	        System.out.println("게시물 삭제 중 예외 발생");
+	        e.printStackTrace();
+	    }
+        return result;
+    }
+    //
+    
 
     // 게시글 데이터를 받아 DB에 저장되어 있던 내용을 갱신합니다(파일 업로드 지원).
     public int updatePost(MVCBoardDTO dto) {
@@ -201,7 +222,5 @@ public class MVCBoardDAO extends DBConnPool {
             e.printStackTrace();
         }
         return result;
-    }
-    
-    
+    }   
 }
