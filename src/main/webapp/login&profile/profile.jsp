@@ -73,12 +73,14 @@ function renderFoods(foods, containerId) {
       </div>
     </div>
     <div class="summary-column">
-      <div class="profile-img" id="profileImage">
-        
-        <div class="name"><br>${dto.id}님의 회원 프로필 <br>성별 : ${dto.gender}<br>목표: ${dto.goals}</div>
-        <form action="${pageContext.request.contextPath}/profile/logout" method="post">
-          <button type="submit" id="btnlogout" class="sub">로그아웃</button>
-        </form>
+    	<div>
+	      <div class="profile-img" id="profileImage">
+	        
+	        <div class="name"><br>${dto.id}님의 회원 프로필 <br>성별 : ${dto.gender}<br>목표: ${dto.goals}</div>
+	        <form action="${pageContext.request.contextPath}/profile/logout" method="post">
+	          <button type="submit" id="btnlogout" class="sub">로그아웃</button>
+	        </form>
+	      </div>
       </div>
       <br><br>
       <div class="statistics">

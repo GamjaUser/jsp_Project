@@ -69,11 +69,13 @@
                 <div class="product" data-product-id="${product.productId}">
                   <div class="item">
                     <div class="product-image">
-                      <img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="Placeholder Image 2" class="product-frame">
+                    <a href="/shpping/ProductPage.do?productId=${product.productId}">
+                      	<img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="Placeholder Image 2" class="product-frame">
+                     </a>
                     </div>
                     <div class="product-details">
                       <h1 style="margin-bottom: 10px"><strong><span class="item-quantity">${product.cnt}</span>X</strong> ${product.name}</h1>
-                      <p><strong>${product.comment}</strong></p>
+
                     </div>
                   </div>
                   <div class="price">${product.price}</div>
