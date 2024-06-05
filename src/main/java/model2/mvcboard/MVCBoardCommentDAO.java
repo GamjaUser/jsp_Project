@@ -32,6 +32,30 @@ public class MVCBoardCommentDAO extends DBConnPool {
         }
         return comments;
     }
+    
+    // 모든 댓글 조회
+    public List<MVCBoardCommentDTO> selectComments() {
+        List<MVCBoardCommentDTO> comments = new ArrayList<>();
+        String query = "SELECT * FROM mvcboard_comment ORDER BY comment_idx DESC";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                MVCBoardCommentDTO dto = new MVCBoardCommentDTO();
+                dto.setIdx(rs.getInt("comment_idx"));
+                dto.setBoardIdx(rs.getInt("board_idx"));
+                dto.setName(rs.getString("writer"));
+                dto.setContent(rs.getString("content"));
+                dto.setPostdate(rs.getDate("reg_date"));
+                comments.add(dto);
+            }
+            rs.close();
+            pstmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return comments;
+    }
 
     // 댓글 추가
     public int insertComment(MVCBoardCommentDTO dto) {

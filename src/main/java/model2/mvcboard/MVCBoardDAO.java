@@ -1,5 +1,7 @@
 package model2.mvcboard;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -76,7 +78,35 @@ public class MVCBoardDAO extends DBConnPool {
         }
         return board;
     }
-
+    
+    //모든 게시판 조회
+    public List<MVCBoardDTO> selectListPage(){
+    	List<MVCBoardDTO> boardList = new Vector<MVCBoardDTO>();
+    	
+    	String sql = "SELECT * FROM board";
+    	
+    	try(PreparedStatement pstmt = conn.prepareStatement(sql);){
+    		
+    		rs = pstmt.executeQuery();
+    		
+    		while(rs.next()) {
+    			MVCBoardDTO dto = new MVCBoardDTO();
+    			
+    			dto.setIdx(rs.getString("idx"));
+    			dto.setTitle(rs.getNString("title"));
+    			dto.setName(rs.getString("name"));
+    			dto.setContent(rs.getString("content"));
+    			
+    			boardList.add(dto);
+    		}
+    		
+    	}catch (SQLException e) {
+			// TODO: handle exception
+    		System.out.println("Ex(selectList : " + e.getMessage());
+		}
+    	
+    	return boardList;
+    }
     
 
     // 게시글 데이터를 받아 DB에 추가합니다(파일 업로드 지원).
