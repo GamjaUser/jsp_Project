@@ -8,7 +8,6 @@ public class ProductDTO {
     private String img; //�̹��� URL
     private String comment; //��ǰ����
     private int price; //�ǸŰ�
-    private int cnt; //���
     private String productKind; //��ǰ����
 
 
@@ -17,7 +16,6 @@ public class ProductDTO {
     public void setImg(String img){this.img = img;}
     public void setComment(String comment){this.comment = comment;}
     public void setPrice(int price){this.price = price;}
-    public void setCnt(int cnt){this.cnt = cnt;}
     public void setProductKind(String productKind){this.productKind = productKind;}
 
     public int getProductId() {
@@ -41,9 +39,6 @@ public class ProductDTO {
         return price;
     }
 
-    public int getCnt() {
-        return cnt;
-    }
 
     public String getProductKind() {
         return productKind;
@@ -57,7 +52,6 @@ public class ProductDTO {
                 ", img='" + img + '\'' +
                 ", comment='" + comment + '\'' +
                 ", price=" + price +
-                ", cnt=" + cnt +
                 ", productKind='" + productKind + '\'' +
                 '}';
     }

@@ -17,7 +17,7 @@ public class ProductDAO extends DBConnPool{
 		int result = 0;
 		
 		String sql = "INSERT INTO product "
-				+ "values(seq_product_num.nextval, ?,?,?,?,?,?)";		
+				+ "values(seq_product_num.nextval, ?,?,?,?,?)";		
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			
@@ -25,8 +25,7 @@ public class ProductDAO extends DBConnPool{
 			pstmt.setString(2, dto.getImg());
 			pstmt.setString(3, dto.getComment());
 			pstmt.setInt(4, dto.getPrice());
-			pstmt.setInt(5, dto.getCnt());
-			pstmt.setString(6, dto.getProductKind());
+			pstmt.setString(5, dto.getProductKind());
 			
 			result = pstmt.executeUpdate();
 			
