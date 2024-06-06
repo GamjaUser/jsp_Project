@@ -65,11 +65,18 @@ $(document).ready(function() {
 	                password: password
 	            },
 	            success: function(response) {
+					console.log("resp : ", response.trim())
 	                if (response.trim() === 'success') {
 	                    alert('로그인 성공! 환영합니다.');
 	                    window.location.href = '/HealthCareLife/profile.do'; // 로그인 성공 시 프로필 페이지로 이동
-	                } else if (response.trim() === 'fail') {
+	                    
+	                } else if (response === "successadmin"){
+	                    alert('환영합니다 관리자님');
+	                    window.location.href = '/adminPage.do';
+	                    
+	                } else if (response === 'fail') {
 	                    alert('로그인 실패 아이디 또는 비밀번호를 확인해주세요.');
+	                    
 	                } else {
 	                    alert('아이디 또는 비밀번호를 정확히 입력해주세요.');
 	                    // 페이지를 초기화해줘야 할 때는 아래와 같이 사용
