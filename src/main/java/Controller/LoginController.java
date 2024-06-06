@@ -20,6 +20,7 @@ public class LoginController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         System.out.println("loginController");
         
+        
         String id = request.getParameter("id");
         String password = request.getParameter("password");
        
