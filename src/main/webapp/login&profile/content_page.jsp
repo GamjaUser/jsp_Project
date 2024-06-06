@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>static_content</title>
 <link rel="stylesheet" type="text/css" href="../css/content_page.css">
 <link rel="stylesheet" type="text/css" href="../css/freeBoard_button.css">

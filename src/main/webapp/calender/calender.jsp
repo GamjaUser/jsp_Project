@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.Calendar"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,12 +42,12 @@ cal.set(inputYear, inputMonth - 1, 1); // 해당 년도와 월의 1일로 설정
 %>
 
 <div class="calendar-cal">
-   
+   ${dto.id}
     <div class="nav-cal">
     	<h1>
-    <button type="button" class="nav-button" onclick="changeDate(0, -1)"> < </button>
+    <button type="button" class="nav-button1" onclick="changeDate(0, -1)"> < </button>
     <%= inputYear %>년 <%= inputMonth %>월 달력 
-    <button type="button" class="nav-button" onclick="changeDate(0, 1)">></button>
+    <button type="button" class="nav-button2" onclick="changeDate(0, 1)">></button>
 </h1>
       <br />  
     </div>

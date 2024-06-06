@@ -76,7 +76,7 @@ function renderFoods(foods, containerId) {
     	<div>
 	      <div class="profile-img" id="profileImage">
 	        
-	        <div class="name"><br>${dto.id}님의 회원 프로필 <br>성별 : ${dto.gender}<br>목표: ${dto.goals}</div>
+	        <div class="name"><br>${dto.id}님의 회원 프로필 <br>성별 : ${dto.gender}<br>목표: ${goals}</div>
 	        <form action="${pageContext.request.contextPath}/profile/logout" method="post">
 	          <button type="submit" id="btnlogout" class="sub">로그아웃</button>
 	        </form>
@@ -162,28 +162,33 @@ function renderFoods(foods, containerId) {
           </form>
         </div>
         <div class="split right">
-          <h2>당신의 BMI는 ${bmi}입니다</h2>
-          <h2>${bmiStatus}</h2>
+          <h2>당신의 BMI는 ${bmi2}입니다</h2>
+          <h2>${bmiStatus2}</h2>
         </div>
       </div>
-      <div class="float-none"></div>
+      <div class="float-none"></div> <br>
       <div class="split-container">
-        <div class="split bottom">
-          <div class="appointments">
-            <div class="calendar-container">광고</div>
+   		 <div class="split bottom">
+        	<div class="appointments">
+            	<!-- 운동 루틴 추가 -->
+          <div class="workout-routine">
+            <h2>운동 루틴</h2>
+            <c:forEach var="day" begin="1" end="3">
+              <div class="day">
+                <h3>${day}일차</h3>
+                <ul>
+                  <c:forEach var="exercise" items="${selectedRoutine}">
+                    <li>${exercise}</li>
+                  </c:forEach>
+                </ul>
+              </div>
+            </c:forEach>
           </div>
         </div>
-        <div class="split bottom">
-          <div class="appointments">
-            <div class="calendar-container">게시판</div>
-          </div>
+      
         </div>
-        <div class="split bottom">
-          <div class="appointments">
-            <div class="calendar-container"></div>
-          </div>
-        </div>
-      </div>
+    </div>
+</div>
     </div>
     <div class="promotion">
       <div class="split">

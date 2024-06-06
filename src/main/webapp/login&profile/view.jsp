@@ -1,18 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>view</title>
 <link rel="stylesheet" type="text/css" href="../css/view.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="../js/page.js"></script>
+
 </head>
 <body>
 	<div id="modal_menubar">
-      <div id="modalContent_menubar"></div>
+      <div id="modalContent_menubar"><%@ include file="../login&profile/page.jsp" %></div>
     </div>
     
     <div class="table-container" style="--data-limit: 9">
@@ -22,7 +22,7 @@
         <col width="15%"/> <col width="*"/>
     </colgroup>
 
-    <!-- °Ô½Ã±Û Á¤º¸ -->
+    <!-- ê²Œì‹œê¸€ ì •ë³´ -->
     <tr>
         <td>num</td> <td></td>
         <td>writer</td> <td></td>
@@ -40,7 +40,7 @@
         <td colspan="3" height="100"></td>
     </tr>
 
-    <!-- Ã·ºÎÆÄÀÏ -->
+    <!-- ì²¨ë¶€íŒŒì¼ -->
     <tr>
         <td>file</td>
         <td>
@@ -55,7 +55,7 @@
         <td></td>
     </tr>
 
-    <!-- ÇÏ´Ü ¸Þ´º(¹öÆ°) -->
+    <!-- í•˜ë‹¨ ë©”ë‰´(ë²„íŠ¼) -->
     <tr>
         <td colspan="4" align="center">
             <button type="button" onclick="">
