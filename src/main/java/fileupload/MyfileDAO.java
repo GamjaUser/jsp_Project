@@ -3,18 +3,20 @@ package fileupload;
 import java.util.List;
 import java.util.Vector;
 
+import DTO.MemberDTO;
 import common.DBConnPool;
+import model2.mvcboard.MVCBoardDTO;
 
 public class MyfileDAO extends DBConnPool {
 	// 새로운 게시물을 입력합니다.
-    public int insertFile(MyfileDTO dto) {
+    public int insertFile(MyfileDTO dto, MemberDTO mdto, MVCBoardDTO bdto) {
         int applyResult = 0;
         try {
-        	String sql = "INSERT INTO myfile " + "(idx, name, title, cate, ofile,sfile)" + 
+        	String sql = "INSERT INTO myfile " + "(idx, id2, idx2, cate, ofile,sfile)" + 
         				"VALUES (seq_board_num.nextval, ?, ?, ?, ?, ?)";
         	pstmt = conn.prepareStatement(sql);
-        	pstmt.setString(1,  dto.getName());
-        	pstmt.setString(2, dto.getTitle());
+        	pstmt.setString(1,  mdto.getId());
+        	pstmt.setString(2, bdto.getIdx());
         	pstmt.setString(3, dto.getCate());
         	pstmt.setString(4, dto.getOfile());
         	pstmt.setString(5, dto.getSfile());
@@ -43,6 +45,7 @@ public class MyfileDAO extends DBConnPool {
         		dto.setSfile(rs.getString("sfile"));
         		dto.setPostdate(rs.getDate("postdate"));
         		fileList.add(dto);
+        		
         	}
         }catch(Exception e) {
         	System.out.println("Exception[myFileList]: " + e.getMessage());

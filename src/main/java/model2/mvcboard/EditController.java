@@ -2,6 +2,7 @@ package model2.mvcboard;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import DTO.MemberDTO;
 import fileupload.FileUtil;
 
 @WebServlet("/mvcboard/edit.do")
@@ -24,6 +26,17 @@ public class EditController extends HttpServlet {
 	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+		
+		// session 검사		
+    	HttpSession session = req.getSession();
+    	MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+        
+        if(mdto == null) {
+        	resp.sendRedirect("/login&profile/login.jsp");
+        	return;
+        }
+        //
+		
 		String idx = req.getParameter("idx");
 		MVCBoardDAO dao = new MVCBoardDAO();
 		MVCBoardDTO dto = dao.selectView(idx);
@@ -34,6 +47,17 @@ public class EditController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
+    	
+    	// session 검사		
+    	HttpSession session = req.getSession();
+    	MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+        
+        if(mdto == null) {
+        	resp.sendRedirect("/login&profile/login.jsp");
+        	return;
+        }
+        //
+    	
         // 1. 파일 업로드 처리 =============================
         // 업로드 디렉터리의 물리적 경로 확인
         String saveDirectory = req.getServletContext().getRealPath("/Uploads");
@@ -57,10 +81,11 @@ public class EditController extends HttpServlet {
         String prevOfile = mr.getParameter("prevOfile");
         String prevSfile = mr.getParameter("prevSfile");
 
-        String name = mr.getParameter("name");
+//        String name = mr.getParameter("name");
+        String name = mdto.getId();
+        System.out.println(name);
         String title = mr.getParameter("title");
         String content = mr.getParameter("content");
-        String pass = mr.getParameter("pass");
             
         // 비밀번호는 session에서 가져옴
         //HttpSession session = req.getSession();
@@ -102,7 +127,10 @@ public class EditController extends HttpServlet {
 
         // DB에 수정 내용 반영
         MVCBoardDAO dao = new MVCBoardDAO();
-        int result = dao.updatePost(dto);
+        
+        // session 유저 검사
+        int result = 0;
+        result = dao.updatePost(dto);
         dao.close();
 
         // 성공 or 실패?
@@ -110,7 +138,7 @@ public class EditController extends HttpServlet {
             resp.sendRedirect("../mvcboard/list.do");
         }
         else {  // 수정 실패
-
+        	resp.sendRedirect("../mvcboard/list.do");
         }
     }
 }

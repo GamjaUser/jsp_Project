@@ -8,11 +8,6 @@
 <title>free_board_write</title>
 <script type="text/javascript">
     function validateForm(form) {  // 필수 항목 입력 확인
-        if (form.name.value == "") {
-            alert("작성자를 입력하세요.");
-            form.name.focus();
-            return false;
-        }
         if (form.title.value == "") {
             alert("제목을 입력하세요.");
             form.title.focus();
@@ -44,7 +39,7 @@
     <tr>
         <td>작성자</td>
         <td>
-            <input type="text" name="name" style="width:150px; height:30px;" />
+        	${id}
         </td>
     </tr>
     <tr>

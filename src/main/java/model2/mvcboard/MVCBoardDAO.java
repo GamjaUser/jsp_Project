@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
+
+import DTO.MemberDTO;
 import common.DBConnPool;
 
 public class MVCBoardDAO extends DBConnPool {
@@ -58,16 +60,15 @@ public class MVCBoardDAO extends DBConnPool {
 
             while (rs.next()) {
                 MVCBoardDTO dto = new MVCBoardDTO();
-
                 dto.setIdx(rs.getString(1));
-                dto.setName(rs.getString(2));
-                dto.setTitle(rs.getString(3));
-                dto.setContent(rs.getString(4));
-                dto.setPostdate(rs.getDate(5));
-                dto.setOfile(rs.getString(6));
-                dto.setSfile(rs.getString(7));
-                dto.setDowncount(rs.getInt(8));
-                dto.setVisitcount(rs.getInt(10));
+                dto.setName(rs.getString(9));
+                dto.setTitle(rs.getString(2));
+                dto.setContent(rs.getString(3));
+                dto.setPostdate(rs.getDate(4));
+                dto.setOfile(rs.getString(5));
+                dto.setSfile(rs.getString(6));
+                dto.setDowncount(rs.getInt(7));
+                dto.setVisitcount(rs.getInt(8));
 
                 board.add(dto);
             }
@@ -110,15 +111,17 @@ public class MVCBoardDAO extends DBConnPool {
     
 
     // 게시글 데이터를 받아 DB에 추가합니다(파일 업로드 지원).
-    public int insertWrite(MVCBoardDTO dto) {
+    public int insertWrite(MVCBoardDTO dto, MemberDTO mdto) {
         int result = 0;
         try {
             String query = "INSERT INTO mvcboard ( "
-                         + " idx, name, title, content, ofile, sfile) "
+                         + " idx, id2, title, content, ofile, sfile) "
                          + " VALUES ( "
                          + " seq_board_num.NEXTVAL,?,?,?,?,?)";
+            System.out.println(dto);
+            System.out.println(mdto);
             pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, dto.getName());
+            pstmt.setString(1, mdto.getId());
             pstmt.setString(2, dto.getTitle());
             pstmt.setString(3, dto.getContent());
             pstmt.setString(4, dto.getOfile());
@@ -143,14 +146,14 @@ public class MVCBoardDAO extends DBConnPool {
 
             if (rs.next()) {  // 결과를 DTO 객체에 저장
                 dto.setIdx(rs.getString(1));
-                dto.setName(rs.getString(2));
-                dto.setTitle(rs.getString(3));
-                dto.setContent(rs.getString(4));
-                dto.setPostdate(rs.getDate(5));
-                dto.setOfile(rs.getString(6));
-                dto.setSfile(rs.getString(7));
-                dto.setDowncount(rs.getInt(8));
-                dto.setVisitcount(rs.getInt(9));
+                dto.setName(rs.getString(9));
+                dto.setTitle(rs.getString(2));
+                dto.setContent(rs.getString(3));
+                dto.setPostdate(rs.getDate(4));
+                dto.setOfile(rs.getString(5));
+                dto.setSfile(rs.getString(6));
+                dto.setDowncount(rs.getInt(7));
+                dto.setVisitcount(rs.getInt(8));
             }
         }
         catch (Exception e) {
@@ -210,7 +213,7 @@ public class MVCBoardDAO extends DBConnPool {
     public int deletePost(String idx, String writer) {
         int result = 0;
         String query = "DELETE FROM mvcboard"
-                + " WHERE idx=? and writer=?"; 
+                + " WHERE idx=? and id2=?"; 
 	    try {
 	        pstmt = conn.prepareStatement(query);
 	        pstmt.setString(1, idx);
@@ -229,20 +232,21 @@ public class MVCBoardDAO extends DBConnPool {
     // 게시글 데이터를 받아 DB에 저장되어 있던 내용을 갱신합니다(파일 업로드 지원).
     public int updatePost(MVCBoardDTO dto) {
         int result = 0;
+        System.out.println("name : " + dto.getName());
         try {
             // 쿼리문 템플릿 준비
             String query = "UPDATE mvcboard"
-                         + " SET title=?, name=?, content=?, ofile=?, sfile=? "
-                         + " WHERE idx=?";
+                         + " SET title=?, content=?, ofile=?, sfile=? "
+                         + " WHERE idx=? and id2=?";
 
             // 쿼리문 준비
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, dto.getTitle());
-            pstmt.setString(2, dto.getName());
-            pstmt.setString(3, dto.getContent());
-            pstmt.setString(4, dto.getOfile());
-            pstmt.setString(5, dto.getSfile());
-            pstmt.setString(6, dto.getIdx());
+            pstmt.setString(2, dto.getContent());
+            pstmt.setString(3, dto.getOfile());
+            pstmt.setString(4, dto.getSfile());
+            pstmt.setString(5, dto.getIdx());
+            pstmt.setString(6, dto.getName());
 
             // 쿼리문 실행
             result = pstmt.executeUpdate();

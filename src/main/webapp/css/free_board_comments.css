@@ -4,7 +4,7 @@ body {
         margin: 0;
         padding: 0;
     }
-    h2, h3 {
+    h2, h4 {
         color: #333;
         margin: 10px;
         font-weight:bold;
@@ -14,7 +14,7 @@ body {
         padding: 10px;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        height: 350px; /* Adjust height to fit the popup */
+        height: 330px; /* Adjust height to fit the popup */
         overflow-y: auto; /* Scrollable comments container */
         margin-bottom: 10px; /* Space for the fixed comment form */
         margin-top:20px;
@@ -56,13 +56,13 @@ body {
     }
     #commentForm {
         background: #fff;
-        padding: 20px;
+        padding: 0 20px;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         position: fixed; /* Fixed at the bottom */
         bottom: 0;
         width: 100%;
-        height:43%;
+        height:41%;
         box-sizing: border-box;
     }
     #commentForm input, #commentForm textarea {
@@ -78,6 +78,8 @@ body {
   color: #fff;
   border-radius: 5px;
   padding: 10px 25px;
+/*   bottom:14em; */
+  margin-right:2%;
   font-family: 'Lato', sans-serif;
   font-weight: 500;
   background: transparent;
@@ -94,6 +96,7 @@ body {
 
 /* 8 */
 .btn-8 {
+	bottom:14em;
   background-color: #f0ecfc;
 background-image: linear-gradient(315deg, #f0ecfc 0%, #c797eb 74%);
   line-height: 42px;

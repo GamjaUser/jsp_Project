@@ -20,7 +20,7 @@ public class MVCBoardCommentDAO extends DBConnPool {
                 MVCBoardCommentDTO dto = new MVCBoardCommentDTO();
                 dto.setIdx(rs.getInt("comment_idx"));
                 dto.setBoardIdx(rs.getInt("board_idx"));
-                dto.setName(rs.getString("writer"));
+                dto.setName(rs.getString("id2"));
                 dto.setContent(rs.getString("content"));
                 dto.setPostdate(rs.getDate("reg_date"));
                 comments.add(dto);
@@ -44,7 +44,7 @@ public class MVCBoardCommentDAO extends DBConnPool {
                 MVCBoardCommentDTO dto = new MVCBoardCommentDTO();
                 dto.setIdx(rs.getInt("comment_idx"));
                 dto.setBoardIdx(rs.getInt("board_idx"));
-                dto.setName(rs.getString("writer"));
+                dto.setName(rs.getString("id2"));
                 dto.setContent(rs.getString("content"));
                 dto.setPostdate(rs.getDate("reg_date"));
                 comments.add(dto);
@@ -61,7 +61,7 @@ public class MVCBoardCommentDAO extends DBConnPool {
     public int insertComment(MVCBoardCommentDTO dto) {
         int result = 0;
         String getMaxIdxQuery = "SELECT MAX(comment_idx) FROM mvcboard_comment";
-        String insertQuery = "INSERT INTO mvcboard_comment (comment_idx, board_idx, writer, content) VALUES (?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO mvcboard_comment (comment_idx, board_idx, id2, content) VALUES (?, ?, ?, ?)";
         try {
             // Get the current maximum idx
             PreparedStatement pstmt = conn.prepareStatement(getMaxIdxQuery);
@@ -73,6 +73,9 @@ public class MVCBoardCommentDAO extends DBConnPool {
             rs.close();
             pstmt.close();
 
+            
+            
+            System.out.println(dto);
             // Insert new comment with incremented idx
             pstmt = conn.prepareStatement(insertQuery);
             pstmt.setInt(1, maxIdx + 1);
@@ -90,12 +93,12 @@ public class MVCBoardCommentDAO extends DBConnPool {
     // 댓글 수정
     public int updateComment(MVCBoardCommentDTO dto) {
         int result = 0;
-        String query = "UPDATE mvcboard_comment SET writer=?, content=? WHERE comment_idx=?";
+        String query = "UPDATE mvcboard_comment SET content=? WHERE comment_idx=? and id2=?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, dto.getName());
-            pstmt.setString(2, dto.getContent());
-            pstmt.setInt(3, dto.getIdx());
+            pstmt.setString(1, dto.getContent());
+            pstmt.setInt(2, dto.getIdx());
+            pstmt.setString(3, dto.getName());
             result = pstmt.executeUpdate();
             pstmt.close();
         } catch (Exception e) {
@@ -121,13 +124,13 @@ public class MVCBoardCommentDAO extends DBConnPool {
     
     // session 유저 검사
     // 유저 댓글 삭제
-    public int deleteComment(int idx, String writer) {
+    public int deleteComment(int idx, String id2) {
         int result = 0;
-        String query = " delete from mvcboard_comment where comment_idx = ? and writer = ?";
+        String query = " delete from mvcboard_comment where comment_idx = ? and id2 = ?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, idx);
-            pstmt.setString(2, writer);
+            pstmt.setString(2, id2);
             result = pstmt.executeUpdate();
             pstmt.close();
         } catch (Exception e) {
