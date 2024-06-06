@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
@@ -137,7 +138,7 @@ public class ProductDAO extends DBConnPool{
 		System.out.println("Delete Product");
 		int result = 0;
 		
-		String sql = "DELETE FROM productd WHERE productid = ? AND id = ?";
+		String sql = "DELETE FROM product WHERE productid = ? AND id = ?";
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setInt(1, productId);
@@ -150,5 +151,24 @@ public class ProductDAO extends DBConnPool{
 		}
 		
 		return result;
+	}
+
+	public String getFilePath(String productId) {
+		System.out.println("getFilePath");
+		
+		String sql = "SELECT img FROM product WHERE productid = ?";
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, Integer.parseInt(productId));
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					return rs.getString("img");
+				}
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

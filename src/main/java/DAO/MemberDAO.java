@@ -56,18 +56,19 @@ public class MemberDAO extends DBConnPool{
  // 아이디와 비밀번호로 로그인 확인
     public String memberLogin(String id, String password) {       
     	
+    	System.out.println("memberLogin");
+    	
     	System.out.println("id : " + id);
     	System.out.println("pwd : " + password);
         String result = "fail";
         String sql = "SELECT * "
-        		+ "FROM member "
+        		+ " FROM member "
         		+ "WHERE id = ? AND password = ?";
+        
         try (PreparedStatement ptsmt = conn.prepareStatement(sql)){     
-            
         	ptsmt.setString(1, id);
         	ptsmt.setString(2, password);
             rs = ptsmt.executeQuery();
-
             // 결과가 존재하면 success 반환
             if (rs.next()) {
                 result = "success";
