@@ -52,7 +52,7 @@ public class BMIUpdateController extends HttpServlet {
         dto.setHeight(height);
         dto.setSdate(new java.sql.Date(currentDate.getTime()));
 
-        MemberInfoDAO memberDAO = new MemberInfoDAO(getServletContext());
+        MemberInfoDAO memberDAO = new MemberInfoDAO();
         try {
             memberDAO.updateMember(dto);
         } catch (SQLException e) {
