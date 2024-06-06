@@ -19,17 +19,18 @@
     <div class="menu-column">
     	
       <ul class="nav1">
-  <a href="/HealthCareLife/profile.do"><li id="profile-img" class="profile-img-page"></li></a>
-  
-  <a href="/board/list.do"><li id="board" class="board-page"></li></a>
-  
-  <a href="/calender/calender.do"><li id="calendar" class="calendar-page"></li></a>
-  
+  <a href="../login&profile/profile.jsp">
+    <li id="profile-img" class="profile-img-page"></li>
+  </a>
+  <a href="../mvcboard/list.do">
+	  <li id="board" class="board-page"></li>
+  </a>
+  <a href="../calender/calender.jsp">
+    <li id="calendar" class="calendar-page"></li>
+  </a>
   <a href="/shopping/shopMain.do"><li id="shop" class="shop-page"></li></a>
-  
   <a href="/shopping/cartMain.do"><li id="shopping-cart" class="shopping-cart-page"></li></a>
-  
-  
+  <li id="settings" class="settings-page"></li>
 </ul>
 
     </div>
