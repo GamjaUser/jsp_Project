@@ -19,7 +19,7 @@
     <div class="menu-column">
     	
       <ul class="nav1">
-  <a href="../login&profile/profile.jsp">
+  <a href="../HealthCareLife/profile.do">
     <li id="profile-img" class="profile-img-page"></li>
   </a>
   <a href="../mvcboard/list.do">
