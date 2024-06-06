@@ -150,11 +150,11 @@ function renderFoods(foods, containerId) {
           <form action="${pageContext.request.contextPath}/profile/updateBMI" method="post">
             <div class="form-group">
               <label for="weight">체중 (kg)</label>
-              <input type="number" id="weight" name="weight" required>
+              <input type="number" id="weight" name="weight" max="250" min="20" required>
             </div>
             <div class="form-group">
               <label for="height">신장 (cm)</label>
-              <input type="number" id="height" name="height" required>
+              <input type="number" id="height" name="height" max="280" min="120" required>
             </div>
             <div class="form-right">
               <button type="submit" id="btnstyle" class="sub">입력</button>
