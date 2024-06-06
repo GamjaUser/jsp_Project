@@ -1,29 +1,31 @@
 @charset "UTF-8";
 
-
-
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e0f7fa; /* 신선한 바다 느낌의 밝은 시안 배경색 */
+    color: #006064; /* 어두운 시안 텍스트 색상 */
+    margin: 0;
+    padding: 0;
+}
 
 #modal_menubar {
     position: fixed;
     top: 0;
     left: 0;
-    display:inline-block;
+    display: inline-block;
     z-index: 1;
 }
 
 #modalContent_menubar {
-    background-color: #fff;
+    background-color: #ffffff;
     width: 100px;
     height: 1200px;
     border-radius: 5px;
     display: block;
-    
 }
 
-/* 본 페이지 스타일 */
 .container {
     position: relative;
-    
 }
 
 #main_content {
@@ -32,61 +34,87 @@
 
 /* 달력 컨테이너 스타일 */
 .calendar-cal {
-    
-    left: 120px;
+    left: 0px;
+    width: 1400px;
+    height: 900px;
     position: absolute;
+    background-color: #ffffff; /* 하얀색 배경 */
+    border: 1px solid #00acc1; /* 시안색 테두리 */
+    border-radius: 8px; /* 둥근 테두리 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 약간의 그림자 효과 */
+    padding: 20px;
 }
 
 /* 달력 제목 스타일 */
 .calendar h1 {
     display: inline-block;
+    color: #00796b; /* 어두운 청록색 */
 }
 
 /* 달력 네비게이션(버튼) 스타일 */
 .nav-cal {
-    display: inline-block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
-
+.nav-cal a{
+	width: 200px;
+    left: 320px;
+}
 /* 버튼 스타일 */
-.nav button {
-    margin: 5px;
-}
-
-.nav-button {
+.nav-button1,.nav-button2 {
     width: 60px;
     height: 40px;
-    border: 1px solid black;
-    margin: 0 5px;
-    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #00acc1; /* 시안색 배경 */
+    color: #ffffff; /* 흰색 텍스트 */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.nav-button1{
+	position: relative;
+}
+.nav-button2{
+	position: absolute;
+	top: 35px;
+	left: 420px;
+}
+
+.nav-button1:hover,.nav-button2:hover {
+    background-color: #00838f; /* 어두운 시안색 배경 */
 }
 
 /* 테이블 스타일 */
 table {
-    width: 96%;
+    width: 100%;
+    height: 780px;
     border-collapse: collapse;
 }
 
 /* 테이블 헤더 스타일 */
 thead {
-    background-color: #f2f2f2;
+    background-color: #00acc1; /* 시안색 배경 */
+    color: #ffffff; /* 흰색 텍스트 */
 }
 
 /* 테이블 헤더 셀 스타일 */
 th {
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     border: 1px solid #ddd;
 }
 
 /* 테이블 바디 셀 스타일 */
 td {
-    padding: 12px 2px;
+    padding: 12px;
     vertical-align: top;
     text-align: left;
-    border: 2px solid #ddd;
-    height: 120px;
-    width: 150px;
-    background-color: #ffffff;
+    border: 1px solid #ddd;
+    height: 100px;
+    background-color: #e0f7fa; /* 밝은 시안색 배경 */
 }
 
 /* 토요일 셀 스타일 */
@@ -97,4 +125,10 @@ td:nth-child(7) {
 /* 일요일 셀 스타일 */
 td:nth-child(1) {
     color: red;
+}
+
+/* 현재 날짜 스타일 */
+td.today {
+    background-color: #4dd0e1; /* 약간 어두운 시안색 배경 */
+    color: #ffffff; /* 흰색 텍스트 */
 }

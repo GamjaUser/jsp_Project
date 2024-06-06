@@ -28,11 +28,11 @@
 <link rel="stylesheet" type="text/css" href="../css/free_board.css">
 <link rel="stylesheet" type="text/css" href="../css/free_board_edit.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="../js/page.js"></script>
+
 </head>
 <body>
 	<div id="modal_menubar">
-	  <div id="modalContent_menubar"></div>
+	  <div id="modalContent_menubar"><%@ include file="../login&profile/page.jsp" %></div>
 	</div>
     <p class="infos">
 	Free Board

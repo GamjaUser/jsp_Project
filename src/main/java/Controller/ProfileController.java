@@ -8,10 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import DTO.MemberDTO;
 import DTO.MemberInfoDTO;
+import DTO.WorkoutRoutineGenerator;
 
 @WebServlet("/HealthCareLife/profile.do")
 public class ProfileController extends HttpServlet {
@@ -34,7 +37,28 @@ public class ProfileController extends HttpServlet {
         
         String id = memberdto.getId();
         System.out.println(id);
-
+        int goals = memberdto.getGoals();
+        
+        // goals 값에 따른 목표 문자열 설정
+        String goalDescription;
+        switch (goals) {
+            case 1:
+                goalDescription = "체중 감소";
+                break;
+            case 2:
+                goalDescription = "벌크업";
+                break;
+            case 3:
+                goalDescription = "체력 향상";
+                break;
+            case 4:
+                goalDescription = "유연성 향상";
+                break;
+            default:
+                goalDescription = "목표 미설정";
+                break;
+        }
+        
         // BMI 계산
         double height = memberInfodto.getHeight() / 100.0; // 키를 미터로 변환
         double weight = memberInfodto.getWeight();
@@ -59,6 +83,7 @@ public class ProfileController extends HttpServlet {
         // 체중 상태를 request에 추가
         request.setAttribute("bmi", bmi);
         request.setAttribute("bmiStatus", bmiStatus);
+        request.setAttribute("goals", goalDescription); // 목표 문자열 추가
         
         // MemberInfoDTO에서 sdate를 가져온 후
         Date sdate = memberInfodto.getSdate();
@@ -72,6 +97,35 @@ public class ProfileController extends HttpServlet {
         // 회원 정보를 request에 추가
         request.setAttribute("dto", memberdto);
         request.setAttribute("dtoinfo", memberInfodto);
+        
+        
+        
+     // 운동 루틴 생성
+        WorkoutRoutineGenerator generator = new WorkoutRoutineGenerator();
+        List<String> selectedRoutine = null;
+
+        // goalDescription 값에 따라서 해당하는 운동 루틴 선택
+        switch (goalDescription) {
+            case "체중 감소":
+                selectedRoutine = generator.getRoutineByGoal(goalDescription);
+                break;
+            case "벌크업":
+                selectedRoutine = generator.getRoutineByGoal(goalDescription);
+                break;
+            case "체력 향상":
+                selectedRoutine = generator.getRoutineByGoal(goalDescription);
+                break;
+            case "유연성 향상":
+                selectedRoutine = generator.getRoutineByGoal(goalDescription);
+                break;
+            default:
+                // 예외 처리 등을 추가할 수 있습니다.
+                break;
+        }
+
+        // 선택된 운동 루틴을 request에 추가
+        request.setAttribute("selectedRoutine", selectedRoutine);
+
 
         // 프로필 페이지로 전송
         request.getRequestDispatcher("/login&profile/profile.jsp").forward(request, response);
