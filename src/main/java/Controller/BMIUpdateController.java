@@ -60,8 +60,8 @@ public class BMIUpdateController extends HttpServlet {
         }
         
         session.setAttribute("dtoinfo", dto);
-        session.setAttribute("bmi", bmi);
-        session.setAttribute("bmiStatus", bmiStatus);
+        session.setAttribute("bmi2", bmi);
+        session.setAttribute("bmiStatus2", bmiStatus);
 
         response.sendRedirect(request.getContextPath() + "/HealthCareLife/profile.do");
     }

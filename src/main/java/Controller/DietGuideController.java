@@ -174,9 +174,16 @@ public class DietGuideController extends HttpServlet {
     private List<FoodItemDTO> getcarRandomFoods(List<FoodItemDTO> foods, int count, int car2) {
         List<FoodItemDTO> carFoods = new ArrayList<>();
         Random random = new Random();
+        List<Integer> selectedIndexes = new ArrayList<>(); // 이전에 선택된 음식의 인덱스를 기록
 
         for (int i = 0; i < count; i++) {
-            FoodItemDTO food = foods.get(random.nextInt(foods.size()));
+            int randomIndex;
+            do {
+                randomIndex = random.nextInt(foods.size());
+            } while (selectedIndexes.contains(randomIndex)); // 이미 선택된 음식이면 다시 선택
+            selectedIndexes.add(randomIndex); // 선택된 음식의 인덱스를 기록
+
+            FoodItemDTO food = foods.get(randomIndex);
             String name = food.getName();
             String img = food.getImage();
             float nut = (float) food.getNutrient();
@@ -191,9 +198,16 @@ public class DietGuideController extends HttpServlet {
     private List<FoodItemDTO> getproRandomFoods(List<FoodItemDTO> foods, int count, int pro2) {
         List<FoodItemDTO> proFoods = new ArrayList<>();
         Random random = new Random();
+        List<Integer> selectedIndexes = new ArrayList<>(); // 이전에 선택된 음식의 인덱스를 기록
 
         for (int i = 0; i < count; i++) {
-            FoodItemDTO food = foods.get(random.nextInt(foods.size()));
+            int randomIndex;
+            do {
+                randomIndex = random.nextInt(foods.size());
+            } while (selectedIndexes.contains(randomIndex)); // 이미 선택된 음식이면 다시 선택
+            selectedIndexes.add(randomIndex); // 선택된 음식의 인덱스를 기록
+
+            FoodItemDTO food = foods.get(randomIndex);
             String name = food.getName();
             String img = food.getImage();
             float nut = (float) food.getNutrient();
@@ -205,12 +219,21 @@ public class DietGuideController extends HttpServlet {
         return proFoods;
     }
 
+    
+
     private List<FoodItemDTO> getfatRandomFoods(List<FoodItemDTO> foods, int count, int fat2) {
         List<FoodItemDTO> fatFoods = new ArrayList<>();
         Random random = new Random();
+        List<Integer> selectedIndexes = new ArrayList<>(); // 이전에 선택된 음식의 인덱스를 기록
 
         for (int i = 0; i < count; i++) {
-            FoodItemDTO food = foods.get(random.nextInt(foods.size()));
+            int randomIndex;
+            do {
+                randomIndex = random.nextInt(foods.size());
+            } while (selectedIndexes.contains(randomIndex)); // 이미 선택된 음식이면 다시 선택
+            selectedIndexes.add(randomIndex); // 선택된 음식의 인덱스를 기록
+
+            FoodItemDTO food = foods.get(randomIndex);
             String name = food.getName();
             String img = food.getImage();
             float nut = (float) food.getNutrient();

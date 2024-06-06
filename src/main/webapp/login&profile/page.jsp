@@ -22,7 +22,9 @@
   <a href="../login&profile/profile.jsp">
     <li id="profile-img" class="profile-img-page"></li>
   </a>
-  <li id="board" class="board-page"></li>
+  <a href="../mvcboard/list.do">
+	  <li id="board" class="board-page"></li>
+  </a>
   <a href="../calender/calender.jsp">
     <li id="calendar" class="calendar-page"></li>
   </a>
