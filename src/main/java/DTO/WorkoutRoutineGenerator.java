@@ -18,6 +18,8 @@ public class WorkoutRoutineGenerator {
         routineMap.put("체력 향상", generateEnduranceImprovementRoutine());
         routineMap.put("유연성 향상", generateFlexibilityImprovementRoutine());
     }
+    
+    
 
     // 체중 감소 운동 루틴 생성 메서드
     private List<String> generateWeightLossRoutine() {
@@ -25,6 +27,7 @@ public class WorkoutRoutineGenerator {
         // 체중 감소에 대한 운동 루틴 생성 및 저장
         for (int i = 1; i <= 3; i++) {
             weightLossRoutine.add(i+"루틴"); 
+            
         }
         return weightLossRoutine;
     }

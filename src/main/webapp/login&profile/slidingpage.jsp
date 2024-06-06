@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -10,7 +8,7 @@
   <link href="
 https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css
 " rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="../css/slidingpage.css">
+  <link rel="stylesheet" type="text/css" href="../css/slidingpage2.css">
     <script src="../js/slidingpage.js"></script>
 
 </head>
@@ -31,10 +29,10 @@ https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css
             <div class="fnc-slide__content">
               <h2 class="fnc-slide__heading">
                 <div class="fnc-slide__heading-line">
-                  <span>Black</span>
+                  <span>저희는 당신의</span>
                 </div>
                 <div class="fnc-slide__heading-line">
-                  <span>Widow</span>
+                  <span>건강을 책임집니다</span>
                 </div>
               </h2>
 
@@ -51,10 +49,10 @@ https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css
             <div class="fnc-slide__content">
               <h2 class="fnc-slide__heading">
                 <div class="fnc-slide__heading-line">
-                  <span>Captain</span>
+                  <span>다양한 식단과 운동루틴을</span>
                 </div>
                 <div class="fnc-slide__heading-line">
-                  <span>America</span>
+                  <span>제안해드릴게요</span>
                 </div>
               </h2>
 
@@ -71,10 +69,10 @@ https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css
             <div class="fnc-slide__content">
               <h2 class="fnc-slide__heading">
                 <div class="fnc-slide__heading-line">
-                  <span>Iron</span>
+                  <span>다른 사람들과 식단과 운동루틴을</span>
                 </div>
                 <div class="fnc-slide__heading-line">
-                  <span>Man</span>
+                  <span>공유할 수 있어요</span>
                 </div>
               </h2>
 
@@ -91,10 +89,10 @@ https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css
             <div class="fnc-slide__content">
               <h2 class="fnc-slide__heading">
                 <div class="fnc-slide__heading-line">
-                  <span>Thor</span>
+                  <span>당신에게 알맞는 헬스용품을</span>
                 </div>
                 <div class="fnc-slide__heading-line">
-                  <span>Just Thor</span>
+                  <span>제공해드립니다</span>
                 </div>
               </h2>
 
@@ -112,19 +110,19 @@ https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css
         </div>
         <div class="fnc-nav__controls">
           <button class="fnc-nav__control">
-            Healthy Care
+          
             <span class="fnc-nav__control-progress"></span>
           </button>
           <button class="fnc-nav__control">
-            profile
+           
             <span class="fnc-nav__control-progress"></span>
           </button>
           <button class="fnc-nav__control">
-            Board
+           
             <span class="fnc-nav__control-progress"></span>
           </button>
           <button class="fnc-nav__control">
-            fitness shop
+            
             <span class="fnc-nav__control-progress"></span>
           </button>
         </div>
