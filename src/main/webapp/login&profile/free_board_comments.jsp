@@ -26,7 +26,7 @@
 <hr>
 <h3>댓글 작성</h3>
     <input type="hidden" id="commentId" value="">
-    <label for="name">작성자: </label><input type="text" id="name" required><br>
+    <label for="name">작성자: </label> <input id="name" type="text" value="${id}" readonly/></br>
     <label for="content">내용: </label><textarea id="content" required></textarea><br>
     <button type="submit" class="custom-btn btn-8"><span>댓글 등록</span></button>
 </form>

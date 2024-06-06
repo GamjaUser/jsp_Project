@@ -1,7 +1,13 @@
 package DTO;
 
 public class MemberDTO {
-    private String id;
+    @Override
+	public String toString() {
+		return "MemberDTO [id=" + id + ", password=" + password + ", gender=" + gender + ", age=" + age + ", goals="
+				+ goals + ", exerciseEXP=" + exerciseEXP + ", level=" + level + "]";
+	}
+
+	private String id;
     private String password;
     private String gender;
     private int age;

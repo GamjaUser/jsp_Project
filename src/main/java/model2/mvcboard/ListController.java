@@ -11,6 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import DTO.MemberDTO;
 
 
 public class ListController extends HttpServlet {
@@ -19,6 +22,17 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 	        throws ServletException, IOException {
+		
+		// session 검사		
+    	HttpSession session = req.getSession();
+    	MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+        
+        if(mdto == null) {
+        	resp.sendRedirect("/login&profile/login.jsp");
+        	return;
+        }
+        //
+		
 	    MVCBoardDAO dao = new MVCBoardDAO();
 	    Map<String, Object> map = new HashMap<String, Object>();
 

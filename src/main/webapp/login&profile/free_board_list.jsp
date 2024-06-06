@@ -36,7 +36,7 @@
         </form>
 
         <!-- 목록 테이블 -->
-        <table border="1" width="90%" class="context_list">
+        <table border="1" width="90%" class="context_list" style="text-align:center;">
             <tr>
                 <th width="10%">번호</th>
                 <th width="*">제목</th>

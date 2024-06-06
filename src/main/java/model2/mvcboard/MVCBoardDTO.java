@@ -1,7 +1,13 @@
 package model2.mvcboard;
 
 public class MVCBoardDTO {
-    // 멤버 변수 선언
+    @Override
+	public String toString() {
+		return "MVCBoardDTO [idx=" + idx + ", name=" + name + ", title=" + title + ", content=" + content
+				+ ", postdate=" + postdate + ", ofile=" + ofile + ", sfile=" + sfile + ", downcount=" + downcount
+				+ ", visitcount=" + visitcount + "]";
+	}
+	// 멤버 변수 선언
     private String idx; 
     private String name;
     private String title;

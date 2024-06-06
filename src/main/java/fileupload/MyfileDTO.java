@@ -5,8 +5,8 @@ import java.sql.Date;
 public class MyfileDTO {
     // 멤버 변수
     private String idx; 
-    private String name;   // 작성자 이름
-    private String title;  // 제목
+    private String name;   // 작성자 이름, id2
+    private String title;  // 제목, idx2
     private String cate;   // 카테고리
     private String ofile;  // 원본 파일명
     private String sfile;  // 저장된 파일명

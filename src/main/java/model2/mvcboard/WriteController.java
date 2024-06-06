@@ -12,9 +12,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import DTO.MemberDTO;
 import fileupload.FileUtil;
 
 public class WriteController extends HttpServlet {
@@ -23,14 +25,40 @@ public class WriteController extends HttpServlet {
 	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+		
+		// session 검사		
+    	HttpSession session = req.getSession();
+    	MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+        
+        if(mdto == null) {
+        	resp.sendRedirect("/login&profile/login.jsp");
+        	return;
+        }
+        //
+        
+        String id = mdto.getId();
+		req.setAttribute("id", id);
+        
 		System.out.println("WriteController is called(GET)");
 //		resp.sendRedirect("/14MVCBoard/Write.jsp");
 		req.getRequestDispatcher("/login&profile/free_board_write.jsp").forward(req, resp);
+		
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+    	
+    	// session 검사		
+    	HttpSession session = req.getSession();
+    	MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+        
+        if(mdto == null) {
+        	resp.sendRedirect("/login&profile/login.jsp");
+        	return;
+        }
+        //
+    	
         // 1. 파일 업로드 처리 =============================
         // 업로드 디렉터리의 물리적 경로 확인
         String saveDirectory = req.getServletContext().getRealPath("/Uploads");
@@ -41,6 +69,7 @@ public class WriteController extends HttpServlet {
 
         // 파일 업로드
         MultipartRequest mr = FileUtil.uploadFile(req, saveDirectory, maxPostSize);
+        System.out.println(mr);
         if (mr == null) {
             // 파일 업로드 실패
             //JSFunction.alertLocation(resp, "첨부 파일이 제한 용량을 초과합니다.",
@@ -76,7 +105,7 @@ public class WriteController extends HttpServlet {
 
         // DAO를 통해 DB에 게시 내용 저장
         MVCBoardDAO dao = new MVCBoardDAO();
-        int result = dao.insertWrite(dto);
+        int result = dao.insertWrite(dto, mdto);
         dao.close();
 
         // 성공 or 실패?

@@ -52,17 +52,13 @@ public class DeleteController extends HttpServlet {
 		// session 검사
         String writer = mdto.getId();
         //관리자 세션 확인
+        
         if(mdto.getLevel() == 0) {
         	result = dao.deletePost(idx);
     	}
         else {
         	result = dao.deletePost(idx, writer);      	
         }
-        
-        //유저 검사 꼭!
-            
-            
-         //
 		
 		// 게시물 삭제 후, 삭제된 행의 수를 반환받습니다.
         dao.close();

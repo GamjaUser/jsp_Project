@@ -34,6 +34,9 @@ public class CommentsController extends HttpServlet {
         	response.sendRedirect("/login&profile/login.jsp");
         	return;
         }
+        
+        String id = mdto.getId();
+		request.setAttribute("id", id);
         //
         
         List<MVCBoardCommentDTO> comments = dao.selectComments(boardIdx);
@@ -47,6 +50,17 @@ public class CommentsController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	// session 검사		
+    	HttpSession session = request.getSession();
+    	MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+        
+        if(mdto == null) {
+        	response.sendRedirect("/login&profile/login.jsp");
+        	return;
+        }
+        //
+    	
     	request.setCharacterEncoding("UTF-8");  // 요청 인코딩 설정
         response.setContentType("application/json;charset=UTF-8");
     	System.out.println("Post request received");
@@ -67,6 +81,17 @@ public class CommentsController extends HttpServlet {
     }
 
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	// session 검사		
+    	HttpSession session = request.getSession();
+    	MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+        
+        if(mdto == null) {
+        	response.sendRedirect("/login&profile/login.jsp");
+        	return;
+        }
+        //
+    	
     	request.setCharacterEncoding("UTF-8");  // 요청 인코딩 설정
         response.setContentType("application/json;charset=UTF-8");
     	System.out.println("Put request received");
@@ -97,16 +122,21 @@ public class CommentsController extends HttpServlet {
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	// session 검사		
+    	HttpSession session = request.getSession();
+    	MemberDTO mdto = (MemberDTO) session.getAttribute("member");
+        
+        if(mdto == null) {
+        	response.sendRedirect("/login&profile/login.jsp");
+        	return;
+        }
+        //
+    	
     	request.setCharacterEncoding("UTF-8");  // 요청 인코딩 설정
         response.setContentType("application/json;charset=UTF-8");
     	System.out.println("DELETE request received");
     	int result = 0;
-    	
-    	// session 검사
-    	HttpSession session = request.getSession();
-    	MemberDTO mdto = (MemberDTO) session.getAttribute("member");
-    	//
-    	
     	
         StringBuilder sb = new StringBuilder();
         BufferedReader reader = request.getReader();
@@ -130,11 +160,6 @@ public class CommentsController extends HttpServlet {
         else {
         	result = dao.deleteComment(idx, writer);        	
         }
-        
-        //유저 검사 꼭!
-            
-            
-         //
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
