@@ -25,7 +25,7 @@ public class ViewadminController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		resp.setContentType("text/html;charset=UTF-8");
 		System.out.println("adminController");
 		
 		HttpSession session = req.getSession();
@@ -49,8 +49,7 @@ public class ViewadminController extends HttpServlet{
 		List<MVCBoardDTO> bList = bdao.selectListPage();
 		List<MVCBoardCommentDTO> bcList = bcdao.selectComments();
 		
-		System.out.println("board : " + bList);
-		
+		System.out.println("product : " + pList);
 		req.setAttribute("products", pList);
 		req.setAttribute("boards", bList);
 		req.setAttribute("comments", bcList);

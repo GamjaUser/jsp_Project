@@ -24,6 +24,40 @@ $(document).ready(function() {
         });
     });
    
+   
+   
+   
+	$(document).ready(function() {
+	    // Product delete AJAX
+	    $('.delete-product-btn').on('click', function() {
+	        const productId = $(this).data('id');
+	        
+	        console.log("id : " + productId)
+            $.ajax({
+                url: '/deleteProduct.do',
+                type: 'POST',
+                data: { productId: productId },
+                success: function(response) {
+					console.log(response.success)
+                    if (response.trim() === "success") {
+                        alert('Product deleted successfully.');
+                        location.reload(); // or you can remove the row from the table
+                    } else {
+                        alert('Failed to delete product.');
+                    }
+                },
+                error: function() {
+                    alert('Error deleting product.');
+                }
+            });
+	        
+	    });
+	
+	    // Similar AJAX handlers can be created for boards and comments
+	});
+
+   
+   
 });
 
 

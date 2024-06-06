@@ -27,6 +27,8 @@ public class InsertProductController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html;charset=UTF-8");
+		req.setCharacterEncoding("UTF-8");
 		System.out.println("insertProduct!!");
 		
 		HttpSession session = req.getSession();
@@ -46,7 +48,9 @@ public class InsertProductController extends HttpServlet{
         
         Part filePart = req.getPart("productImg"); // Retrieves <input type="file" name="productImg">
         String fileName = getFileName(filePart);
-		
+	
+        
+        
      // Define the path to save the file
         String uploadPath = "C:\\Users\\whwog\\OneDrive\\바탕 화면\\js\\jsp_Project\\img\\product";
 //        String uploadPath = "C:\\img\\product";

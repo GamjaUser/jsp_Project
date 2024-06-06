@@ -51,6 +51,8 @@ public class ProductDAO extends DBConnPool{
 			while(rs.next()) {
 				ProductDTO dto = new ProductDTO();
 				
+//				System.out.println("comm : " + rs.getString("comment"));
+				
 				dto.setProdcutId(rs.getInt("productid"));
 				dto.setName(rs.getString("name"));
 				dto.setImg(rs.getString("img"));
@@ -134,15 +136,14 @@ public class ProductDAO extends DBConnPool{
 		}
 
 	
-	public int deleteProduct(int productId, String id) {
+	public boolean deleteProduct(int productId) {
 		System.out.println("Delete Product");
 		int result = 0;
 		
-		String sql = "DELETE FROM product WHERE productid = ? AND id = ?";
+		String sql = "DELETE FROM product WHERE productid = ?";
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setInt(1, productId);
-			pstmt.setString(2, id);
 			
 			result = pstmt.executeUpdate();
 		}catch (SQLException e) {
@@ -150,7 +151,7 @@ public class ProductDAO extends DBConnPool{
 			System.out.println("Ex : " + e.getMessage());
 		}
 		
-		return result;
+		return result ==  1 ;
 	}
 
 	public String getFilePath(String productId) {
@@ -165,7 +166,7 @@ public class ProductDAO extends DBConnPool{
 					return rs.getString("img");
 				}
 			}
-		}catch(SQLException e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		

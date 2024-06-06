@@ -8,7 +8,7 @@
   <link href="
 https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css
 " rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="../css/slidingpage2.css">
+  <link rel="stylesheet" type="text/css" href="../css/slidingpage.css">
     <script src="../js/slidingpage.js"></script>
 
 </head>

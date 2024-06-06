@@ -97,23 +97,34 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody >
-                        <c:forEach var="product" items="${products}">
-                            <tr class = "proId">
-                                <td>
-                                <%-- Assuming product is an instance of ProductDTO --%>
-									<img src="/images/${product.productId}" alt="Product Image">
-                                </td>
-                                <td>${product.productId}</td>
-                                <td>${product.name}</td>
-                                <td>${product.comment}</td>
-                                <td>${product.price}</td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
+               		<c:choose>
+                		<c:when test="${not empty products}">
+                   			<tbody >
+		                        <c:forEach var="product" items="${products}">
+		                            <tr class = "proId">
+		                                <td>
+		                                <%-- Assuming product is an instance of ProductDTO --%>
+											<img src="/images/${product.productId}" alt="Product Image">
+		                                </td>
+		                                <td>${product.productId}</td>
+		                                <td>${product.name}</td>
+		                                <td>${product.comment}</td>
+		                                <td>${product.price}</td>
+		                                <td>
+		                                   	<button class="btn btn-danger btn-sm delete-product-btn" data-id="${product.productId}">Delete</button>
+		                                </td>
+		                            </tr>
+		                        </c:forEach>
+	                   		</tbody>
+	                    </c:when>
+	    	        	<c:otherwise>
+	                            <tbody>
+	                                <tr>
+	                                    <td colspan="6" class="text-center">No products available.</td>
+	                                </tr>
+	                            </tbody>
+						</c:otherwise>
+    	        	</c:choose>
                 </table>
             </div>
         </div>
@@ -128,7 +139,6 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="addBoardModalLabel">Add New Board</h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form id = "boardform">
@@ -165,19 +175,30 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <c:forEach var="board" items="${boards}">
-                            <tr>
-                                <td>${board.boardId}</td>
-                                <td>${board.title}</td>
-                                <td>${board.content}</td>
-                                <td>${board.author}</td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm" onclick="deleteBoard('${board.boardId}')">Delete</button>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
+                    <c:choose>
+                    	<c:when test="${not empty boards}">
+	                    	<tbody>
+	                    	<c:forEach var="board" items="${boards}">
+	                            <tr>
+	                                <td>${board.boardId}</td>
+	                                <td>${board.title}</td>
+	                                <td>${board.content}</td>
+	                                <td>${board.author}</td>
+	                                <td>
+	                                    <button class="btn btn-danger btn-sm" onclick="deleteBoard('${board.boardId}')">Delete</button>
+	                                </td>
+	                            </tr>
+	                   		</c:forEach>
+		               		</tbody>
+                   		</c:when>
+	    	        	<c:otherwise>
+	                            <tbody>
+	                                <tr>
+	                                    <td colspan="6" class="text-center">No products available.</td>
+	                                </tr>
+	                            </tbody>
+						</c:otherwise>
+    	        	</c:choose>
                 </table>
             </div>
         </div>
@@ -197,19 +218,30 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <c:forEach var="comment" items="${comments}">
-                            <tr>
-                                <td>${comment.commentId}</td>
-                                <td>${comment.boardId}</td>
-                                <td>${comment.content}</td>
-                                <td>${comment.author}</td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm" onclick="deleteComment('${comment.commentId}')">Delete</button>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
+                    <c:choose>
+                    	<c:when test="${not empty boards}">
+	                    <tbody>
+	                   		<c:forEach var="comment" items="${comments}">
+	                            <tr>
+	                                <td>${comment.commentId}</td>
+	                                <td>${comment.boardId}</td>
+	                                <td>${comment.content}</td>
+	                                <td>${comment.author}</td>
+	                                <td>
+	                                    <button class="btn btn-danger btn-sm" onclick="deleteComment('${comment.commentId}')">Delete</button>
+	                                </td>
+	                            </tr>
+	                    	</c:forEach>
+	                    </tbody>
+						</c:when>
+	    	        	<c:otherwise>
+	                            <tbody>
+	                                <tr>
+	                                    <td colspan="6" class="text-center">No products available.</td>
+	                                </tr>
+	                            </tbody>
+						</c:otherwise>
+    	        	</c:choose>
                 </table>
             </div>
         </div>

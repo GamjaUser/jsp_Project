@@ -31,8 +31,14 @@ public class ImageController extends HttpServlet {
         
         ProductDAO dao = new ProductDAO();
         
+        if(productId == "") {
+        	System.out.println("111111111111");
+			response.sendRedirect("/adminPage.do");
+			return;
+        }
+        
         String filePath = dao.getFilePath(productId);
-        System.out.println("filePath : "+ filePath);
+//        System.out.println("filePath : "+ filePath);
 
         // Define the directory where images are stored
         String imagePath = "C:\\Users\\whwog\\OneDrive\\바탕 화면\\js\\jsp_Project\\img\\product";
