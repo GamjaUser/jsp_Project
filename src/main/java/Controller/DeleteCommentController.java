@@ -13,10 +13,11 @@ import org.json.simple.JSONObject;
 
 import DAO.ProductDAO;
 import DTO.MemberDTO;
+import model2.mvcboard.MVCBoardCommentDAO;
 
 
-@WebServlet("/deleteProduct.do")
-public class DeleteProductController extends HttpServlet{
+@WebServlet("/deleteComment.do")
+public class DeleteCommentController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -32,12 +33,11 @@ public class DeleteProductController extends HttpServlet{
 		}
 		
 		String id = mdto.getId();
-		ProductDAO dao = new ProductDAO();
+		MVCBoardCommentDAO dao = new MVCBoardCommentDAO();
 		
-		String productId= req.getParameter("productId");
-		System.out.println("productid : " + productId);
+		String commentId = req.getParameter("commentId");
 		
-		boolean result = dao.deleteProduct(productId);
+		boolean result = dao.deleteComment(commentId);
 		dao.close();
 		
 		System.out.println("result : "+ result);
@@ -47,7 +47,6 @@ public class DeleteProductController extends HttpServlet{
 	            resp.setContentType("application/json");
 	            resp.getWriter().write(responseJson.toString());
 	        }
-		//JSON 작성
 		
 	}
 }

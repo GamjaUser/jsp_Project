@@ -82,9 +82,10 @@ public class MVCBoardDAO extends DBConnPool {
     
     //모든 게시판 조회
     public List<MVCBoardDTO> selectListPage(){
+    	System.out.println("viewBoard");
     	List<MVCBoardDTO> boardList = new Vector<MVCBoardDTO>();
     	
-    	String sql = "SELECT * FROM board";
+    	String sql = "select * from mvcboard";
     	
     	try(PreparedStatement pstmt = conn.prepareStatement(sql);){
     		
@@ -95,9 +96,10 @@ public class MVCBoardDAO extends DBConnPool {
     			
     			dto.setIdx(rs.getString("idx"));
     			dto.setTitle(rs.getNString("title"));
-    			dto.setName(rs.getString("name"));
+    			dto.setName(rs.getString("id2"));
     			dto.setContent(rs.getString("content"));
     			
+    			System.out.println("idx : " + dto);
     			boardList.add(dto);
     		}
     		
@@ -193,7 +195,7 @@ public class MVCBoardDAO extends DBConnPool {
     }
 
     // 지정한 일련번호의 게시물을 삭제합니다.
-    public int deletePost(String idx) {
+    public boolean deletePost(String idx) {
         int result = 0;
         String query = "DELETE FROM mvcboard"
                 + " WHERE idx=?"; 
@@ -206,7 +208,7 @@ public class MVCBoardDAO extends DBConnPool {
 	        System.out.println("게시물 삭제 중 예외 발생");
 	        e.printStackTrace();
 	    }
-        return result;
+        return result==1;
     }
     
     // session 유저 검사

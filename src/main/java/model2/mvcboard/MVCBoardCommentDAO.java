@@ -108,18 +108,18 @@ public class MVCBoardCommentDAO extends DBConnPool {
     }
 
     // 관리자 댓글 삭제
-    public int deleteComment(int idx) {
+    public boolean deleteComment(String idx) {
         int result = 0;
         String query = " delete from mvcboard_comment where comment_idx = ?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, idx);
+            pstmt.setString(1, idx);
             result = pstmt.executeUpdate();
             pstmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return result;
+        return result == 1;
     }
     
     // session 유저 검사

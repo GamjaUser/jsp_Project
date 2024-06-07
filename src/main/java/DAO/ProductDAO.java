@@ -15,6 +15,7 @@ public class ProductDAO extends DBConnPool{
 	}
 	
 	public int insertPrdouct(ProductDTO dto) {
+		System.out.println("insertProdut");
 		int result = 0;
 		
 		String sql = "INSERT INTO product "
@@ -50,7 +51,7 @@ public class ProductDAO extends DBConnPool{
 			
 			while(rs.next()) {
 				ProductDTO dto = new ProductDTO();
-				
+				System.out.println("id : " +  rs.getString("name"));
 //				System.out.println("comm : " + rs.getString("comment"));
 				
 				dto.setProdcutId(rs.getInt("productid"));
@@ -77,7 +78,8 @@ public class ProductDAO extends DBConnPool{
 		
 		String sql = "select * from product where productid = ?";
 		
-		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+		try{
+			pstmt = conn.prepareStatement(sql);
 			System.out.println("단일상품 페이지1");
 			pstmt.setInt(1, productId);
 			
@@ -96,6 +98,9 @@ public class ProductDAO extends DBConnPool{
 		}catch (SQLException e) {
 			// TODO: handle exception
 			System.out.println("Ex : " + e.getMessage());
+		}
+		finally {
+			conn.close();
 		}
 		
 		return dto;
@@ -136,14 +141,14 @@ public class ProductDAO extends DBConnPool{
 		}
 
 	
-	public boolean deleteProduct(int productId) {
+	public boolean deleteProduct(String productId) {
 		System.out.println("Delete Product");
 		int result = 0;
 		
 		String sql = "DELETE FROM product WHERE productid = ?";
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-			pstmt.setInt(1, productId);
+			pstmt.setString(1, productId);
 			
 			result = pstmt.executeUpdate();
 		}catch (SQLException e) {

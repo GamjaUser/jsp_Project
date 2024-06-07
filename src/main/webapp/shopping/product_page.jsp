@@ -19,7 +19,7 @@
     <div id="modal_menubar"><!-- 모달출력코드 -->
         <div id="modalContent_menubar">
             <!-- 모달출력 --><%@ include file="../login&profile/page.jsp" %>
-        </div>
+   	     </div>
     </div>
     <div class="home text-center mb-4 w-100">
         <span class="shape score">Healthy</span><span class="shape">life</span>
@@ -32,7 +32,7 @@
                 <div class="col-md-6 text-center">
 <!--                     왼쪽: 상품 이미지 -->
                     <div class="thumb-gallery">
-                        <img src="//gdimg.gmarket.co.kr/2006325732/still/600?ver=1655887922" data-product-id = ${product.productId } class="img-fluid item" alt="item">
+                        <img src="/images/${product.productId}" data-product-id = ${product.productId } class="img-fluid item" alt="item">
                     </div>
                 </div>
                 <!-- 오른쪽: 상품 정보 -->

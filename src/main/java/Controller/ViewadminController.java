@@ -45,11 +45,17 @@ public class ViewadminController extends HttpServlet{
 		MVCBoardCommentDAO bcdao = new MVCBoardCommentDAO();
 		
 		//정보들을 담을 리스트
-		List<ProductDTO> pList = pdao.listProduct();
-		List<MVCBoardDTO> bList = bdao.selectListPage();
-		List<MVCBoardCommentDTO> bcList = bcdao.selectComments();
+		List<ProductDTO> pList = new Vector<ProductDTO>();
+		pList = pdao.listProduct();
+		pdao.close();
+		List<MVCBoardDTO> bList = new Vector<MVCBoardDTO>();
+		bList =bdao.selectListPage();
+		bdao.close();
+		List<MVCBoardCommentDTO> bcList = new Vector<MVCBoardCommentDTO>();
+		bcList = bcdao.selectComments();
+		bcdao.close();
 		
-		System.out.println("product : " + pList);
+		System.out.println("board : " + pList);
 		req.setAttribute("products", pList);
 		req.setAttribute("boards", bList);
 		req.setAttribute("comments", bcList);

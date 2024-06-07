@@ -70,7 +70,7 @@
                   <div class="item">
                     <div class="product-image">
                     <a href="/shpping/ProductPage.do?productId=${product.productId}">
-                      	<img src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="Placeholder Image 2" class="product-frame">
+                      	<img src="/images/${product.productId }" class="product-frame">
                      </a>
                     </div>
                     <div class="product-details">

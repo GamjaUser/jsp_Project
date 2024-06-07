@@ -62,6 +62,8 @@ public class WriteController extends HttpServlet {
         // 1. 파일 업로드 처리 =============================
         // 업로드 디렉터리의 물리적 경로 확인
         String saveDirectory = req.getServletContext().getRealPath("/Uploads");
+        System.out.println(saveDirectory);
+        saveDirectory = "C:\\Users\\whwog\\OneDrive\\바탕 화면\\js\\jsp_Project\\src\\main\\webapp\\Uploads";
 
         // 초기화 매개변수로 설정한 첨부 파일 최대 용량 확인
         ServletContext application = getServletContext();

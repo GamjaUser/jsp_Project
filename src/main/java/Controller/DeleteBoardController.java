@@ -13,15 +13,18 @@ import org.json.simple.JSONObject;
 
 import DAO.ProductDAO;
 import DTO.MemberDTO;
+import model2.mvcboard.MVCBoardCommentDTO;
+import model2.mvcboard.MVCBoardDAO;
+import model2.mvcboard.MVCBoardDTO;
 
 
-@WebServlet("/deleteProduct.do")
-public class DeleteProductController extends HttpServlet{
+@WebServlet("/deleteboard.do")
+public class DeleteBoardController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		System.out.println("deleteBoard");
 		HttpSession session = req.getSession();
 		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
 		
@@ -32,22 +35,22 @@ public class DeleteProductController extends HttpServlet{
 		}
 		
 		String id = mdto.getId();
-		ProductDAO dao = new ProductDAO();
+		MVCBoardDAO dao = new MVCBoardDAO();
 		
-		String productId= req.getParameter("productId");
-		System.out.println("productid : " + productId);
+		String boardId = req.getParameter("boardId");
+		System.out.println("boardId : " + boardId);
 		
-		boolean result = dao.deleteProduct(productId);
+		boolean result = dao.deletePost(boardId);
 		dao.close();
 		
-		System.out.println("result : "+ result);
+		System.out.println("result !!!!!!!!!!!!!!!!: "+ result);
+		
 		JSONObject responseJson = new JSONObject();
 		  if (result) {
 	            responseJson.put("success", true);
 	            resp.setContentType("application/json");
 	            resp.getWriter().write(responseJson.toString());
 	        }
-		//JSON 작성
 		
 	}
 }

@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -25,7 +25,9 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">Admin Dashboard</h1>
     <div class="text-right mb-4">
-        <button class="btn btn-danger" onclick="location.href='/logout.do'">Logout</button>
+    	<form action="${pageContext.request.contextPath}/profile/logout" method="post">
+        	<button class="btn btn-danger" id = "logout" >Logout</button>
+       	</form>
     </div>
     <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -130,9 +132,8 @@
         </div>
         
         <!-- Board Tab -->
-        <div id="board" class="tab-pane fade">
+        <div class="tab-pane fade" id = "board">
             <h2 class="mt-2">Manage Board</h2>
-            <button class="btn btn-success mb-2" data-toggle="modal" data-target="#addBoardModal">Add Board</button>
             <!-- Board Modal -->
             <div class="modal fade" id="addBoardModal" tabindex="-1" role="dialog" aria-labelledby="addBoardModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -158,7 +159,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id = "boardbtn">Save Board</button>
+                            <button type="button" class="btn btn-primary" id="boardbtn">Save Board</button>
                         </div>
                     </div>
                 </div>
@@ -180,12 +181,12 @@
 	                    	<tbody>
 	                    	<c:forEach var="board" items="${boards}">
 	                            <tr>
-	                                <td>${board.boardId}</td>
+	                                <td>${board.idx}</td>
 	                                <td>${board.title}</td>
 	                                <td>${board.content}</td>
-	                                <td>${board.author}</td>
+	                                <td>${board.name}</td>
 	                                <td>
-	                                    <button class="btn btn-danger btn-sm" onclick="deleteBoard('${board.boardId}')">Delete</button>
+	                                    <button class="btn btn-danger btn-sm" id ="deletbtn" data-id="${board.idx}" >Delete</button>
 	                                </td>
 	                            </tr>
 	                   		</c:forEach>
@@ -223,12 +224,12 @@
 	                    <tbody>
 	                   		<c:forEach var="comment" items="${comments}">
 	                            <tr>
-	                                <td>${comment.commentId}</td>
-	                                <td>${comment.boardId}</td>
+	                                <td>${comment.idx}</td>
+	                                <td>${comment.boardIdx}</td>
 	                                <td>${comment.content}</td>
-	                                <td>${comment.author}</td>
+	                                <td>${comment.name}</td>
 	                                <td>
-	                                    <button class="btn btn-danger btn-sm" onclick="deleteComment('${comment.commentId}')">Delete</button>
+	                                    <button class="btn btn-danger btn-sm" id = "commentbtn" data-id="${comment.idx}">Delete</button>
 	                                </td>
 	                            </tr>
 	                    	</c:forEach>
@@ -245,7 +246,6 @@
                 </table>
             </div>
         </div>
-
     </div>
 </div>
 </body>

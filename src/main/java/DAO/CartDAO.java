@@ -23,7 +23,7 @@ public class CartDAO extends DBConnPool{
 		String sql = "MERGE INTO cart c"
 				+" USING (SELECT ? AS id, ? AS productid FROM dual) src"
 				+" ON (c.\"ID\" = src.id AND c.PRODUCTID = src.productid)"
-				+" WHEN MATCHED THEN"
+				+" WHEN MATCHED THEN"	
 				+"  UPDATE SET c.CNT = ?"
 				+" WHEN NOT MATCHED THEN"
 				+" 	INSERT (PRODUCTID, \"ID\", CNT)"

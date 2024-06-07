@@ -130,7 +130,7 @@ $(document).ready(function() {
         let resultItems = results.map(function(result) {
             return '<div class="col-md-4 mb-4">' +
                    '<div class="card h-100 item" data-product-id="' + result.productId + '">' +
-                   '<a href="/shpping/ProductPage.do?productid="' + result.productId + '"><img class="card-img-top" src="http://img1.exportersindia.com/product_images/bc-small/dir_55/1620613/cannondale-jekyll-1-2011-mountain-bike-309779.jpg" alt="item"></a>' +
+                   '<a href="/shpping/ProductPage.do?productid="' + result.productId + '"><img class="card-img-top" src="/images/'+  result.productId + '" alt="item"></a>' +
                    '<div class="card-body">' +
                    '<h5 class="card-title">' + result.name + '</h5>' +
                    '<p class="card-text">가격: <em>' + result.price + '</em></p>' +

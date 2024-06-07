@@ -20,11 +20,11 @@ public class MemberDAO extends DBConnPool{
     // 새로운 회원을 member 테이블에 삽입하는 메서드
     public int insertMember(MemberDTO member) {
         int dto=0;
-    	try  {
-        	String query = "INSERT INTO member "
-        			     + "(id, password, gender, age, goals, exerciseEXP, \"level\") "
-        			     + "VALUES (? ,?, ?, ?, ?, ?, ?)";
-        	pstmt = conn.prepareStatement(query);
+        String query = "INSERT INTO member "
+        		+ "(id, password, gender, age, goals, exerciseEXP, \"level\") "
+        		+ "VALUES (? ,?, ?, ?, ?, ?, ?)";
+    	try (PreparedStatement pstmt = conn.prepareStatement(query)){
+        	
             pstmt.setString(1, member.getId());
             pstmt.setString(2, member.getPassword());
             pstmt.setString(3, member.getGender());
@@ -89,8 +89,7 @@ public class MemberDAO extends DBConnPool{
     	 
         String sql = "SELECT * FROM member WHERE id=?";  // 쿼리문 템플릿 준비
         
-        try {
-        	PreparedStatement pstmt = conn.prepareStatement(sql);
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)){
         	pstmt.setString(1, id);
         	rs = pstmt.executeQuery();
         	
@@ -116,10 +115,9 @@ public class MemberDAO extends DBConnPool{
     // ID로 특정 회원을 조회하는 메서드
     public MemberDTO getMemberById(String id) throws SQLException {
         String query = "SELECT * FROM member WHERE id = ?";
-        try (PreparedStatement ptsmt = conn.prepareStatement(query)) {
+        try  {
             pstmt.setString(1, id);
-            try {
-            	pstmt = conn.prepareStatement(query);
+            try(PreparedStatement ptsmt = conn.prepareStatement(query)) {
     			rs = pstmt.executeQuery();
                 if (rs.next()) {
                     MemberDTO member = new MemberDTO();
@@ -143,8 +141,7 @@ public class MemberDAO extends DBConnPool{
     public List<MemberDTO> getAllMembers() throws SQLException {
         List<MemberDTO> members = new ArrayList<>();
         String query = "SELECT * FROM member";
-        try  {
-        	pstmt = conn.prepareStatement(query);
+        try  (PreparedStatement pstmt = conn.prepareStatement(query)){
         	rs = pstmt.executeQuery();
             while (rs.next()) {
                 MemberDTO member = new MemberDTO();
@@ -166,8 +163,7 @@ public class MemberDAO extends DBConnPool{
     // 회원 정보를 업데이트하는 메서드
     public void updateMember(MemberInfoDTO infoDTO) throws SQLException {
     	String query = "UPDATE member SET password = ?, gender = ?, age = ?, goals = ?, exerciseEXP = ?, level = ? WHERE id = ?";
-        try {
-        	pstmt = conn.prepareStatement(query);
+        try (PreparedStatement pstmt = conn.prepareStatement(query)){
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				MemberDTO dto = new MemberDTO();
@@ -184,17 +180,4 @@ public class MemberDAO extends DBConnPool{
         }  
     }
 
-    // 특정 ID의 회원을 삭제하는 메서드
-    public int deleteMember(String id) throws SQLException {
-    	int result = 0;
-        try {
-        	String query = "DELETE FROM member WHERE id = ?";
-        	pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, id);
-            result = pstmt.executeUpdate();
-        }catch(Exception e) {
-        	System.out.println("Exception[deleteMember]: "+ e.getMessage());
-        }
-        return result;
-    }
 }

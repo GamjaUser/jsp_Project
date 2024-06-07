@@ -26,11 +26,10 @@ public class MemberInfoDAO extends DBConnPool {
     // 새로운 회원 정보를 member_info 테이블에 삽입하는 메서드
     public int insertMemberInfo(MemberInfoDTO memberInfo){
         int dto = 0;
-    	try {
-        	String query = "INSERT INTO member_info "
-        				 + "(id, Weight, height, sdate) "
-        				 + "VALUES (?, ?, ?,TO_DATE(?,'YYYY-MM-DD'))";
-        	pstmt = conn.prepareStatement(query);
+        String query = "INSERT INTO member_info "
+        		+ "(id, Weight, height, sdate) "
+        		+ "VALUES (?, ?, ?,TO_DATE(?,'YYYY-MM-DD'))";
+    	try (PreparedStatement pstmt = conn.prepareStatement(query)){
         	pstmt.setString(1, memberInfo.getId());
             pstmt.setInt(2, memberInfo.getWeight());
             pstmt.setInt(3, memberInfo.getHeight());
@@ -45,8 +44,7 @@ public class MemberInfoDAO extends DBConnPool {
     public MemberInfoDTO selectProfileView_info(String id) {
         MemberInfoDTO dto = new MemberInfoDTO();
         String query = "SELECT * FROM member_info WHERE id = ?";
-        try {
-            pstmt = conn.prepareStatement(query);
+        try (PreparedStatement pstmt = conn.prepareStatement(query)){
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
             
@@ -99,21 +97,15 @@ public class MemberInfoDAO extends DBConnPool {
         }      
     }	
     
-    
-    
-    
-    
-
 
 
 	//관리자 모드
     // ID로 특정 회원 정보를 조회하는 메서드
     public MemberInfoDTO getMemberInfoById(String id) throws SQLException {
         String query = "SELECT * FROM member_info WHERE id = ?";
-        try (PreparedStatement psmt = conn.prepareStatement(query)) {
+        try  {
             pstmt.setString(1, id);
-            try {
-            	pstmt = conn.prepareStatement(query);
+            try (PreparedStatement psmt = conn.prepareStatement(query)){
     			rs = pstmt.executeQuery();
                 if (rs.next()) {
                     MemberInfoDTO memberInfo = new MemberInfoDTO();
@@ -134,7 +126,9 @@ public class MemberInfoDAO extends DBConnPool {
     public List<MemberInfoDTO> getAllMemberInfo() throws SQLException {
         List<MemberInfoDTO> memberInfos = new ArrayList<>();
         String query = "SELECT * FROM member_info";
-        try {
+        
+        
+        try (PreparedStatement psmt = conn.prepareStatement(query)){
         	pstmt = conn.prepareStatement(query);
         	rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -150,22 +144,5 @@ public class MemberInfoDAO extends DBConnPool {
         }
         return memberInfos;
     }
-
- 
-
-    // 특정 ID의 회원 정보를 삭제하는 메서드
-    public int deleteMemberInfo(String id) throws SQLException {
-        int result = 0;
-    	try{
-        	String query = "DELETE FROM member_info WHERE id = ?";
-        	pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, id);
-            result = pstmt.executeUpdate();
-        }catch(Exception e) {
-        	System.out.println("Exception[deleteMemberInfo]: "+ e.getMessage());
-        }
-    	return result;
-    }
-
 
 }

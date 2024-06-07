@@ -23,8 +23,11 @@ public class BMIUpdateController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         MemberDTO memberdto = (MemberDTO) session.getAttribute("member");
+        
         String id = memberdto.getId();
         System.out.println(id);
+        
+        
         
         int weight = Integer.parseInt(request.getParameter("weight"));
         int height = Integer.parseInt(request.getParameter("height"));
