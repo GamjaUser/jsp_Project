@@ -56,7 +56,7 @@ function renderFoods(foods, containerId) {
         var nutrient = document.createElement("p");
         nutrient.innerText =  food.nutrient + "g";
         var calories = document.createElement("p");
-        calories.innerText = food.calories + "kcal";
+        calories.innerText = food.calories + "kcal(100g기준)";
         foodItem.appendChild(img);
         foodItem.appendChild(name);
         foodItem.appendChild(nutrient);
@@ -128,15 +128,15 @@ function renderFoods(foods, containerId) {
             <div class="kcalguide1"><br>지방 <br><br> <span id="fatValue"></span></div>
           </div>
           <div class="meal-recommendation-content-food">
-            <p>탄수화물 <span id="carValue2"></span> 섭취</p> <br>
+            <p>탄수화물 <span id="carValue2"></span>을 섭취하려면</p> <br>
             <div id="carbohydrateFoods"></div>
           </div>
           <div class="meal-recommendation-content-food">
-            <p>단백질 <span id="proValue2"></span> 섭취</p> <br>
+            <p>단백질 <span id="proValue2"></span>을 섭취하려면</p> <br>
             <div id="proteinFoods"></div>
           </div>
           <div class="meal-recommendation-content-food">
-            <p>지방 <span id="fatValue2"></span> 섭취</p> <br>
+            <p>지방 <span id="fatValue2"></span>을 섭취하려면</p> <br>
             <div id="fatFoods"></div>
           </div>
         </div>
@@ -150,11 +150,11 @@ function renderFoods(foods, containerId) {
           <form action="${pageContext.request.contextPath}/profile/updateBMI" method="post">
             <div class="form-group">
               <label for="weight">체중 (kg)</label>
-              <input type="number" id="weight" name="weight" required>
+              <input type="number" id="weight" name="weight" max="250" min="20" required>
             </div>
             <div class="form-group">
               <label for="height">신장 (cm)</label>
-              <input type="number" id="height" name="height" required>
+              <input type="number" id="height" name="height" max="280" min="120" required>
             </div>
             <div class="form-right">
               <button type="submit" id="btnstyle" class="sub">입력</button>
