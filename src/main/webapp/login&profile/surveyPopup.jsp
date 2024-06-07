@@ -115,7 +115,7 @@
 									<p>신장을 입력해주세요</p>
 								</div>
 								<div class="mm-survey-item">
-									<input type="number" id="height" data-item="3" name="height" value="height" required/>
+									<input type="number" id="height" data-item="3" name="height" value="height" max="280" min="120" required/>
 									<label for="height"><span></span><p>cm</p></label>
 								</div>
 								
@@ -127,7 +127,7 @@
 									<p>체중을 입력해주세요</p>
 								</div>
 								<div class="mm-survey-item">
-									<input type="number" id="weight" data-item="4" name="weight" value="weight" required/>
+									<input type="number" id="weight" data-item="4" name="weight" value="weight" max="250" min="20" required/>
 									<label for="weight"><span></span><p>kg</p></label>
 								</div>
 								
