@@ -24,7 +24,8 @@
 * 관리자가 게시글, 상품 정보 등 삭제 가능
 ---
 ## 실행 화면
-* 더 자세한 내용은 ppt 참고
+* 더 자세한 내용은 __For your healthy life.pptx__ 참고
+
 ![image](https://github.com/user-attachments/assets/9b3a0d42-58d9-4eec-af2a-63f437024be3)
 ![image](https://github.com/user-attachments/assets/4a1a0678-f760-466c-91c1-776750ab2e9c)
 ![image](https://github.com/user-attachments/assets/afe5b1aa-3327-49c6-82cc-010006e88300)
